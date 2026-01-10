@@ -2,10 +2,6 @@
 $page_title = "Testimonials";
 require_once 'includes/header.php';
 
-// Database connection
-require_once 'includes/database.php';
-$database = new Database();
-$conn = $database->getConnection();
 ?>
 
 <!-- Hero Section -->
@@ -307,7 +303,7 @@ $conn = $database->getConnection();
 </section>
 
 <!-- Submit Testimonial Form -->
-<section class="py-5 bg-primary text-white">
+<section class="py-5" style="background: var(--gradient-color); color: white;">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-5 mb-lg-0">

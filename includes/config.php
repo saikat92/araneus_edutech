@@ -16,4 +16,8 @@ define('SITE_ADDRESS', '116/56/E/N, East Chandmari, Barrackpore, Kolkata - 70012
 define('SITE_LLPIN', 'AAP-3776');
 
 
+// Database connection
+require_once 'includes/database.php';
+$database = new Database();
+$conn = $database->getConnection();
 ?>

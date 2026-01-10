@@ -350,7 +350,7 @@ require_once 'includes/header.php';
 </section>
 
 <!-- CTA Section -->
-<section class="py-5 bg-primary text-white">
+<section class="py-5 text-white" style="background: var(--gradient-color); color: white;">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8 mb-4 mb-lg-0">

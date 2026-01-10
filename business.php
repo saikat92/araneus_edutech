@@ -275,7 +275,7 @@ require_once 'includes/header.php';
 </section>
 
 <!-- Process Section -->
-<section class="py-5 bg-primary text-white">
+<section class="py-5" style="background: var(--gradient-color); color: white;">
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="section-title text-white">Our Implementation Process</h2>

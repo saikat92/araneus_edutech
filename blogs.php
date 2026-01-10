@@ -306,7 +306,7 @@ $featured_result = $conn->query($featured_query);
 </section>
 
 <!-- CTA Section -->
-<section class="py-5 bg-dark text-white">
+<section class="py-5" style="background: var(--gradient-color); color: white;">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8 mb-4 mb-lg-0">

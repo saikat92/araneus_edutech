@@ -89,7 +89,7 @@ require_once 'includes/header.php';
                         </div>
                     </div>
                     
-                    <a href="<?= SITE_URL; ?>contact.php" class="btn btn-outline-primary px-4">Enquire About Training</a>
+                    <a href="<?= SITE_URL; ?>courses.php" class="btn btn-outline-primary px-4">Enquire About Training</a>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -140,7 +140,7 @@ require_once 'includes/header.php';
                         </div>
                     </div>
                     
-                    <a href="../contact.php" class="btn btn-primary mt-4 px-4">Apply for Internship</a>
+                    <a href="courses.php" class="btn btn-primary mt-4 px-4">Apply for Internship</a>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -221,6 +221,8 @@ require_once 'includes/header.php';
                     </div>
                     <h4 class="mt-4 mb-3">Certification Programs</h4>
                     <p>Industry-recognized credentials to validate skills</p>
+                    <a href="certificates.php" target="_blank" class="btn btn-primary px-4 mt-3">Verify Certificate<i class="fas fa-graduation-cap ms-2"></i></a>
+
                 </div>
             </div>
             <div class="col-lg-8">
@@ -320,7 +322,7 @@ require_once 'includes/header.php';
 </section>
 
 <!-- CTA Section -->
-<section class="py-5 bg-primary text-white">
+<section class="py-5 text-white" style="background: var(--gradient-color); color: white;">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8 mb-4 mb-lg-0">

@@ -19,7 +19,7 @@ body {
     font-family: 'Poppins', sans-serif;
     color: var(--dark-color);
     line-height: 1.6;
-    padding-top: 76px; /* For fixed navbar */
+    /* padding-top: 76px; For fixed navbar */
 }
 
 h1, h2, h3, h4, h5, h6 {

@@ -25,6 +25,7 @@
                         <li class="mb-2"><a href="<?= SITE_URL; ?>index.php" class="text-white-50 text-decoration-none">Home</a></li>
                         <li class="mb-2"><a href="<?= SITE_URL; ?>about.php" class="text-white-50 text-decoration-none">About Us</a></li>
                         <li class="mb-2"><a href="<?= SITE_URL; ?>education.php" class="text-white-50 text-decoration-none">Educational Solutions</a></li>
+                        <li class="mb-2"><a href="<?= SITE_URL; ?>courses.php" class="text-white-50 text-decoration-none">Courses</a></li>
                         <li class="mb-2"><a href="<?= SITE_URL; ?>business.php" class="text-white-50 text-decoration-none">Business Solutions</a></li>
                         <li class="mb-2"><a href="<?= SITE_URL; ?>testimonials.php" class="text-white-50 text-decoration-none">Testimonials</a></li>
                         <li class="mb-2"><a href="<?= SITE_URL; ?>blogs.php" class="text-white-50 text-decoration-none">Blogs</a></li>
@@ -34,11 +35,16 @@
                 </div>
                 
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <h5 class="mb-3">Solutions</h5>
+                    <h5 class="mb-3">Education Solutions</h5>
                     <ul class="list-unstyled">
                         <li class="mb-2"><a href="<?= SITE_URL; ?>education.php#training" class="text-white-50 text-decoration-none">Industry Training Courses</a></li>
                         <li class="mb-2"><a href="<?= SITE_URL; ?>education.php#consultancy" class="text-white-50 text-decoration-none">Educational Consultancy</a></li>
                         <li class="mb-2"><a href="<?= SITE_URL; ?>education.php#internship" class="text-white-50 text-decoration-none">Internship Programs</a></li>
+                        <li class="mb-2"><a href="<?= SITE_URL; ?>certificates.php" class="text-white-50 text-decoration-none">Certificate Verification</a></li>
+                        <li class="mb-2"><a href="<?= SITE_URL; ?>portal/" class="text-white-50 text-decoration-none">Student Portal</a></li>
+                    </ul>
+                    <h5 class="mb-3">Business Solutions</h5>
+                    <ul class="list-unstyled">
                         <li class="mb-2"><a href="<?= SITE_URL; ?>business.php#crm" class="text-white-50 text-decoration-none">CRM-Salesforce</a></li>
                         <li class="mb-2"><a href="<?= SITE_URL; ?>business.php#erp" class="text-white-50 text-decoration-none">ERP Solutions</a></li>
                         <li class="mb-2"><a href="<?= SITE_URL; ?>business.php#gst" class="text-white-50 text-decoration-none">GST & E-Invoicing</a></li>
