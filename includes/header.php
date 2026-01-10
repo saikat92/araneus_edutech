@@ -6,6 +6,8 @@ include 'config.php'; ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
     <title>Araneus Edutech LLP - <?php echo $page_title ?? 'Professional Consultancy'; ?></title>
     
     <!-- Bootstrap 5 CSS -->
@@ -21,12 +23,14 @@ include 'config.php'; ?>
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>assets/css/style.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/images/icon.png">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
         <div class="container">
+            <!-- navbar brand logo image -->
+            <img src="assets/images/icon.png" alt="Araneus Edutech Logo" class="navbar-brand-logo px-1" width="70" />
             <a class="navbar-brand" href="index.php">
                 <span class="brand-text">ARANEUS</span>
                 <span class="brand-subtitle">Edutech LLP</span>
@@ -58,6 +62,9 @@ include 'config.php'; ?>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= SITE_URL; ?>blogs.php">BLOGS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= SITE_URL; ?>career.php">CAREER</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= SITE_URL; ?>contact.php">CONTACT US</a>
