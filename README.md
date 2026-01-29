@@ -1,5 +1,3 @@
-# araneus-edutech-llp
-
 ## Araneus Edutech LLP: powered by @saikat92
 
 ### 👀 Preview
