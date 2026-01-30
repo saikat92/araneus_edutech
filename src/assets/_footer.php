@@ -132,8 +132,7 @@ require_once __DIR__ . '/../core/connection.php';
                     <li class="mb-3">
                         <button class="contact-btn" disabled>
                             <i class="fas fa-id-card me-2"></i>
-                            <span class="llpin-label">LLPIN:</span>
-                            <span><?= COMPANY_LLPIN; ?></span>
+                            <span class="llpin-label">LLPIN: <?= COMPANY_LLPIN; ?></span>
                         </button>
                     </li>
                 </ul>
