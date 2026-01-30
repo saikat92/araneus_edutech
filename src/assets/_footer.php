@@ -9,87 +9,160 @@ require_once __DIR__ . '/../core/connection.php';
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
-                <h5 class="footer-brand mb-3">ARANEUS Edutech LLP</h5>
-                <p class="text-light">Providing innovative educational and business solutions to help organizations and individuals achieve their goals.</p>
+                <h5 class="footer-brand mb-3"><?= COMPANY_NAME; ?></h5>
+                <p class="text-light">Delivering innovative educational and business solutions to help organizations and individuals achieve their goals.</p>
+
                 <div class="social-icons mt-4">
-                    <a href="https://www.facebook.com/araneusedutech" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="text-white me-3"><i class="fab fa-x"></i></a>
-                    <a href="https://www.linkedin.com/company/araneus-edutech-llp" class="text-white me-3"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://www.instagram.com/araneusedutech" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/araneusedutech" class="text-white me-3"><i class="fab fa-youtube"></i></a>
+                    <button onclick="window.open('<?= COMPANY_FACEBOOK; ?>','_blank')">
+                        <i class="fab fa-facebook-f"></i>
+                    </button>
+
+                    <button onclick="window.open('<?= COMPANY_INSTAGRAM; ?>','_blank')">
+                        <i class="fab fa-instagram"></i>
+                    </button>
+
+                    <button onclick="window.open('<?= COMPANY_GITHUB; ?>','_blank')">
+                        <i class="fab fa-github"></i>
+                    </button>
+
+                    <button onclick="window.open('<?= COMPANY_LINKEDIN; ?>','_blank')">
+                        <i class="fab fa-linkedin-in"></i>
+                    </button>
+
+                    <button onclick="window.open('<?= COMPANY_YOUTUBE; ?>','_blank')">
+                        <i class="fab fa-youtube"></i>
+                    </button>
                 </div>
+
                 <div class="logo">
-                    <img src="<?= DOMAIN; ?>assets/images/msme.png" alt="msme_logo" style="height: 80px; margin-top: 15px;">
+                    <img src="<?= DOMAIN; ?>assets/images/logos/wb-msme-in.png" alt="msme_logo" style="height: 100px; width: auto; margin-top: 30px;">
                 </div>
             </div>
 
             <div class="col-lg-2 col-md-6 mb-4">
-                <h5 class="mb-3">Quick Links</h5>
+                <h5 class="mb-3">Site Pages</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>index.php" class="text-white-50 text-decoration-none">Home</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>about.php" class="text-white-50 text-decoration-none">About Us</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>education.php" class="text-white-50 text-decoration-none">Educational Solutions</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>courses.php" class="text-white-50 text-decoration-none">Courses</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>business.php" class="text-white-50 text-decoration-none">Business Solutions</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>testimonials.php" class="text-white-50 text-decoration-none">Testimonials</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>blogs.php" class="text-white-50 text-decoration-none">Blogs</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>events.php" class="text-white-50 text-decoration-none">Events</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>contact.php" class="text-white-50 text-decoration-none">Contact Us</a></li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>'">Home</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/about.php'">About</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/education.php'">Solutions</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/courses.php'">Courses</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/blogs.php'">Blogs</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/testimonials.php'">Testimonials</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/career.php'">Career</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/contact.php'">Let’s Talk</button>
+                    </li>
                 </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 mb-4">
                 <h5 class="mb-3">Education Solutions</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>education.php#training" class="text-white-50 text-decoration-none">Industry Training Courses</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>education.php#consultancy" class="text-white-50 text-decoration-none">Educational Consultancy</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>education.php#internship" class="text-white-50 text-decoration-none">Internship Programs</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>certificates.php" class="text-white-50 text-decoration-none">Certificate Verification</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>portal/" class="text-white-50 text-decoration-none">Student Portal</a></li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/education.php#training'">Industry Training Courses</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/education.php#workshops'">Educational Consultancy</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/education.php#consultancy'">Internship Programs</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/certificates.php'">Certificates Verification</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/student_portal.php'">Student Portal</button>
+                    </li>
                 </ul>
                 <h5 class="mb-3">Business Solutions</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>business.php#crm" class="text-white-50 text-decoration-none">CRM-Salesforce</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>business.php#erp" class="text-white-50 text-decoration-none">ERP Solutions</a></li>
-                    <li class="mb-2"><a href="<?= DOMAIN; ?>business.php#gst" class="text-white-50 text-decoration-none">GST & E-Invoicing</a></li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/business.php#crm'">CRM-Salesforce</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/business.php#erp'">ERP Solutions</button>
+                    </li>
+                    <li class="mb-2">
+                        <button class="footer-btn" onclick="location.href='<?= DOMAIN; ?>pages/business.php#gst'">GST & E-Invoicing</button>
+                    </li>
                 </ul>
             </div>
 
             <div class="col-lg-3 col-md-6 mb-4">
-                <h5 class="mb-3">Contact Info</h5>
+                <h5 class="mb-3">Need help? Contact us!</h5>
                 <ul class="list-unstyled contact-info">
                     <li class="mb-3">
-                        <i class="fas fa-map-marker-alt me-2"></i>
-                        <span><?php echo COMPANY_ADDRESS; ?></span>
+                        <button class="contact-btn"
+                            onclick="window.open('<?= COMPANY_ADDRESS_GMAP; ?>','_blank')">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <span><?= COMPANY_ADDRESS; ?></span>
+                        </button>
                     </li>
+
                     <li class="mb-3">
-                        <i class="fas fa-phone me-2"></i>
-                        <span><?php echo COMPANY_PHONE; ?></span>
+                        <button class="contact-btn"
+                            onclick="window.open('tel:<?= preg_replace('/\s+/', '', COMPANY_PHONE); ?>')">
+                            <i class="fas fa-phone me-2"></i>
+                            <span><?= COMPANY_PHONE; ?></span>
+                        </button>
                     </li>
+
                     <li class="mb-3">
-                        <i class="fas fa-envelope me-2"></i>
-                        <span><?php echo COMPANY_CUSTOM_MAIL; ?></span>
+                        <button class="contact-btn"
+                            onclick="window.open('mailto:<?= COMPANY_CUSTOM_MAIL; ?>')">
+                            <i class="fas fa-envelope me-2"></i>
+                            <span><?= COMPANY_CUSTOM_MAIL; ?></span>
+                        </button>
                     </li>
+
                     <li class="mb-3">
-                        <i class="fas fa-id-card me-2"></i>
-                        <span>LLPIN: <?php echo COMPANY_LLPIN; ?></span>
+                        <button class="contact-btn" disabled>
+                            <i class="fas fa-id-card me-2"></i>
+                            <span class="llpin-label">LLPIN:</span>
+                            <span><?= COMPANY_LLPIN; ?></span>
+                        </button>
                     </li>
                 </ul>
             </div>
-        </div>
 
-        <hr class="bg-light">
+            <hr class="bg-light">
 
-        <div class="row">
-            <div class="col-md-6">
-                <p class="mb-0">&copy; <?php echo date('Y'); ?> Araneus Edutech LLP. All rights reserved.</p>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <a href="#" class="text-white-50 text-decoration-none me-3">Privacy Policy</a>
-                <a href="#" class="text-white-50 text-decoration-none">Terms of Service</a>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">
+                        &copy; <?php
+                                $start = (int) WEB_INDEXY;
+                                echo $start . ' - ' . substr($start + 1, -2);
+                                ?> Araneus Edutech LLP. All rights reserved.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <button class="footer-btn footer-inline-btn me-3"
+                        onclick="location.href='<?= DOMAIN; ?>pages/privacy-policy.php'">
+                        Privacy Policy
+                    </button>
+
+                    <button class="footer-btn footer-inline-btn"
+                        onclick="location.href='<?= DOMAIN; ?>pages/terms-of-service.php'">
+                        Terms of Service
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 </footer>
 
 <!-- Bootstrap JS Bundle with Popper -->
