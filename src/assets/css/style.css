@@ -1,0 +1,377 @@
+/* Custom Styles for Araneus Edutech LLP */
+
+:root {
+  --primary-color: #ff4000;
+  --secondary-color: #ffa900;
+  --dark-color: #333333;
+  --light-color: #ffffff;
+  --gray-color: #111111;
+  --gradient-color: linear-gradient(135deg, #ff4000 0%, #ffa900 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lexend Deca", sans-serif;
+  color: var(--dark-color);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 600;
+}
+
+/* Navbar Styles */
+.navbar-brand {
+  font-weight: 700;
+}
+
+.brand-text {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+}
+
+.brand-subtitle {
+  color: var(--gray-color);
+  font-size: 0.9rem;
+  display: block;
+  line-height: 1;
+}
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+  color: var(--dark-color);
+  margin: 0 10px;
+  position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--primary-color);
+}
+
+.navbar-nav .nav-link.btn-contact {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  border-radius: 4px;
+  padding: 8px 20px;
+  margin-left: 10px;
+}
+
+.navbar-nav .nav-link.btn-contact:hover {
+  background-color: var(--secondary-color);
+  color: var(--light-color);
+}
+
+/* Hero Section */
+.hero-section {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../images/hero-bg.png");
+  background-size: cover;
+  background-position: center;
+  color: var(--light-color);
+  padding: 100px 0;
+  text-align: center;
+}
+
+.hero-section h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 30px;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--light-color);
+  color: var(--light-color);
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.btn-secondary:hover {
+  background-color: var(--light-color);
+  color: var(--primary-color);
+}
+
+/* Section Styles */
+.section-title {
+  position: relative;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.section-title:after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 4px;
+  background-color: var(--primary-color);
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.section-padding {
+  padding: 80px 0;
+}
+
+.bg-light {
+  background-color: var(--light-color) !important;
+}
+
+/* Card Styles */
+.card {
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card-icon {
+  width: 70px;
+  height: 70px;
+  background-color: rgba(255, 69, 0, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.card-icon i {
+  font-size: 30px;
+  color: var(--primary-color);
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #222;
+  font-family: "Lexend Deca", sans-serif;
+  line-height: 1.4;
+}
+
+.footer-brand {
+  font-family: "Cormorant Upright", serif;
+  font-size: 2rem !important;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.footer h5 {
+  margin-bottom: 20px;
+  font-family: "Cormorant Upright", serif;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 10px;
+  display: inline-block;
+  font-size: 1.5rem;
+}
+
+.footer h5::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  bottom: 0;
+  left: 0;
+}
+
+.footer .col-lg-2 > h5,
+.footer .col-lg-3:not(:first-child) > h5 {
+  margin-top: 10px;
+}
+
+.footer p {
+  max-width: 340px;
+  margin-bottom: 0;
+}
+
+.footer-btn {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--light-color);
+  transition: color 0.2s ease;
+}
+
+.footer-btn:hover {
+  color: var(--primary-color);
+}
+
+.contact-info li {
+  display: flex;
+  align-items: flex-start;
+}
+
+.contact-info i {
+  margin-top: 5px;
+  color: var(--secondary-color);
+}
+.contact-btn {
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--light-color);
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.contact-btn:hover {
+    color: var(--primary-color);
+}
+
+.contact-btn i {
+    margin-top: 4px;
+    color: var(--secondary-color);
+}
+
+.contact-btn:disabled {
+    cursor: default;
+    opacity: 0.9;
+}
+
+
+/* Solutions Pages */
+.solution-hero {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--secondary-color) 100%
+  );
+  color: var(--light-color);
+  padding: 100px 0 60px;
+}
+
+.solution-item {
+  padding: 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid var(--primary-color);
+  background-color: var(--light-color);
+  height: 100%;
+}
+
+.solution-item h4 {
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+/* Contact Form */
+.contact-form .form-control {
+  padding: 12px 15px;
+  border-radius: 4px;
+  border: 1px solid var(--light-color);
+  margin-bottom: 20px;
+}
+
+.contact-form .form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(255, 69, 0, 0.25);
+}
+
+.contact-info-box {
+  background-color: var(--light-color);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.contact-info-box i {
+  font-size: 40px;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1rem;
+  }
+
+  .section-padding {
+    padding: 60px 0;
+  }
+
+  .navbar-nav .nav-link.btn-contact {
+    margin-left: 0;
+    margin-top: 10px;
+    display: inline-block;
+  }
+}
+.social-icons button {
+  width: 40px;
+  height: 40px;
+  margin-top: 10px;
+  border-radius: 50%;
+  background: #3a3f44;
+  color: var(--light-color);
+  border: none;
+  margin-right: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.social-icons button:hover {
+  background: var(--primary-color);
+  transform: scale(1.2);
+}
+
+.footer-inline-btn {
+    display: inline-block;
+    width: auto;
+}
+
+.footer-inline-btn:hover {
+    color: var(--primary-color);
+}
