@@ -1,6 +1,6 @@
 <?php
 $page_title = "Home";
-require_once 'includes/header.php';
+require_once '../includes/header.php';
 ?>
 
 <!-- Hero Section -->
@@ -129,4 +129,4 @@ require_once 'includes/header.php';
     </div>
 </section>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

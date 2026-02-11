@@ -1,6 +1,6 @@
 <?php
 $page_title = "Educational Solutions";
-require_once 'includes/header.php';
+require_once '../includes/header.php';
 ?>
 
 <!-- Hero Section -->
@@ -11,7 +11,7 @@ require_once 'includes/header.php';
                 <h1 class="display-4 fw-bold mb-4">Educational Solutions</h1>
                 <p class="lead mb-4">Bridging the gap between academia and industry with innovative, career-focused educational programs and services designed for tomorrow's professionals.</p>
                 <a href="#solutions" class="btn btn-primary btn-lg me-3">Explore Solutions</a>
-                <a href="../contact.php" class="btn btn-outline-light btn-lg">Get Started</a>
+                <a href="contact.php" class="btn btn-outline-light btn-lg">Get Started</a>
             </div>
         </div>
     </div>
@@ -89,7 +89,7 @@ require_once 'includes/header.php';
                         </div>
                     </div>
                     
-                    <a href="<?= SITE_URL; ?>courses.php" class="btn btn-outline-primary px-4">Enquire About Training</a>
+                    <a href="courses.php" class="btn btn-outline-primary px-4">Enquire About Training</a>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -313,7 +313,7 @@ require_once 'includes/header.php';
                             <span>Interactive discussion forums</span>
                         </div>
                     </div>
-                    <a href="student_portal.php" target="_blank" class="btn btn-primary px-4">Access Portal <i class="fas fa-external-link-alt ms-2"></i></a>
+                    <a href="login.php" target="_blank" class="btn btn-primary px-4">Access Portal <i class="fas fa-external-link-alt ms-2"></i></a>
                 </div>
             </div>
         </div>
@@ -330,7 +330,7 @@ require_once 'includes/header.php';
                 <p class="lead mb-0">Whether you're a student looking to enhance your skills or an institution seeking to improve outcomes, we have solutions tailored for you.</p>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <a href="../contact.php" class="btn btn-light btn-lg px-5">Get Started <i class="fas fa-arrow-right ms-2"></i></a>
+                <a href="contact.php" class="btn btn-light btn-lg px-5">Get Started <i class="fas fa-arrow-right ms-2"></i></a>
             </div>
         </div>
     </div>
@@ -466,4 +466,4 @@ require_once 'includes/header.php';
     }
 </style>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

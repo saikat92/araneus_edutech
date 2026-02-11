@@ -1,64 +1,31 @@
 <?php
 session_start();
 $page_title = "Student Portal Login";
-require_once 'includes/header.php';
+require_once '../includes/header.php';
+
+// Initialize Auth Controller
+require_once '../controller/Auth.php';
+$auth = new Auth();
 
 // Handle login
 $errorMsg = '';
 $successMsg = '';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['login'])) {
     $candidate_id = trim($_POST['candidate_id'] ?? '');
     $password = trim($_POST['password'] ?? '');
     
-    // Basic validation
     if (empty($candidate_id) || empty($password)) {
         $errorMsg = "Please enter both Candidate ID and Password";
     } else {
-        try {
-            require_once 'includes/database.php';
-            $db = new Database();
-            $conn = $db->getConnection();
-            
-            // Prepare SQL to check student
-            $stmt = $conn->prepare("SELECT * FROM students WHERE candidate_id = ? AND status = 'active'");
-            $stmt->bind_param("s", $candidate_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            
-            if ($result->num_rows === 1) {
-                $student = $result->fetch_assoc();
-                
-                // Verify password (assuming passwords are hashed)
-                if (password_verify($password, $student['password'])) {
-                    // Set session variables
-                    $_SESSION['student_id'] = $student['id'];
-                    $_SESSION['candidate_id'] = $student['candidate_id'];
-                    $_SESSION['student_name'] = $student['full_name'];
-                    $_SESSION['student_email'] = $student['email'];
-                    $_SESSION['logged_in'] = true;
-                    
-                    // Update last login
-                    $updateStmt = $conn->prepare("UPDATE students SET last_login = NOW() WHERE id = ?");
-                    $updateStmt->bind_param("i", $student['id']);
-                    $updateStmt->execute();
-                    $updateStmt->close();
-                    
-                    // Redirect to dashboard
-                    header("Location: portal-dashboard.php");
-                    exit();
-                } else {
-                    $errorMsg = "Invalid Candidate ID or Password";
-                }
-            } else {
-                $errorMsg = "Invalid Candidate ID or Password";
-            }
-            
-            $stmt->close();
-            $db->close();
-            
-        } catch (Exception $e) {
-            $errorMsg = "Login failed. Please try again later.";
+        $result = $auth->loginStudent($candidate_id, $password);
+        
+        if ($result['success']) {
+            // Redirect to dashboard
+            header("Location: " . $result['redirect']);
+            exit();
+        } else {
+            $errorMsg = $result['message'];
         }
     }
 }
@@ -97,8 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     
                     <div class="mt-5">
-                        <p>New to the portal? <a href="portal-register.php" class="text-primary fw-bold">Create an account</a></p>
-                        <p>Forgot your password? <a href="portal-forgot-password.php" class="text-primary fw-bold">Reset it here</a></p>
+                        <p>New to the portal? <a href="register.php" class="text-primary fw-bold">Create an account</a></p>
+                        <p>Forgot your password? <a href="forgot-password.php" class="text-primary fw-bold">Reset it here</a></p>
                     </div>
                 </div>
             </div>
@@ -117,19 +84,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             
                             <?php if ($errorMsg): ?>
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <i class="fas fa-exclamation-circle me-2"></i> <?php echo $errorMsg; ?>
+                                <i class="fas fa-exclamation-circle me-2"></i> <?php echo htmlspecialchars($errorMsg); ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                             <?php endif; ?>
                             
                             <?php if ($successMsg): ?>
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <i class="fas fa-check-circle me-2"></i> <?php echo $successMsg; ?>
+                                <i class="fas fa-check-circle me-2"></i> <?php echo htmlspecialchars($successMsg); ?>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                             <?php endif; ?>
                             
                             <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" id="loginForm">
+                                <input type="hidden" name="login" value="1">
+                                
                                 <div class="mb-4">
                                     <label for="candidate_id" class="form-label fw-bold">Candidate ID</label>
                                     <div class="input-group">
@@ -197,6 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </section>
 
+<!-- Rest of the page remains the same as your original student_portal.php -->
 <!-- Portal Benefits Section -->
 <section class="py-5 bg-light">
     <div class="container">
@@ -463,4 +433,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

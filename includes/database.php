@@ -33,4 +33,8 @@ class Database {
         $this->conn->close();
     }
 }
+
+$db = new Database();
+$conn = $db->getConnection();
+
 ?>

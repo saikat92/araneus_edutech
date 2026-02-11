@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/header.php';
+require_once '../includes/header.php';
 $page_title = 'Student Certificate';
 
 
@@ -18,7 +18,7 @@ if (empty($certificate_id)) {
                 </div>
             </div>
         </div>';
-    require_once 'includes/footer.php';
+    require_once '../includes/footer.php';
     exit();
 }
 
@@ -43,7 +43,7 @@ if (!$student_data) {
                 </div>
             </div>
         </div>';
-    require_once 'includes/footer.php';
+    require_once '../includes/footer.php';
     exit();
 }
 
@@ -630,5 +630,5 @@ $stmt->close();
 </script>
 
 <?php 
-require_once 'includes/footer.php'; 
+require_once '../includes/footer.php'; 
 ?>

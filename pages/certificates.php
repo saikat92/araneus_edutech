@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/header.php';
+require_once '../includes/header.php';
 $page_title = 'Certificates';
 ?>
 
@@ -157,5 +157,5 @@ $page_title = 'Certificates';
     }
 </style>
 
-<?php require_once 'includes/footer.php'; 
+<?php require_once '../includes/footer.php'; 
 ?>

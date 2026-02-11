@@ -1,6 +1,6 @@
 <?php
 $page_title = "Business Solutions";
-require_once 'includes/header.php';
+require_once '../includes/header.php';
 ?>
 
 <!-- Hero Section -->
@@ -462,4 +462,4 @@ require_once 'includes/header.php';
     }
 </style>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

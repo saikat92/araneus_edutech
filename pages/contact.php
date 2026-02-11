@@ -1,6 +1,6 @@
 <?php
 $page_title = "Contact Us";
-require_once 'includes/header.php';
+require_once '../includes/header.php';
 
 // Handle form submission
 $formSubmitted = false;
@@ -597,4 +597,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

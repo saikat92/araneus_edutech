@@ -1,11 +1,7 @@
 <?php
 $page_title = "Blogs & Insights";
-require_once 'includes/header.php';
+require_once '../includes/header.php';
 
-// Include database connection
-require_once 'includes/database.php';
-$db = new Database();
-$conn = $db->getConnection();
 
 // Handle blog search
 $search_query = isset($_GET['search']) ? trim($_GET['search']) : '';
@@ -592,5 +588,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <?php 
 $conn->close();
-require_once 'includes/footer.php'; 
+require_once '../includes/footer.php'; 
 ?>

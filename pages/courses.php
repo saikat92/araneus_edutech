@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/header.php';
+require_once '../includes/header.php';
 $page_title = 'Courses - Araneus Edutech LLP';
 ?>
 
@@ -544,7 +544,7 @@ $page_title = 'Courses - Araneus Edutech LLP';
     </div>
 </section>
 
-<?php require_once 'includes/footer.php'; 
+<?php require_once '../includes/footer.php'; 
 
 // Helper Functions
 function getCategoryColor($category) {

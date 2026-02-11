@@ -1,5 +1,8 @@
-<?php
-include 'config.php'; ?>
+<?php include 'database.php';
+
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,14 +26,14 @@ include 'config.php'; ?>
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>assets/css/style.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/images/icon.png">
+    <link rel="icon" type="image/x-icon" href="<?php echo SITE_URL; ?>assets/images/icon.png">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
         <div class="container">
             <!-- navbar brand logo image -->
-            <img src="assets/images/icon.png" alt="Araneus Edutech Logo" class="navbar-brand-logo px-1" width="70" />
+            <img src="<?php echo SITE_URL; ?>assets/images/icon.png" alt="Araneus Edutech Logo" class="navbar-brand-logo px-1" width="70" />
             <a class="navbar-brand" href="index.php">
                 <span class="brand-text">ARANEUS</span>
                 <span class="brand-subtitle">Edutech LLP</span>
@@ -46,28 +49,28 @@ include 'config.php'; ?>
                         <a class="nav-link" href="<?= SITE_URL; ?>">HOME</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= SITE_URL; ?>about.php">ABOUT</a>
+                        <a class="nav-link" href="<?= SITE_URL; ?>pages/about.php">ABOUT</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="solutionsDropdown" role="button" data-bs-toggle="dropdown">
                             SOLUTIONS
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="<?= SITE_URL; ?>education.php">Educational Solutions</a></li>
-                            <li><a class="dropdown-item" href="<?= SITE_URL; ?>business.php">Business Solutions</a></li>
+                            <li><a class="dropdown-item" href="<?= SITE_URL; ?>pages/education.php">Educational Solutions</a></li>
+                            <li><a class="dropdown-item" href="<?= SITE_URL; ?>pages/business.php">Business Solutions</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= SITE_URL; ?>testimonials.php">TESTIMONIALS</a>
+                        <a class="nav-link" href="<?= SITE_URL; ?>pages/testimonials.php">TESTIMONIALS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= SITE_URL; ?>blogs.php">BLOGS</a>
+                        <a class="nav-link" href="<?= SITE_URL; ?>pages/blogs.php">BLOGS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= SITE_URL; ?>career.php">CAREER</a>
+                        <a class="nav-link" href="<?= SITE_URL; ?>pages/career.php">CAREER</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= SITE_URL; ?>contact.php">CONTACT US</a>
+                        <a class="nav-link" href="<?= SITE_URL; ?>pages/contact.php">CONTACT US</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link btn-contact" href="contact.php">CONTACT US</a>

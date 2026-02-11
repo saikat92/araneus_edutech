@@ -1,6 +1,6 @@
 <?php
 $page_title = "Careers";
-require_once 'includes/header.php';
+require_once '../includes/header.php';
 ?>
 
 <!-- Hero Section -->
@@ -852,4 +852,4 @@ require_once 'includes/header.php';
     });
 </script>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

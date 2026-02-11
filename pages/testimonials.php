@@ -1,6 +1,6 @@
 <?php
 $page_title = "Testimonials";
-require_once 'includes/header.php';
+require_once '../includes/header.php';
 
 ?>
 
@@ -212,7 +212,7 @@ require_once 'includes/header.php';
             }
             
             // Close database connection
-            $database->close();
+            $conn->close();
             ?>
         </div>
     </div>
@@ -646,4 +646,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

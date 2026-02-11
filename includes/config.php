@@ -5,7 +5,7 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'araneus_db');
+define('DB_NAME', 'araneus');
 
 // Site configuration
 define('SITE_NAME', 'Araneus Edutech LLP');
@@ -17,7 +17,7 @@ define('SITE_LLPIN', 'AAP-3776');
 
 
 // Database connection
-require_once 'includes/database.php';
-$database = new Database();
-$conn = $database->getConnection();
+// require_once 'includes/database.php';
+// $database = new Database();
+// $conn = $database->getConnection();
 ?>
