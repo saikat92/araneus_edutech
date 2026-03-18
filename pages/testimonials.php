@@ -269,32 +269,32 @@ require_once '../includes/header.php';
             <div class="row align-items-center justify-content-center">
                 <div class="col-lg-2 col-md-3 col-4 mb-4">
                     <div class="client-logo">
-                        <img src="https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Client 1" class="img-fluid">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7M8t2nRwZ3YT3EWuH9UplHRqpMstm0xI0dg&s" alt="Client 1" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-4 mb-4">
                     <div class="client-logo">
-                        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Client 2" class="img-fluid">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_GylGW8wjYID3Y3LVCo4FSqBEgmjVjH6VGw&s" alt="Client 2" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-4 mb-4">
                     <div class="client-logo">
-                        <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Client 3" class="img-fluid">
+                        <img src="https://d2lk14jtvqry1q.cloudfront.net/media/large_217_c53d2207b0_6f9a255794.png" alt="Client 3" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-4 mb-4">
                     <div class="client-logo">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Client 4" class="img-fluid">
+                        <img src="https://www.eduopinions.com/wp-content/uploads/2022/05/Techno-India-University.jpg" alt="Client 4" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-4 mb-4">
                     <div class="client-logo">
-                        <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Client 5" class="img-fluid">
+                        <img src="https://plastwork.in/assets/img/loading_logo.jpeg" alt="Client 5" class="img-fluid">
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-4 mb-4">
                     <div class="client-logo">
-                        <img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Client 6" class="img-fluid">
+                        <img src="https://devtiplast.com/wp-content/uploads/2026/01/cropped-cropped-WhatsApp-Image-2025-12-20-at-1.00.20-PM.jpeg" alt="Client 6" class="img-fluid">
                     </div>
                 </div>
             </div>

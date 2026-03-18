@@ -12,23 +12,13 @@ $errorMsg = '';
 $successMsg = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
-    // Collect form data
+    // Collect only necessary form data
     $formData = [
         'candidate_id' => trim($_POST['candidate_id'] ?? ''),
-        'full_name' => trim($_POST['full_name'] ?? ''),
-        'email' => trim($_POST['email'] ?? ''),
-        'password' => $_POST['password'] ?? '',
-        'confirm_password' => $_POST['confirm_password'] ?? '',
-        'father_name' => trim($_POST['father_name'] ?? ''),
-        'course_completed' => trim($_POST['course_completed'] ?? ''),
-        'certification' => trim($_POST['certification'] ?? ''),
-        'mode' => trim($_POST['mode'] ?? ''),
-        'time_hours' => intval($_POST['time_hours'] ?? 0),
-        'start_date' => $_POST['start_date'] ?? '',
-        'end_date' => $_POST['end_date'] ?? '',
-        'llpin' => trim($_POST['llpin'] ?? ''),
-        'address' => trim($_POST['address'] ?? ''),
-        'github_link' => trim($_POST['github_link'] ?? '')
+        'full_name'    => trim($_POST['full_name'] ?? ''),
+        'email'        => trim($_POST['email'] ?? ''),
+        'password'     => $_POST['password'] ?? '',
+        'confirm_password' => $_POST['confirm_password'] ?? ''
     ];
     
     // Validate passwords match
@@ -117,37 +107,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
                                 <input type="hidden" name="register" value="1">
                                 
                                 <div class="row">
-                                    <!-- Personal Information -->
-                                    <div class="col-md-6 mb-3">
+                                    <!-- Candidate ID (Username) -->
+                                    <div class="col-md-12 mb-3">
                                         <label for="candidate_id" class="form-label fw-bold">Candidate ID *</label>
                                         <input type="text" class="form-control" id="candidate_id" name="candidate_id" 
                                                placeholder="e.g., ARN2024001" required
-                                               value="<?php echo htmlspecialchars($formData['candidate_id']); ?>">
-                                        <div class="form-text">Your unique student identification number</div>
+                                               value="<?php echo htmlspecialchars($formData['candidate_id'] ?? ''); ?>">
+                                        <div class="form-text">Your unique student identification number shared in mail.</div>
                                     </div>
                                     
-                                    <div class="col-md-6 mb-3">
+                                    <!-- Full Name -->
+                                    <div class="col-md-12 mb-3">
                                         <label for="full_name" class="form-label fw-bold">Full Name *</label>
                                         <input type="text" class="form-control" id="full_name" name="full_name" 
                                                placeholder="Enter your full name" required
-                                               value="<?php echo htmlspecialchars($formData['full_name']); ?>">
+                                               value="<?php echo htmlspecialchars($formData['full_name'] ?? ''); ?>">
                                     </div>
                                     
-                                    <div class="col-md-6 mb-3">
+                                    <!-- Email -->
+                                    <div class="col-12 mb-3">
                                         <label for="email" class="form-label fw-bold">Email Address *</label>
                                         <input type="email" class="form-control" id="email" name="email" 
                                                placeholder="Enter your email" required
-                                               value="<?php echo htmlspecialchars($formData['email']); ?>">
+                                               value="<?php echo htmlspecialchars($formData['email'] ?? ''); ?>">
                                     </div>
                                     
-                                    <div class="col-md-6 mb-3">
-                                        <label for="father_name" class="form-label fw-bold">Father's Name *</label>
-                                        <input type="text" class="form-control" id="father_name" name="father_name" 
-                                               placeholder="Enter father's name" required
-                                               value="<?php echo htmlspecialchars($formData['father_name']); ?>">
-                                    </div>
-                                    
-                                    <!-- Passwords -->
+                                    <!-- Password -->
                                     <div class="col-md-6 mb-3">
                                         <label for="password" class="form-label fw-bold">Password *</label>
                                         <div class="input-group">
@@ -160,6 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
                                         <div class="form-text">Minimum 8 characters</div>
                                     </div>
                                     
+                                    <!-- Confirm Password -->
                                     <div class="col-md-6 mb-3">
                                         <label for="confirm_password" class="form-label fw-bold">Confirm Password *</label>
                                         <div class="input-group">
@@ -169,72 +155,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['register'])) {
                                                 <i class="fas fa-eye"></i>
                                             </button>
                                         </div>
-                                    </div>
-                                    
-                                    <!-- Course Information -->
-                                    <div class="col-md-6 mb-3">
-                                        <label for="course_completed" class="form-label fw-bold">Course Completed *</label>
-                                        <input type="text" class="form-control" id="course_completed" name="course_completed" 
-                                               placeholder="e.g., Full Stack Development" required
-                                               value="<?php echo htmlspecialchars($formData['course_completed']); ?>">
-                                    </div>
-                                    
-                                    <div class="col-md-6 mb-3">
-                                        <label for="certification" class="form-label fw-bold">Certification *</label>
-                                        <input type="text" class="form-control" id="certification" name="certification" 
-                                               placeholder="e.g., Certified Full Stack Developer" required
-                                               value="<?php echo htmlspecialchars($formData['certification']); ?>">
-                                    </div>
-                                    
-                                    <div class="col-md-4 mb-3">
-                                        <label for="mode" class="form-label fw-bold">Mode *</label>
-                                        <select class="form-select" id="mode" name="mode" required>
-                                            <option value="">Select Mode</option>
-                                            <option value="Online" <?php echo ($formData['mode'] == 'Online') ? 'selected' : ''; ?>>Online</option>
-                                            <option value="Offline" <?php echo ($formData['mode'] == 'Offline') ? 'selected' : ''; ?>>Offline</option>
-                                            <option value="Hybrid" <?php echo ($formData['mode'] == 'Hybrid') ? 'selected' : ''; ?>>Hybrid</option>
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="col-md-4 mb-3">
-                                        <label for="time_hours" class="form-label fw-bold">Duration (Hours) *</label>
-                                        <input type="number" class="form-control" id="time_hours" name="time_hours" 
-                                               min="1" max="1000" required
-                                               value="<?php echo htmlspecialchars($formData['time_hours']); ?>">
-                                    </div>
-                                    
-                                    <div class="col-md-4 mb-3">
-                                        <label for="llpin" class="form-label fw-bold">LLPIN</label>
-                                        <input type="text" class="form-control" id="llpin" name="llpin" 
-                                               placeholder="e.g., AAP-3776"
-                                               value="<?php echo htmlspecialchars($formData['llpin']); ?>">
-                                    </div>
-                                    
-                                    <!-- Dates -->
-                                    <div class="col-md-6 mb-3">
-                                        <label for="start_date" class="form-label fw-bold">Start Date *</label>
-                                        <input type="date" class="form-control" id="start_date" name="start_date" required
-                                               value="<?php echo htmlspecialchars($formData['start_date']); ?>">
-                                    </div>
-                                    
-                                    <div class="col-md-6 mb-3">
-                                        <label for="end_date" class="form-label fw-bold">End Date *</label>
-                                        <input type="date" class="form-control" id="end_date" name="end_date" required
-                                               value="<?php echo htmlspecialchars($formData['end_date']); ?>">
-                                    </div>
-                                    
-                                    <!-- Address & Links -->
-                                    <div class="col-12 mb-3">
-                                        <label for="address" class="form-label fw-bold">Address *</label>
-                                        <textarea class="form-control" id="address" name="address" rows="3" 
-                                                  placeholder="Enter your complete address" required><?php echo htmlspecialchars($formData['address']); ?></textarea>
-                                    </div>
-                                    
-                                    <div class="col-12 mb-4">
-                                        <label for="github_link" class="form-label fw-bold">GitHub Profile Link</label>
-                                        <input type="url" class="form-control" id="github_link" name="github_link" 
-                                               placeholder="https://github.com/yourusername"
-                                               value="<?php echo htmlspecialchars($formData['github_link']); ?>">
                                     </div>
                                     
                                     <!-- Terms and Submit -->
@@ -408,10 +328,14 @@ document.addEventListener('DOMContentLoaded', function() {
             let isValid = true;
             
             // Clear previous error states
-            const inputs = this.querySelectorAll('input[required], select[required], textarea[required]');
+            const inputs = this.querySelectorAll('input[required]');
             inputs.forEach(input => {
                 input.classList.remove('is-invalid');
             });
+            
+            // Remove any dynamically added error messages
+            const existingErrors = this.querySelectorAll('.text-danger');
+            existingErrors.forEach(err => err.remove());
             
             // Validate each required field
             inputs.forEach(input => {
@@ -429,40 +353,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 confirmPassword.classList.add('is-invalid');
                 isValid = false;
                 
-                if (!document.querySelector('#passwordError')) {
-                    const errorDiv = document.createElement('div');
-                    errorDiv.id = 'passwordError';
-                    errorDiv.className = 'text-danger mt-1 small';
-                    errorDiv.textContent = 'Passwords do not match';
-                    
-                    if (confirmPassword.parentNode) {
-                        confirmPassword.parentNode.appendChild(errorDiv);
-                    }
-                }
-            }
-            
-            // Validate dates
-            const startDate = document.getElementById('start_date');
-            const endDate = document.getElementById('end_date');
-            if (startDate && endDate && startDate.value && endDate.value) {
-                const start = new Date(startDate.value);
-                const end = new Date(endDate.value);
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'text-danger mt-1 small';
+                errorDiv.textContent = 'Passwords do not match';
                 
-                if (end <= start) {
-                    endDate.classList.add('is-invalid');
-                    isValid = false;
-                    
-                    if (!document.querySelector('#dateError')) {
-                        const errorDiv = document.createElement('div');
-                        errorDiv.id = 'dateError';
-                        errorDiv.className = 'text-danger mt-1 small';
-                        errorDiv.textContent = 'End date must be after start date';
-                        
-                        if (endDate.parentNode) {
-                            endDate.parentNode.appendChild(errorDiv);
-                        }
-                    }
-                }
+                confirmPassword.parentNode.appendChild(errorDiv);
             }
             
             // Validate terms agreement
@@ -476,16 +371,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.preventDefault();
                 event.stopPropagation();
             }
-        });
-    }
-    
-    // Set minimum end date based on start date
-    const startDateInput = document.getElementById('start_date');
-    const endDateInput = document.getElementById('end_date');
-    
-    if (startDateInput && endDateInput) {
-        startDateInput.addEventListener('change', function() {
-            endDateInput.min = this.value;
         });
     }
 });

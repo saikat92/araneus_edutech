@@ -11,10 +11,12 @@ if (!$auth->isLoggedIn() || $auth->getUserRole() !== 'student') {
 }
 
 $page_title = "Student Dashboard";
-require_once '../includes/header.php';
+require_once 'includes/header.php';
 
-// Database connection for fetching student data
-require_once '../includes/database.php';
+// Database connection – safely include only if class not already defined
+// if (!class_exists('Database')) {
+//     require_once '../includes/database.php';
+// // }
 $db = new Database();
 $conn = $db->getConnection();
 
@@ -28,9 +30,9 @@ $stmt->close();
 
 // Fetch enrollments
 $enrollmentStmt = $conn->prepare("
-    SELECT e.*, c.course_name 
+    SELECT e.*, c.title AS course_name 
     FROM enrollments e
-    LEFT JOIN courses c ON e.course_id = c.course_code
+    LEFT JOIN courses c ON e.course_id = c.id
     WHERE e.student_id = ?
     ORDER BY e.enrollment_date DESC
 ");
@@ -40,7 +42,7 @@ $enrollments = $enrollmentStmt->get_result();
 $enrollmentStmt->close();
 ?>
 
-<!-- Dashboard Header -->
+<!-- Dashboard Header – unchanged -->
 <section class="dashboard-header bg-primary text-white py-4">
     <div class="container">
         <div class="row align-items-center">
@@ -225,10 +227,10 @@ $enrollmentStmt->close();
                         </ul>
                         <a href="profile.php" class="btn btn-outline-primary w-100">Edit Profile</a>
                     </div>
-                </div>
+                <!-- </div>
                 
-                <!-- Quick Links -->
-                <div class="card">
+              
+                <div class="card"> -->
                     <div class="card-header bg-light">
                         <h5 class="mb-0"><i class="fas fa-bolt me-2"></i> Quick Links</h5>
                     </div>
@@ -337,5 +339,5 @@ $enrollmentStmt->close();
 
 <?php 
 $db->close();
-require_once '../includes/footer.php'; 
+require_once 'includes/footer.php'; 
 ?>

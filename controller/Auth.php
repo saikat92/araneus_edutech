@@ -1,5 +1,8 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 
 class Auth {
     private $db;
@@ -12,17 +15,14 @@ class Auth {
     }
     
     /**
-     * Student Registration
+     * Student Registration (simplified)
      */
     public function registerStudent($data) {
         $response = ['success' => false, 'message' => ''];
         
         try {
-            // Validate required fields
-            $required = ['candidate_id', 'full_name', 'email', 'password', 'father_name', 
-                        'course_completed', 'certification', 'mode', 'time_hours', 
-                        'start_date', 'end_date', 'address'];
-            
+            // Validate only the fields we now collect
+            $required = ['candidate_id', 'full_name', 'email', 'password'];
             foreach ($required as $field) {
                 if (empty($data[$field])) {
                     $response['message'] = "Please fill in all required fields";
@@ -30,7 +30,7 @@ class Auth {
                 }
             }
             
-            // Check if candidate_id already exists
+            // Check if candidate_id or email already exists
             $stmt = $this->conn->prepare("SELECT id FROM students WHERE candidate_id = ? OR email = ?");
             $stmt->bind_param("ss", $data['candidate_id'], $data['email']);
             $stmt->execute();
@@ -49,6 +49,23 @@ class Auth {
             // Generate verification token
             $verificationToken = bin2hex(random_bytes(32));
             
+            // Set default values for fields no longer collected
+            $defaults = [
+                'father_name'       => '',
+                'course_completed'  => '',
+                'certification'     => '',
+                'mode'              => 'Online',
+                'time_hours'        => 0,
+                'start_date'        => date('Y-m-d'),
+                'end_date'          => date('Y-m-d', strtotime('+1 month')),
+                'llpin'             => null,
+                'address'           => '',
+                'github_link'       => null
+            ];
+            
+            // Merge provided data with defaults
+            $insertData = array_merge($defaults, $data);
+            
             // Prepare SQL
             $sql = "INSERT INTO students (
                 candidate_id, full_name, email, password, father_name, 
@@ -60,20 +77,20 @@ class Auth {
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param(
                 "ssssssssiisssss",
-                $data['candidate_id'],
-                $data['full_name'],
-                $data['email'],
+                $insertData['candidate_id'],
+                $insertData['full_name'],
+                $insertData['email'],
                 $hashedPassword,
-                $data['father_name'],
-                $data['course_completed'],
-                $data['certification'],
-                $data['mode'],
-                $data['time_hours'],
-                $data['start_date'],
-                $data['end_date'],
-                $data['llpin'] ?? null,
-                $data['address'],
-                $data['github_link'] ?? null,
+                $insertData['father_name'],
+                $insertData['course_completed'],
+                $insertData['certification'],
+                $insertData['mode'],
+                $insertData['time_hours'],
+                $insertData['start_date'],
+                $insertData['end_date'],
+                $insertData['llpin'],
+                $insertData['address'],
+                $insertData['github_link'],
                 $verificationToken
             );
             

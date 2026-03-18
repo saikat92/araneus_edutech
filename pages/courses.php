@@ -349,45 +349,46 @@ $page_title = 'Courses - Araneus Edutech LLP';
                                                     </div>
                                                 </li>
                                             </ul>
+                                            <!-- Enrollment CTA -->
+                                            <div class="d-grid gap-3">
+                                                <button class="btn btn-primary btn-lg enroll-btn"
+                                                        data-course-id="<?php echo $course['id']; ?>"
+                                                        data-course-title="<?php echo htmlspecialchars($course['title']); ?>">
+                                                    <i class="fas fa-shopping-cart me-2"></i>Enroll Now
+                                                </button>
+                                                <a href="#" class="btn btn-outline-primary">
+                                                    <i class="fas fa-download me-2"></i>Download Syllabus
+                                                </a>
+                                                <div class="text-center">
+                                                    <small class="text-muted">
+                                                        <i class="fas fa-shield-alt me-1"></i>
+                                                        7-day money-back guarantee
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Share Options -->
+                                            <div class="mt-4 pt-3 border-top text-center">
+                                                <small class="text-muted d-block mb-2">Share this course</small>
+                                                <div class="d-flex justify-content-center gap-2">
+                                                    <a href="#" class="btn btn-sm btn-outline-secondary">
+                                                        <i class="fab fa-facebook-f"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-sm btn-outline-secondary">
+                                                        <i class="fab fa-twitter"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-sm btn-outline-secondary">
+                                                        <i class="fab fa-linkedin-in"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-sm btn-outline-secondary">
+                                                        <i class="fab fa-whatsapp"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     
-                                    <!-- Enrollment CTA -->
-                                    <div class="d-grid gap-3">
-                                        <button class="btn btn-primary btn-lg enroll-btn"
-                                                data-course-id="<?php echo $course['id']; ?>"
-                                                data-course-title="<?php echo htmlspecialchars($course['title']); ?>">
-                                            <i class="fas fa-shopping-cart me-2"></i>Enroll Now
-                                        </button>
-                                        <a href="#" class="btn btn-outline-primary">
-                                            <i class="fas fa-download me-2"></i>Download Syllabus
-                                        </a>
-                                        <div class="text-center">
-                                            <small class="text-muted">
-                                                <i class="fas fa-shield-alt me-1"></i>
-                                                7-day money-back guarantee
-                                            </small>
-                                        </div>
-                                    </div>
                                     
-                                    <!-- Share Options -->
-                                    <div class="mt-4 pt-3 border-top text-center">
-                                        <small class="text-muted d-block mb-2">Share this course</small>
-                                        <div class="d-flex justify-content-center gap-2">
-                                            <a href="#" class="btn btn-sm btn-outline-secondary">
-                                                <i class="fab fa-facebook-f"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-outline-secondary">
-                                                <i class="fab fa-twitter"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-outline-secondary">
-                                                <i class="fab fa-linkedin-in"></i>
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-outline-secondary">
-                                                <i class="fab fa-whatsapp"></i>
-                                            </a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -848,7 +849,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (!<?php echo isset($_SESSION['user_id']) ? 'true' : 'false'; ?>) {
                 // Redirect to login if not logged in
-                window.location.href = 'pages/auth/login.php?redirect=courses&course_id=' + courseId;
+                window.location.href = 'login.php?redirect=courses&course_id=' + courseId;
                 return;
             }
             

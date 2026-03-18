@@ -336,15 +336,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <div class="col-lg-6">
                                 <div class="map-container">
                                     <!-- Google Maps Embed -->
-                                    <iframe 
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3682.0673447734724!2d88.36368877488891!3d22.64713603197478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f89c5d5c5c5c5d%3A0x5c5c5c5c5c5c5c5c!2sBarrackpore%2C%20Kolkata%2C%20West%20Bengal%2C%20India!5e0!3m2!1sen!2sin!4v1692356789012!5m2!1sen!2sin" 
-                                        width="100%" 
-                                        height="300" 
-                                        style="border:0;" 
-                                        allowfullscreen="" 
-                                        loading="lazy" 
-                                        referrerpolicy="no-referrer-when-downgrade">
-                                    </iframe>
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d268.0312737880964!2d88.38126219585727!3d22.759665950061947!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1773829747285!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                                 </div>
                             </div>
                         </div>

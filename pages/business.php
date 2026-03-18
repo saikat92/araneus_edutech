@@ -11,7 +11,7 @@ require_once '../includes/header.php';
                 <h1 class="display-4 fw-bold mb-4">Business Solutions</h1>
                 <p class="lead mb-4">Comprehensive technology solutions to streamline operations, enhance productivity, and drive growth for businesses of all sizes.</p>
                 <a href="#solutions" class="btn btn-primary btn-lg me-3">Explore Solutions</a>
-                <a href="../contact.php" class="btn btn-outline-light btn-lg">Schedule Consultation</a>
+                <a href="contact.php" class="btn btn-outline-light btn-lg">Schedule Consultation</a>
             </div>
         </div>
     </div>
@@ -25,7 +25,7 @@ require_once '../includes/header.php';
                 <h2 class="h1 mb-4">Transform Your Business with Technology</h2>
                 <p class="lead mb-4">In today's digital landscape, leveraging the right technology solutions is crucial for business success. We provide comprehensive software, application, and digital solutions tailored to your specific business needs.</p>
                 <p>From CRM implementation to custom software development, our team of experts ensures seamless integration and maximum ROI for your technology investments.</p>
-                <a href="../contact.php" class="btn btn-primary mt-3 px-4">Get Free Consultation</a>
+                <a href="contact.php" class="btn btn-primary mt-3 px-4">Get Free Consultation</a>
             </div>
             <div class="col-lg-6">
                 <div class="business-overview-img">
@@ -92,7 +92,7 @@ require_once '../includes/header.php';
                         <li><i class="fas fa-check-circle text-success me-2"></i>Marketing automation integration</li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>Ongoing support & maintenance</li>
                     </ul>
-                    <a href="../contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
+                    <a href="contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
                 </div>
             </div>
             
@@ -110,7 +110,7 @@ require_once '../includes/header.php';
                         <li><i class="fas fa-check-circle text-success me-2"></i>Human capital management</li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>Custom module development</li>
                     </ul>
-                    <a href="../contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
+                    <a href="contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
                 </div>
             </div>
             
@@ -128,7 +128,7 @@ require_once '../includes/header.php';
                         <li><i class="fas fa-check-circle text-success me-2"></i>Software upgrade services</li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>24/7 technical support</li>
                     </ul>
-                    <a href="../contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
+                    <a href="contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
                 </div>
             </div>
             
@@ -146,7 +146,7 @@ require_once '../includes/header.php';
                         <li><i class="fas fa-check-circle text-success me-2"></i>Implementation roadmap planning</li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>Total cost of ownership analysis</li>
                     </ul>
-                    <a href="../contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
+                    <a href="contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
                 </div>
             </div>
             
@@ -164,7 +164,7 @@ require_once '../includes/header.php';
                         <li><i class="fas fa-check-circle text-success me-2"></i>Tax filing automation</li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>Integration with existing ERP/accounting systems</li>
                     </ul>
-                    <a href="../contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
+                    <a href="contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
                 </div>
             </div>
             
@@ -182,7 +182,7 @@ require_once '../includes/header.php';
                         <li><i class="fas fa-check-circle text-success me-2"></i>Marketing collateral design</li>
                         <li><i class="fas fa-check-circle text-success me-2"></i>UI/UX design for applications</li>
                     </ul>
-                    <a href="../contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
+                    <a href="contact.php" class="btn btn-outline-primary btn-sm">Learn More</a>
                 </div>
             </div>
         </div>
@@ -333,7 +333,7 @@ require_once '../includes/header.php';
                 </div>
             </div>
             <div class="col-lg-4 text-lg-end">
-                <a href="../contact.php" class="btn btn-primary btn-lg px-5">Schedule Consultation <i class="fas fa-calendar-alt ms-2"></i></a>
+                <a href="contact.php" class="btn btn-primary btn-lg px-5">Schedule Consultation <i class="fas fa-calendar-alt ms-2"></i></a>
             </div>
         </div>
     </div>
