@@ -52,13 +52,7 @@ class Auth {
             // Set default values for fields no longer collected
             $defaults = [
                 'father_name'       => '',
-                'course_completed'  => '',
-                'certification'     => '',
-                'mode'              => 'Online',
                 'time_hours'        => 0,
-                'start_date'        => date('Y-m-d'),
-                'end_date'          => date('Y-m-d', strtotime('+1 month')),
-                'llpin'             => null,
                 'address'           => '',
                 'github_link'       => null
             ];
@@ -67,28 +61,18 @@ class Auth {
             $insertData = array_merge($defaults, $data);
             
             // Prepare SQL
-            $sql = "INSERT INTO students (
-                candidate_id, full_name, email, password, father_name, 
-                course_completed, certification, mode, time_hours, 
-                start_date, end_date, llpin, address, github_link, 
-                status, verification_token
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?)";
+            $sql = "INSERT INTO students (candidate_id, full_name, email, password, father_name, time_hours, address, github_link, status, verification_token) VALUES 
+            (?, ?, ?, ? , ?, ?, ?, ?, 'pending', ?)";
             
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param(
-                "ssssssssiisssss",
+                "sssssisss",
                 $insertData['candidate_id'],
                 $insertData['full_name'],
                 $insertData['email'],
                 $hashedPassword,
                 $insertData['father_name'],
-                $insertData['course_completed'],
-                $insertData['certification'],
-                $insertData['mode'],
                 $insertData['time_hours'],
-                $insertData['start_date'],
-                $insertData['end_date'],
-                $insertData['llpin'],
                 $insertData['address'],
                 $insertData['github_link'],
                 $verificationToken
