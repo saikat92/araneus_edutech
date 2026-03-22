@@ -3,25 +3,20 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-
 class Auth {
-    private $db;
     private $conn;
-    
+
     public function __construct() {
         require_once __DIR__ . '/../includes/database.php';
         $database = new Database();
         $this->conn = $database->getConnection();
     }
-    
-    /**
-     * Student Registration (simplified)
-     */
+
+    // ─── Student Registration ───────────────────────────────────────────────
     public function registerStudent($data) {
         $response = ['success' => false, 'message' => ''];
-        
+
         try {
-            // Validate only the fields we now collect
             $required = ['candidate_id', 'full_name', 'email', 'password'];
             foreach ($required as $field) {
                 if (empty($data[$field])) {
@@ -29,41 +24,35 @@ class Auth {
                     return $response;
                 }
             }
-            
-            // Check if candidate_id or email already exists
+
+            // Check duplicate candidate_id or email
             $stmt = $this->conn->prepare("SELECT id FROM students WHERE candidate_id = ? OR email = ?");
             $stmt->bind_param("ss", $data['candidate_id'], $data['email']);
             $stmt->execute();
             $result = $stmt->get_result();
-            
             if ($result->num_rows > 0) {
                 $response['message'] = "Candidate ID or Email already exists";
                 $stmt->close();
                 return $response;
             }
             $stmt->close();
-            
-            // Hash password
-            $hashedPassword = password_hash($data['password'], PASSWORD_DEFAULT);
-            
-            // Generate verification token
+
+            $hashedPassword    = password_hash($data['password'], PASSWORD_DEFAULT);
             $verificationToken = bin2hex(random_bytes(32));
-            
-            // Set default values for fields no longer collected
+
             $defaults = [
-                'father_name'       => '',
-                'time_hours'        => 0,
-                'address'           => '',
-                'github_link'       => null
+                'father_name' => '',
+                'time_hours'  => 0,
+                'address'     => '',
+                'github_link' => null,
             ];
-            
-            // Merge provided data with defaults
             $insertData = array_merge($defaults, $data);
-            
-            // Prepare SQL
-            $sql = "INSERT INTO students (candidate_id, full_name, email, password, father_name, time_hours, address, github_link, status, verification_token) VALUES 
-            (?, ?, ?, ? , ?, ?, ?, ?, 'pending', ?)";
-            
+
+            $sql = "INSERT INTO students
+                        (candidate_id, full_name, email, password, father_name, time_hours,
+                         address, github_link, status, verification_token)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending', ?)";
+
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param(
                 "sssssisss",
@@ -77,74 +66,62 @@ class Auth {
                 $insertData['github_link'],
                 $verificationToken
             );
-            
+
             if ($stmt->execute()) {
-                $studentId = $stmt->insert_id;
-                
-                // Send verification email
                 $this->sendVerificationEmail($data['email'], $data['full_name'], $verificationToken);
-                
-                $response['success'] = true;
-                $response['message'] = "Registration successful! Please check your email to verify your account.";
-                $response['student_id'] = $studentId;
+                $response['success']    = true;
+                $response['message']    = "Registration successful! Please check your email to verify your account.";
+                $response['student_id'] = $stmt->insert_id;
             } else {
                 $response['message'] = "Registration failed: " . $stmt->error;
             }
-            
             $stmt->close();
-            
+
         } catch (Exception $e) {
             $response['message'] = "Registration error: " . $e->getMessage();
         }
-        
+
         return $response;
     }
-    
-    /**
-     * Student Login
-     */
+
+    // ─── Student Login ──────────────────────────────────────────────────────
     public function loginStudent($candidateId, $password) {
         $response = ['success' => false, 'message' => ''];
-        
+
         try {
             $stmt = $this->conn->prepare("
-                SELECT id, candidate_id, full_name, email, password, status, email_verified 
-                FROM students 
-                WHERE candidate_id = ? 
-                AND status != 'inactive'
+                SELECT id, candidate_id, full_name, email, password, status, email_verified
+                FROM students
+                WHERE candidate_id = ? AND status != 'inactive'
             ");
             $stmt->bind_param("s", $candidateId);
             $stmt->execute();
             $result = $stmt->get_result();
-            
+
             if ($result->num_rows === 1) {
                 $student = $result->fetch_assoc();
-                
-                // Check if email is verified
+
                 if (!$student['email_verified']) {
                     $response['message'] = "Please verify your email before logging in.";
                     $stmt->close();
                     return $response;
                 }
-                
-                // Verify password
+
                 if (password_verify($password, $student['password'])) {
-                    // Update last login
                     $updateStmt = $this->conn->prepare("UPDATE students SET last_login = NOW() WHERE id = ?");
                     $updateStmt->bind_param("i", $student['id']);
                     $updateStmt->execute();
                     $updateStmt->close();
-                    
-                    // Set session variables
-                    $_SESSION['student_id'] = $student['id'];
-                    $_SESSION['candidate_id'] = $student['candidate_id'];
-                    $_SESSION['student_name'] = $student['full_name'];
+
+                    $_SESSION['student_id']    = $student['id'];
+                    $_SESSION['candidate_id']  = $student['candidate_id'];
+                    $_SESSION['student_name']  = $student['full_name'];
                     $_SESSION['student_email'] = $student['email'];
-                    $_SESSION['logged_in'] = true;
-                    $_SESSION['user_role'] = 'student';
-                    
-                    $response['success'] = true;
-                    $response['message'] = "Login successful!";
+                    $_SESSION['logged_in']     = true;
+                    $_SESSION['user_role']     = 'student';
+
+                    $response['success']  = true;
+                    $response['message']  = "Login successful!";
                     $response['redirect'] = "../portal/dashboard.php";
                 } else {
                     $response['message'] = "Invalid Candidate ID or Password";
@@ -152,281 +129,264 @@ class Auth {
             } else {
                 $response['message'] = "Invalid Candidate ID or Password";
             }
-            
             $stmt->close();
-            
+
         } catch (Exception $e) {
             $response['message'] = "Login error: " . $e->getMessage();
         }
-        
+
         return $response;
     }
-    
-    /**
-     * Admin/Staff Login
-     */
+
+    // ─── Admin / Staff Login ────────────────────────────────────────────────
     public function loginUser($username, $password) {
         $response = ['success' => false, 'message' => ''];
-        
+
         try {
             $stmt = $this->conn->prepare("
-                SELECT id, username, password_hash, email, role, full_name, status 
-                FROM users 
+                SELECT id, username, password_hash, email, role, full_name, status
+                FROM users
                 WHERE username = ? AND status = 'active'
             ");
             $stmt->bind_param("s", $username);
             $stmt->execute();
             $result = $stmt->get_result();
-            
+
             if ($result->num_rows === 1) {
                 $user = $result->fetch_assoc();
-                
-                // Verify password
+
                 if (password_verify($password, $user['password_hash'])) {
-                    // Update last login
                     $updateStmt = $this->conn->prepare("UPDATE users SET last_login = NOW() WHERE id = ?");
                     $updateStmt->bind_param("i", $user['id']);
                     $updateStmt->execute();
                     $updateStmt->close();
-                    
-                    // Set session variables
-                    $_SESSION['user_id'] = $user['id'];
-                    $_SESSION['username'] = $user['username'];
-                    $_SESSION['user_name'] = $user['full_name'];
+
+                    $_SESSION['user_id']    = $user['id'];
+                    $_SESSION['username']   = $user['username'];
+                    $_SESSION['user_name']  = $user['full_name'];
                     $_SESSION['user_email'] = $user['email'];
-                    $_SESSION['user_role'] = $user['role'];
-                    $_SESSION['logged_in'] = true;
-                    
-                    $response['success'] = true;
-                    $response['message'] = "Login successful!";
-                    $response['redirect'] = ($user['role'] == 'admin') ? "../admin/dashboard.php" : "../staff/dashboard.php";
+                    $_SESSION['user_role']  = $user['role'];
+                    $_SESSION['logged_in']  = true;
+
+                    $response['success']  = true;
+                    $response['message']  = "Login successful!";
+                    $response['redirect'] = ($user['role'] == 'admin')
+                        ? "../admin/dashboard.php"
+                        : "../staff/dashboard.php";
                 } else {
                     $response['message'] = "Invalid username or password";
                 }
             } else {
                 $response['message'] = "Invalid username or password";
             }
-            
             $stmt->close();
-            
+
         } catch (Exception $e) {
             $response['message'] = "Login error: " . $e->getMessage();
         }
-        
+
         return $response;
     }
-    
-    /**
-     * Verify Email
-     */
+
+    // ─── Email Verification ─────────────────────────────────────────────────
     public function verifyEmail($token) {
         $response = ['success' => false, 'message' => ''];
-        
+
         try {
             $stmt = $this->conn->prepare("
-                SELECT id, full_name, email 
-                FROM students 
+                SELECT id, full_name, email
+                FROM students
                 WHERE verification_token = ? AND email_verified = 0
             ");
             $stmt->bind_param("s", $token);
             $stmt->execute();
             $result = $stmt->get_result();
-            
+
             if ($result->num_rows === 1) {
                 $student = $result->fetch_assoc();
-                
-                // Update verification status
+
                 $updateStmt = $this->conn->prepare("
-                    UPDATE students 
-                    SET email_verified = 1, verification_token = NULL, status = 'active' 
+                    UPDATE students
+                    SET email_verified = 1, verification_token = NULL, status = 'active'
                     WHERE id = ?
                 ");
                 $updateStmt->bind_param("i", $student['id']);
-                
+
                 if ($updateStmt->execute()) {
                     $response['success'] = true;
                     $response['message'] = "Email verified successfully! You can now login.";
                 } else {
                     $response['message'] = "Verification failed. Please try again.";
                 }
-                
                 $updateStmt->close();
             } else {
                 $response['message'] = "Invalid or expired verification token";
             }
-            
             $stmt->close();
-            
+
         } catch (Exception $e) {
             $response['message'] = "Verification error: " . $e->getMessage();
         }
-        
+
         return $response;
     }
-    
-    /**
-     * Forgot Password
-     */
+
+    // ─── Forgot Password ────────────────────────────────────────────────────
     public function forgotPassword($email) {
         $response = ['success' => false, 'message' => ''];
-        
+
         try {
-            // Check if email exists in students table
-            $stmt = $this->conn->prepare("SELECT id, full_name FROM students WHERE email = ? AND status = 'active'");
+            $stmt = $this->conn->prepare(
+                "SELECT id, full_name FROM students WHERE email = ? AND status = 'active'"
+            );
             $stmt->bind_param("s", $email);
             $stmt->execute();
             $result = $stmt->get_result();
-            
+
             if ($result->num_rows === 1) {
-                $user = $result->fetch_assoc();
-                
-                // Generate reset token
+                $user       = $result->fetch_assoc();
                 $resetToken = bin2hex(random_bytes(32));
-                $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
-                
-                // Store reset token
-                $updateStmt = $this->conn->prepare("
-                    UPDATE students 
-                    SET reset_token = ?, reset_expiry = ? 
-                    WHERE id = ?
-                ");
+                $expiry     = date('Y-m-d H:i:s', strtotime('+1 hour'));
+
+                $updateStmt = $this->conn->prepare(
+                    "UPDATE students SET reset_token = ?, reset_expiry = ? WHERE id = ?"
+                );
                 $updateStmt->bind_param("ssi", $resetToken, $expiry, $user['id']);
-                
+
                 if ($updateStmt->execute()) {
-                    // Send reset email
-                    $resetLink = "http://" . $_SERVER['HTTP_HOST'] . "/pages/reset-password.php?token=" . $resetToken;
-                    
-                    // In production, use a proper email sending library
-                    $subject = "Password Reset Request - Araneus Edutech";
-                    $message = "Dear " . $user['full_name'] . ",\n\n";
-                    $message .= "You have requested to reset your password. Click the link below to reset:\n";
-                    $message .= $resetLink . "\n\n";
-                    $message .= "This link will expire in 1 hour.\n\n";
-                    $message .= "If you didn't request this, please ignore this email.\n";
-                    
-                    // For demo, we'll just return the link
+                    $this->sendPasswordResetEmail($email, $user['full_name'], $resetToken);
+                    // SECURITY: never expose the token in the JSON response
                     $response['success'] = true;
                     $response['message'] = "Password reset link sent to your email.";
-                    $response['demo_link'] = $resetLink; // Remove in production
                 } else {
                     $response['message'] = "Failed to process reset request";
                 }
-                
                 $updateStmt->close();
             } else {
-                $response['message'] = "No account found with this email";
+                // Generic message to avoid email enumeration
+                $response['success'] = true;
+                $response['message'] = "If that email exists, a reset link has been sent.";
             }
-            
             $stmt->close();
-            
+
         } catch (Exception $e) {
             $response['message'] = "Error: " . $e->getMessage();
         }
-        
+
         return $response;
     }
-    
-    /**
-     * Reset Password
-     */
+
+    // ─── Reset Password ─────────────────────────────────────────────────────
     public function resetPassword($token, $newPassword) {
         $response = ['success' => false, 'message' => ''];
-        
+
         try {
             $stmt = $this->conn->prepare("
-                SELECT id FROM students 
-                WHERE reset_token = ? 
-                AND reset_expiry > NOW() 
-                AND status = 'active'
+                SELECT id FROM students
+                WHERE reset_token = ? AND reset_expiry > NOW() AND status = 'active'
             ");
             $stmt->bind_param("s", $token);
             $stmt->execute();
             $result = $stmt->get_result();
-            
+
             if ($result->num_rows === 1) {
-                $student = $result->fetch_assoc();
-                
-                // Hash new password
+                $student        = $result->fetch_assoc();
                 $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-                
-                // Update password and clear reset token
+
                 $updateStmt = $this->conn->prepare("
-                    UPDATE students 
-                    SET password = ?, reset_token = NULL, reset_expiry = NULL 
+                    UPDATE students
+                    SET password = ?, reset_token = NULL, reset_expiry = NULL
                     WHERE id = ?
                 ");
                 $updateStmt->bind_param("si", $hashedPassword, $student['id']);
-                
+
                 if ($updateStmt->execute()) {
                     $response['success'] = true;
                     $response['message'] = "Password reset successfully!";
                 } else {
                     $response['message'] = "Failed to reset password";
                 }
-                
                 $updateStmt->close();
             } else {
                 $response['message'] = "Invalid or expired reset token";
             }
-            
             $stmt->close();
-            
+
         } catch (Exception $e) {
             $response['message'] = "Error: " . $e->getMessage();
         }
-        
+
         return $response;
     }
-    
-    /**
-     * Check if user is logged in
-     */
-    public function isLoggedIn() {
-        return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
-    }
-    
-    /**
-     * Get current user role
-     */
-    public function getUserRole() {
-        return $_SESSION['user_role'] ?? null;
-    }
-    
-    /**
-     * Get current student ID
-     */
-    public function getStudentId() {
-        return $_SESSION['student_id'] ?? null;
-    }
-    
-    /**
-     * Logout
-     */
+
+    // ─── Helper methods ─────────────────────────────────────────────────────
+    public function isLoggedIn()  { return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true; }
+    public function getUserRole() { return $_SESSION['user_role'] ?? null; }
+    public function getStudentId(){ return $_SESSION['student_id'] ?? null; }
+
     public function logout() {
         session_destroy();
         return ['success' => true, 'message' => 'Logged out successfully'];
     }
-    
+
+    // ─── Email senders (PHPMailer-ready) ────────────────────────────────────
+
     /**
-     * Send verification email
+     * Send email verification link.
+     * Swap the mail() call for PHPMailer when SMTP is configured.
      */
     private function sendVerificationEmail($email, $name, $token) {
-        // In production, use PHPMailer or similar
-        $verificationLink = "http://" . $_SERVER['HTTP_HOST'] . "/pages/verify-email.php?token=" . $token;
-        
+        $protocol         = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $host             = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        $verificationLink = $protocol . '://' . $host . '/pages/verify-email.php?token=' . $token;
+
         $subject = "Verify Your Email - Araneus Edutech Student Portal";
-        $message = "Dear " . $name . ",\n\n";
-        $message .= "Thank you for registering with Araneus Edutech!\n";
-        $message .= "Please click the link below to verify your email address:\n";
-        $message .= $verificationLink . "\n\n";
-        $message .= "This link will expire in 24 hours.\n\n";
-        $message .= "If you didn't create an account, please ignore this email.\n";
-        
-        // For demo purposes, we'll just log it
-        error_log("Verification email to: $email");
-        error_log("Verification link: $verificationLink");
-        
-        return true;
+        $body    = "Dear " . $name . ",\n\n"
+                 . "Thank you for registering with Araneus Edutech!\n"
+                 . "Please click the link below to verify your email address:\n\n"
+                 . $verificationLink . "\n\n"
+                 . "This link will expire in 24 hours.\n\n"
+                 . "If you did not create an account, please ignore this email.\n\n"
+                 . "Regards,\nAraneus Edutech Team";
+
+        $headers  = "From: noreply@araneusedutech.com\r\n";
+        $headers .= "Reply-To: araneusedutech@gmail.com\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion();
+
+        $sent = @mail($email, $subject, $body, $headers);
+        if (!$sent) {
+            // Fallback: log so the link is not silently lost during development
+            error_log("[Auth] Verification email for {$email}: {$verificationLink}");
+        }
+        return $sent;
+    }
+
+    /**
+     * Send password reset link.
+     * SECURITY: token is never returned to the caller — only sent by email.
+     */
+    private function sendPasswordResetEmail($email, $name, $token) {
+        $protocol  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $host      = $_SERVER['HTTP_HOST'] ?? 'localhost';
+        $resetLink = $protocol . '://' . $host . '/pages/reset-password.php?token=' . $token;
+
+        $subject = "Password Reset Request - Araneus Edutech";
+        $body    = "Dear " . $name . ",\n\n"
+                 . "You have requested to reset your password. Click the link below:\n\n"
+                 . $resetLink . "\n\n"
+                 . "This link will expire in 1 hour.\n\n"
+                 . "If you did not request this, please ignore this email.\n\n"
+                 . "Regards,\nAraneus Edutech Team";
+
+        $headers  = "From: noreply@araneusedutech.com\r\n";
+        $headers .= "Reply-To: araneusedutech@gmail.com\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion();
+
+        $sent = @mail($email, $subject, $body, $headers);
+        if (!$sent) {
+            error_log("[Auth] Password reset email for {$email}: {$resetLink}");
+        }
+        return $sent;
     }
 }
 ?>

@@ -1,5 +1,4 @@
 <?php
-session_start();
 $page_title = "Student Registration";
 require_once '../includes/header.php';
 

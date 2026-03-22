@@ -1,7 +1,7 @@
 <?php
-session_start();
+// session handled by Auth.php
 require_once '../controller/Auth.php';
-require_once '../includes/Database.php';
+require_once '../includes/database.php';
 
 header('Content-Type: application/json');
 
@@ -12,15 +12,16 @@ if (!$auth->isLoggedIn() || $auth->getUserRole() !== 'student') {
 }
 
 $studentId = $auth->getStudentId();
-$courseId = $_POST['course_id'] ?? 0;
-$notes = $_POST['notes'] ?? '';
+$courseId  = intval($_POST['course_id'] ?? 0);
+$notes     = trim($_POST['notes'] ?? '');
 
 if (!$courseId) {
     echo json_encode(['success' => false, 'error' => 'Course ID required']);
     exit;
 }
 
-$db = new Database();
+// Single DB connection
+$db   = new Database();
 $conn = $db->getConnection();
 
 // Check if already enrolled
@@ -31,21 +32,31 @@ $check->store_result();
 if ($check->num_rows > 0) {
     echo json_encode(['success' => false, 'error' => 'Already enrolled in this course']);
     $check->close();
-    $conn->close();
     exit;
 }
 $check->close();
 
+// Verify course exists and is active
+$courseCheck = $conn->prepare("SELECT id FROM courses WHERE id = ? AND is_active = 1");
+$courseCheck->bind_param("i", $courseId);
+$courseCheck->execute();
+$courseCheck->store_result();
+if ($courseCheck->num_rows === 0) {
+    echo json_encode(['success' => false, 'error' => 'Course not found or inactive']);
+    $courseCheck->close();
+    exit;
+}
+$courseCheck->close();
+
 // Insert enrollment
 $enrollDate = date('Y-m-d');
-$status = 'enrolled';
+$status     = 'enrolled';
 $stmt = $conn->prepare("INSERT INTO enrollments (student_id, course_id, enrollment_date, status, notes) VALUES (?, ?, ?, ?, ?)");
 $stmt->bind_param("iisss", $studentId, $courseId, $enrollDate, $status, $notes);
 
 if ($stmt->execute()) {
-    echo json_encode(['success' => true]);
+    echo json_encode(['success' => true, 'message' => 'Enrolled successfully!']);
 } else {
-    echo json_encode(['success' => false, 'error' => $stmt->error]);
+    echo json_encode(['success' => false, 'error' => 'Database error: ' . $stmt->error]);
 }
 $stmt->close();
-$conn->close();

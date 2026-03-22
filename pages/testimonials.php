@@ -2,646 +2,200 @@
 $page_title = "Testimonials";
 require_once '../includes/header.php';
 
+// Fetch all published testimonials
+$stmt = $conn->prepare("SELECT * FROM testimonials WHERE status = 'published' ORDER BY is_featured DESC, testimonial_date DESC");
+$stmt->execute();
+$result      = $stmt->get_result();
+$testimonials = [];
+while ($row = $result->fetch_assoc()) $testimonials[] = $row;
+$stmt->close();
+
+$featured  = array_filter($testimonials, fn($t) => $t['is_featured']);
+$regular   = array_filter($testimonials, fn($t) => !$t['is_featured']);
+
+// Stats
+$total     = count($testimonials);
+$avgRating = $total ? round(array_sum(array_column($testimonials,'rating')) / $total, 1) : 0;
+$fiveStars = count(array_filter($testimonials, fn($t) => $t['rating'] == 5));
+
+function stars($n) {
+    $html = '';
+    for ($i = 1; $i <= 5; $i++)
+        $html .= $i <= $n
+            ? '<i class="fas fa-star text-warning"></i>'
+            : '<i class="far fa-star" style="color:#ccc;"></i>';
+    return $html;
+}
+
+function initials($name) {
+    $parts = explode(' ', trim($name));
+    return strtoupper(substr($parts[0],0,1) . (isset($parts[1]) ? substr($parts[1],0,1) : ''));
+}
+
+// Palette for avatar backgrounds
+$avatarColors = ['#FF4500','#FF8C00','#e55d2b','#c94a1a','#e07020','#d45500','#f07030'];
 ?>
 
-<!-- Hero Section -->
-<section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');">
+<!-- Hero -->
+<section class="hero-section" style="background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&q=80');background-size:cover;background-position:center;">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-8 mx-auto text-center">
-                <h1 class="display-4 fw-bold mb-4">Client Testimonials</h1>
-                <p class="lead mb-4">Discover what our clients say about our services and how we've helped transform their educational and business journeys.</p>
-                <a href="#testimonials" class="btn btn-primary btn-lg">Read Testimonials</a>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center text-white">
+                <p class="text-warning fw-semibold mb-2 text-uppercase ls-1">What People Say</p>
+                <h1 class="display-4 fw-bold mb-3">Real Stories.<br>Real Results.</h1>
+                <p class="lead mb-4 opacity-75">Hear directly from students and clients who have experienced the Araneus difference.</p>
+                <a href="#testimonials" class="btn btn-primary btn-lg px-5">Read Testimonials</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Stats Section -->
-<section class="py-5 bg-light">
+<!-- Stats bar -->
+<section class="py-4 border-bottom">
     <div class="container">
-        <div class="row text-center">
-            <div class="col-md-3 col-6 mb-4 mb-md-0">
-                <div class="stat-box">
-                    <h2 class="fw-bold text-primary">150+</h2>
-                    <p class="mb-0">Happy Clients</p>
+        <div class="row text-center g-0">
+            <div class="col-4 border-end">
+                <div class="py-2">
+                    <div class="h2 fw-bold text-primary mb-0"><?php echo $total; ?>+</div>
+                    <small class="text-muted">Happy Clients</small>
                 </div>
             </div>
-            <div class="col-md-3 col-6 mb-4 mb-md-0">
-                <div class="stat-box">
-                    <h2 class="fw-bold text-primary">4.8/5</h2>
-                    <p class="mb-0">Average Rating</p>
+            <div class="col-4 border-end">
+                <div class="py-2">
+                    <div class="h2 fw-bold text-warning mb-0"><?php echo number_format($avgRating,1); ?><span class="fs-5">/5</span></div>
+                    <small class="text-muted">Average Rating</small>
                 </div>
             </div>
-            <div class="col-md-3 col-6">
-                <div class="stat-box">
-                    <h2 class="fw-bold text-primary">95%</h2>
-                    <p class="mb-0">Client Retention</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="stat-box">
-                    <h2 class="fw-bold text-primary">100+</h2>
-                    <p class="mb-0">Projects Completed</p>
+            <div class="col-4">
+                <div class="py-2">
+                    <div class="h2 fw-bold text-success mb-0"><?php echo $fiveStars; ?></div>
+                    <small class="text-muted">5-Star Reviews</small>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Testimonials Grid -->
-<section class="section-padding" id="testimonials">
+<!-- Featured testimonials -->
+<?php if (!empty($featured)): ?>
+<section class="section-padding bg-light" id="testimonials">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="section-title">What Our Clients Say</h2>
-            <p class="lead text-muted">Read authentic feedback from our valued clients across different industries</p>
+            <h2 class="section-title">Featured Stories</h2>
+            <p class="lead text-muted">Highlighted experiences from our most valued clients</p>
         </div>
-        
-        <div class="row g-4">
-            <?php
-            // Fetch testimonials from database
-            $query = "SELECT * FROM testimonials WHERE status = 'published' ORDER BY created_at DESC";
-            $result = $conn->query($query);
-            
-            if ($result && $result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $client_name = htmlspecialchars($row['client_name']);
-                    $client_position = htmlspecialchars($row['client_position']);
-                    $company = htmlspecialchars($row['company']);
-                    $testimonial = htmlspecialchars($row['testimonial']);
-                    $rating = (int)$row['rating'];
-                    $testimonial_date = date('F Y', strtotime($row['testimonial_date']));
-                    $is_featured = (bool)$row['is_featured'];
-                    
-                    // Generate star rating HTML
-                    $stars = '';
-                    for ($i = 1; $i <= 5; $i++) {
-                        if ($i <= $rating) {
-                            $stars .= '<i class="fas fa-star text-warning"></i>';
-                        } else {
-                            $stars .= '<i class="far fa-star text-warning"></i>';
-                        }
-                    }
-                    
-                    // Determine badge for featured testimonials
-                    $badge = $is_featured ? '<span class="featured-badge">Featured</span>' : '';
-                    
-                    // Different card style for featured testimonials
-                    $card_class = $is_featured ? 'testimonial-card featured' : 'testimonial-card';
-                    
-                    echo "
-                    <div class='col-lg-4 col-md-6'>
-                        <div class='$card_class'>
-                            $badge
-                            <div class='testimonial-content'>
-                                <div class='rating mb-3'>
-                                    $stars
-                                </div>
-                                <p class='testimonial-text'>\"$testimonial\"</p>
-                            </div>
-                            <div class='testimonial-author'>
-                                <div class='author-info'>
-                                    <h5 class='mb-1'>$client_name</h5>
-                                    <p class='mb-1 text-muted'>$client_position</p>
-                                    <p class='company mb-0'><i class='fas fa-building me-1'></i>$company</p>
-                                </div>
-                                <div class='testimonial-date'>
-                                    <i class='far fa-calendar-alt'></i>
-                                    <span>$testimonial_date</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>";
-                }
-            } else {
-                // Display sample testimonials if database is empty
-                $sample_testimonials = [
-                    [
-                        'name' => 'Rajesh Kumar',
-                        'position' => 'HR Manager',
-                        'company' => 'Tech Solutions Inc.',
-                        'testimonial' => 'Araneus Edutech provided excellent training for our new hires. The industry-relevant curriculum and expert trainers helped our team get up to speed quickly.',
-                        'rating' => 5,
-                        'date' => 'May 2023',
-                        'featured' => true
-                    ],
-                    [
-                        'name' => 'Priya Sharma',
-                        'position' => 'Director',
-                        'company' => 'Global Education Trust',
-                        'testimonial' => 'Their educational consultancy helped us redesign our curriculum to better align with industry needs. Student placement rates have improved by 40%.',
-                        'rating' => 4,
-                        'date' => 'June 2023',
-                        'featured' => true
-                    ],
-                    [
-                        'name' => 'Amit Patel',
-                        'position' => 'CEO',
-                        'company' => 'StartUp Innovate',
-                        'testimonial' => 'The Salesforce CRM implementation was seamless. The Araneus team provided excellent support throughout the transition process.',
-                        'rating' => 5,
-                        'date' => 'July 2023',
-                        'featured' => true
-                    ],
-                    [
-                        'name' => 'Sneha Verma',
-                        'position' => 'Student',
-                        'company' => 'University of Technology',
-                        'testimonial' => 'The internship program was a game-changer for my career. I gained practical skills that helped me secure a job even before graduation.',
-                        'rating' => 5,
-                        'date' => 'August 2023',
-                        'featured' => false
-                    ],
-                    [
-                        'name' => 'Vikram Singh',
-                        'position' => 'Operations Head',
-                        'company' => 'Manufacturing Corp Ltd.',
-                        'testimonial' => 'Their ERP implementation services transformed our operations. Inventory management and reporting have become much more efficient.',
-                        'rating' => 4,
-                        'date' => 'September 2023',
-                        'featured' => false
-                    ],
-                    [
-                        'name' => 'Anjali Mehta',
-                        'position' => 'Training Coordinator',
-                        'company' => 'Educational Institute',
-                        'testimonial' => 'The faculty development program was excellent. Our teachers are now using modern teaching methodologies that engage students better.',
-                        'rating' => 5,
-                        'date' => 'October 2023',
-                        'featured' => false
-                    ]
-                ];
-                
-                foreach ($sample_testimonials as $testimonial) {
-                    $stars = '';
-                    for ($i = 1; $i <= 5; $i++) {
-                        if ($i <= $testimonial['rating']) {
-                            $stars .= '<i class="fas fa-star text-warning"></i>';
-                        } else {
-                            $stars .= '<i class="far fa-star text-warning"></i>';
-                        }
-                    }
-                    
-                    $badge = $testimonial['featured'] ? '<span class="featured-badge">Featured</span>' : '';
-                    $card_class = $testimonial['featured'] ? 'testimonial-card featured' : 'testimonial-card';
-                    
-                    echo "
-                    <div class='col-lg-4 col-md-6'>
-                        <div class='$card_class'>
-                            $badge
-                            <div class='testimonial-content'>
-                                <div class='rating mb-3'>
-                                    $stars
-                                </div>
-                                <p class='testimonial-text'>\"{$testimonial['testimonial']}\"</p>
-                            </div>
-                            <div class='testimonial-author'>
-                                <div class='author-info'>
-                                    <h5 class='mb-1'>{$testimonial['name']}</h5>
-                                    <p class='mb-1 text-muted'>{$testimonial['position']}</p>
-                                    <p class='company mb-0'><i class='fas fa-building me-1'></i>{$testimonial['company']}</p>
-                                </div>
-                                <div class='testimonial-date'>
-                                    <i class='far fa-calendar-alt'></i>
-                                    <span>{$testimonial['date']}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>";
-                }
-            }
-            
-            // Close database connection
-            $conn->close();
-            ?>
-        </div>
-    </div>
-</section>
-
-<!-- Video Testimonials -->
-<section class="py-5 bg-light">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="section-title">Video Testimonials</h2>
-            <p class="lead text-muted">Hear directly from our clients about their experience working with us</p>
-        </div>
-        
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center">
+        <?php foreach ($featured as $i => $t):
+            $color = $avatarColors[$i % count($avatarColors)]; ?>
             <div class="col-lg-6">
-                <div class="video-testimonial">
-                    <div class="video-placeholder">
-                        <div class="play-button">
-                            <i class="fas fa-play"></i>
+                <div class="card h-100 border-0 shadow" style="border-left:4px solid var(--primary-color)!important;border-radius:12px;overflow:hidden;">
+                    <div class="card-body p-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center me-3 text-white fw-bold flex-shrink-0"
+                                 style="width:52px;height:52px;background:<?php echo $color; ?>;font-size:18px;">
+                                <?php echo initials($t['client_name']); ?>
+                            </div>
+                            <div>
+                                <div class="fw-semibold mb-0"><?php echo htmlspecialchars($t['client_name']); ?></div>
+                                <div class="small text-muted"><?php echo htmlspecialchars($t['client_position']); ?>
+                                    <?php if ($t['company']): ?> &middot; <?php echo htmlspecialchars($t['company']); ?><?php endif; ?>
+                                </div>
+                            </div>
+                            <span class="badge ms-auto" style="background:var(--primary-color);">Featured</span>
                         </div>
-                        <div class="video-info">
-                            <h5>Educational Transformation</h5>
-                            <p>Hear from Global Education Trust about our curriculum redesign project</p>
-                        </div>
+                        <div class="mb-3"><?php echo stars($t['rating']); ?></div>
+                        <p class="mb-3" style="font-size:15px;line-height:1.7;color:#444;">
+                            &ldquo;<?php echo htmlspecialchars($t['testimonial']); ?>&rdquo;
+                        </p>
+                        <?php if ($t['testimonial_date']): ?>
+                        <small class="text-muted"><i class="far fa-calendar-alt me-1"></i><?php echo date('F Y', strtotime($t['testimonial_date'])); ?></small>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="video-testimonial">
-                    <div class="video-placeholder">
-                        <div class="play-button">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="video-info">
-                            <h5>Business Technology Success</h5>
-                            <p>Tech Solutions Inc. shares their experience with our CRM implementation</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <?php endforeach; ?>
         </div>
     </div>
 </section>
+<?php endif; ?>
 
-<!-- Client Logos -->
+<!-- All testimonials grid -->
+<?php if (!empty($regular)): ?>
 <section class="section-padding">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="section-title">Trusted By Industry Leaders</h2>
-            <p class="lead text-muted">We're proud to work with organizations across various sectors</p>
+            <h2 class="section-title">More Reviews</h2>
+            <p class="lead text-muted">Authentic feedback from clients across different fields</p>
         </div>
-        
-        <div class="client-logos">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-lg-2 col-md-3 col-4 mb-4">
-                    <div class="client-logo">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7M8t2nRwZ3YT3EWuH9UplHRqpMstm0xI0dg&s" alt="Client 1" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-4 mb-4">
-                    <div class="client-logo">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_GylGW8wjYID3Y3LVCo4FSqBEgmjVjH6VGw&s" alt="Client 2" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-4 mb-4">
-                    <div class="client-logo">
-                        <img src="https://d2lk14jtvqry1q.cloudfront.net/media/large_217_c53d2207b0_6f9a255794.png" alt="Client 3" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-4 mb-4">
-                    <div class="client-logo">
-                        <img src="https://www.eduopinions.com/wp-content/uploads/2022/05/Techno-India-University.jpg" alt="Client 4" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-4 mb-4">
-                    <div class="client-logo">
-                        <img src="https://plastwork.in/assets/img/loading_logo.jpeg" alt="Client 5" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-4 mb-4">
-                    <div class="client-logo">
-                        <img src="https://devtiplast.com/wp-content/uploads/2026/01/cropped-cropped-WhatsApp-Image-2025-12-20-at-1.00.20-PM.jpeg" alt="Client 6" class="img-fluid">
+
+        <!-- Rating filter -->
+        <div class="d-flex justify-content-center gap-2 mb-5 flex-wrap" id="ratingFilter">
+            <button class="btn btn-sm btn-primary active-filter" data-rating="0">All</button>
+            <button class="btn btn-sm btn-outline-warning" data-rating="5"><i class="fas fa-star text-warning"></i> 5 Stars</button>
+            <button class="btn btn-sm btn-outline-warning" data-rating="4"><i class="fas fa-star text-warning"></i> 4 Stars</button>
+        </div>
+
+        <div class="row g-4" id="testimonialsGrid">
+        <?php foreach ($regular as $i => $t):
+            $color = $avatarColors[$i % count($avatarColors)]; ?>
+            <div class="col-lg-4 col-md-6 tcard" data-rating="<?php echo $t['rating']; ?>">
+                <div class="card h-100 border-0 shadow-sm" style="border-radius:12px;">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <div class="mb-3"><?php echo stars($t['rating']); ?></div>
+                        <p class="flex-grow-1 mb-4" style="font-size:14px;line-height:1.7;color:#555;">
+                            &ldquo;<?php echo htmlspecialchars($t['testimonial']); ?>&rdquo;
+                        </p>
+                        <div class="d-flex align-items-center mt-auto">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center me-3 text-white fw-bold flex-shrink-0"
+                                 style="width:44px;height:44px;background:<?php echo $color; ?>;font-size:15px;">
+                                <?php echo initials($t['client_name']); ?>
+                            </div>
+                            <div>
+                                <div class="fw-semibold small"><?php echo htmlspecialchars($t['client_name']); ?></div>
+                                <div class="text-muted" style="font-size:12px;">
+                                    <?php echo htmlspecialchars($t['client_position'] ?? ''); ?>
+                                    <?php if ($t['company']): ?><br><?php echo htmlspecialchars($t['company']); ?><?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        <?php endforeach; ?>
         </div>
+
+        <?php if (empty($regular) && empty($featured)): ?>
+        <div class="text-center py-5 text-muted">
+            <i class="fas fa-comment-slash fa-3x mb-3"></i>
+            <p>No testimonials yet. Check back soon.</p>
+        </div>
+        <?php endif; ?>
+    </div>
+</section>
+<?php endif; ?>
+
+<!-- CTA -->
+<section class="py-5" style="background:linear-gradient(135deg,var(--primary-color),var(--secondary-color));">
+    <div class="container text-center text-white">
+        <h3 class="fw-bold mb-2">Ready to Start Your Journey?</h3>
+        <p class="mb-4 opacity-75">Join hundreds of satisfied clients and students who trust Araneus Edutech.</p>
+        <a href="contact.php" class="btn btn-light px-5 fw-semibold" style="color:var(--primary-color);">Get in Touch</a>
     </div>
 </section>
 
-<!-- Submit Testimonial Form -->
-<section class="py-5" style="background: var(--gradient-color); color: white;">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-5 mb-lg-0">
-                <h2 class="h1 mb-3">Share Your Experience</h2>
-                <p class="lead mb-4">Have you worked with us? We'd love to hear about your experience with Araneus Edutech.</p>
-                <div class="mb-4">
-                    <h5><i class="fas fa-check-circle me-2"></i>Your feedback helps us improve</h5>
-                    <h5><i class="fas fa-check-circle me-2"></i>Help others make informed decisions</h5>
-                    <h5><i class="fas fa-check-circle me-2"></i>Share your success story</h5>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="card border-0 shadow">
-                    <div class="card-body p-4 p-lg-5">
-                        <h3 class="card-title mb-4 text-dark">Submit Your Testimonial</h3>
-                        <form id="testimonialForm" method="POST" action="">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="name" class="form-label text-dark">Full Name *</label>
-                                    <input type="text" class="form-control" id="name" name="name" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="position" class="form-label text-dark">Position</label>
-                                    <input type="text" class="form-control" id="position" name="position">
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="company" class="form-label text-dark">Company / Institution</label>
-                                <input type="text" class="form-control" id="company" name="company">
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label text-dark">Email Address *</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="testimonial" class="form-label text-dark">Your Testimonial *</label>
-                                <textarea class="form-control" id="testimonial" name="testimonial" rows="4" required></textarea>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label text-dark">Rating</label>
-                                <div class="rating-input">
-                                    <input type="radio" id="star5" name="rating" value="5">
-                                    <label for="star5"><i class="fas fa-star"></i></label>
-                                    <input type="radio" id="star4" name="rating" value="4">
-                                    <label for="star4"><i class="fas fa-star"></i></label>
-                                    <input type="radio" id="star3" name="rating" value="3">
-                                    <label for="star3"><i class="fas fa-star"></i></label>
-                                    <input type="radio" id="star2" name="rating" value="2">
-                                    <label for="star2"><i class="fas fa-star"></i></label>
-                                    <input type="radio" id="star1" name="rating" value="1">
-                                    <label for="star1"><i class="fas fa-star"></i></label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Submit Testimonial</button>
-                            <p class="text-muted small mt-3 mb-0">* By submitting, you agree to have your testimonial displayed on our website.</p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Additional CSS for this page -->
 <style>
-    .hero-section {
-        padding: 120px 0 80px;
-    }
-    
-    .stat-box {
-        padding: 20px;
-    }
-    
-    .stat-box h2 {
-        font-size: 3rem;
-        margin-bottom: 10px;
-    }
-    
-    .testimonial-card {
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        padding: 30px;
-        height: 100%;
-        position: relative;
-        transition: transform 0.3s ease;
-    }
-    
-    .testimonial-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
-    }
-    
-    .testimonial-card.featured {
-        border-top: 4px solid var(--primary-color);
-    }
-    
-    .featured-badge {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        background-color: var(--primary-color);
-        color: white;
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-    }
-    
-    .testimonial-content {
-        margin-bottom: 25px;
-    }
-    
-    .rating {
-        color: #FFD700;
-    }
-    
-    .testimonial-text {
-        font-style: italic;
-        line-height: 1.6;
-        margin-bottom: 0;
-    }
-    
-    .testimonial-author {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        border-top: 1px solid #eee;
-        padding-top: 20px;
-    }
-    
-    .author-info h5 {
-        color: var(--dark-color);
-        font-weight: 600;
-    }
-    
-    .company {
-        font-size: 0.9rem;
-        color: #666;
-    }
-    
-    .testimonial-date {
-        text-align: right;
-        font-size: 0.85rem;
-        color: #999;
-    }
-    
-    .testimonial-date i {
-        margin-right: 5px;
-    }
-    
-    .video-testimonial {
-        position: relative;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    
-    .video-placeholder {
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1573164713714-d95e436ab99d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');
-        background-size: cover;
-        background-position: center;
-        height: 300px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-    }
-    
-    .video-placeholder:hover {
-        transform: scale(1.02);
-    }
-    
-    .play-button {
-        width: 70px;
-        height: 70px;
-        background-color: var(--primary-color);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 100px;
-    }
-    
-    .play-button i {
-        color: white;
-        font-size: 25px;
-        margin-left: 5px;
-    }
-    
-    .video-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.7);
-        color: white;
-        padding: 20px;
-    }
-    
-    .video-info h5 {
-        margin-bottom: 5px;
-    }
-    
-    .video-info p {
-        margin-bottom: 0;
-        font-size: 0.9rem;
-        opacity: 0.9;
-    }
-    
-    .client-logos {
-        padding: 20px 0;
-    }
-    
-    .client-logo {
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 120px;
-        transition: transform 0.3s ease;
-    }
-    
-    .client-logo:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-    
-    .client-logo img {
-        max-height: 60px;
-        width: auto;
-        filter: grayscale(100%);
-        opacity: 0.7;
-        transition: all 0.3s ease;
-    }
-    
-    .client-logo:hover img {
-        filter: grayscale(0%);
-        opacity: 1;
-    }
-    
-    .rating-input {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-    }
-    
-    .rating-input input {
-        display: none;
-    }
-    
-    .rating-input label {
-        color: #ddd;
-        cursor: pointer;
-        font-size: 1.5rem;
-        margin-right: 5px;
-        transition: color 0.3s;
-    }
-    
-    .rating-input input:checked ~ label,
-    .rating-input label:hover,
-    .rating-input label:hover ~ label {
-        color: #FFD700;
-    }
-    
-    @media (max-width: 768px) {
-        .stat-box h2 {
-            font-size: 2.5rem;
-        }
-        
-        .testimonial-author {
-            flex-direction: column;
-        }
-        
-        .testimonial-date {
-            margin-top: 10px;
-            text-align: left;
-        }
-        
-        .video-placeholder {
-            height: 250px;
-        }
-        
-        .play-button {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 80px;
-        }
-    }
+.active-filter { background:var(--primary-color)!important;border-color:var(--primary-color)!important;color:#fff!important; }
+.ls-1 { letter-spacing:.08em; }
 </style>
-
-<!-- JavaScript for testimonial submission -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const testimonialForm = document.getElementById('testimonialForm');
-    
-    testimonialForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form values
-        const name = document.getElementById('name').value;
-        const position = document.getElementById('position').value;
-        const company = document.getElementById('company').value;
-        const email = document.getElementById('email').value;
-        const testimonial = document.getElementById('testimonial').value;
-        const rating = document.querySelector('input[name="rating"]:checked');
-        
-        // Basic validation
-        if (!name || !email || !testimonial) {
-            alert('Please fill in all required fields.');
-            return;
-        }
-        
-        if (!rating) {
-            alert('Please provide a rating.');
-            return;
-        }
-        
-        // In a real implementation, you would send this data to the server
-        // For now, we'll just show a success message
-        alert('Thank you for your testimonial! It will be reviewed and published soon.');
-        testimonialForm.reset();
-        
-        // Reset stars
-        document.querySelectorAll('input[name="rating"]').forEach(input => {
-            input.checked = false;
-        });
-    });
-    
-    // Video placeholder click handler
-    document.querySelectorAll('.video-placeholder').forEach(placeholder => {
-        placeholder.addEventListener('click', function() {
-            alert('In a real implementation, this would play a video testimonial.');
-        });
+document.getElementById('ratingFilter').addEventListener('click', function(e) {
+    const btn = e.target.closest('[data-rating]');
+    if (!btn) return;
+    document.querySelectorAll('#ratingFilter button').forEach(b => b.classList.remove('active-filter','btn-warning'));
+    btn.classList.add('active-filter');
+    const r = parseInt(btn.dataset.rating);
+    document.querySelectorAll('.tcard').forEach(c => {
+        c.style.display = (r === 0 || parseInt(c.dataset.rating) === r) ? '' : 'none';
     });
 });
 </script>

@@ -1,5 +1,5 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) { session_start(); }
 require_once '../controller/Auth.php';
 require_once '../controller/StudentController.php';
 require_once '../includes/Database.php';

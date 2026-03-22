@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once '../controller/Auth.php';
 require_once '../controller/StudentController.php';
 
@@ -86,7 +85,12 @@ $assignStmt->close();
                             <i class="fas fa-user-circle me-2"></i> My Account
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="dashboard.php"><i class="fas fa-user me-2"></i> Dashboard</a></li>
+                            <li><a class="dropdown-item" href="dashboard.php"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a></li>
+                            <li><a class="dropdown-item" href="courses.php"><i class="fas fa-book-open me-2"></i> My Courses</a></li>
+                            <li><a class="dropdown-item" href="assignments.php"><i class="fas fa-tasks me-2"></i> Assignments</a></li>
+                            <li><a class="dropdown-item" href="grades.php"><i class="fas fa-chart-bar me-2"></i> Grades</a></li>
+                            <li><a class="dropdown-item" href="certificates.php"><i class="fas fa-certificate me-2"></i> Certificates</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="profile.php"><i class="fas fa-user me-2"></i> Profile</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
