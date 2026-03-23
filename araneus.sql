@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2026 at 12:20 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Mar 23, 2026 at 05:50 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -68,7 +68,8 @@ INSERT INTO `assignments` (`id`, `course_id`, `title`, `description`, `due_date`
 (26, 8, 'House Price Prediction Model', 'Build a linear regression model to predict house prices using scikit-learn. Perform train/test split and evaluate.', '2026-06-28', '2026-03-19 11:15:53'),
 (27, 8, 'Customer Segmentation Project', 'Apply K-Means clustering to segment customers based on purchasing behavior. Visualize clusters.', '2026-06-28', '2026-03-19 11:15:53'),
 (28, 8, 'Module 3 Project: Customer Analytics Platform', 'End-to-end data solution: extract data from SQL database, analyze with Python, build ML models, and present results in an interactive dashboard.', '2026-07-01', '2026-03-19 11:15:53'),
-(29, 8, 'Final Project: Comprehensive Business Intelligence System', 'Complete desktop application with database backend, data processing modules, ML models for forecasting, and interactive dashboard. Must integrate all three modules.', '2026-07-15', '2026-03-19 11:15:53');
+(29, 8, 'Final Project: Comprehensive Business Intelligence System', 'Complete desktop application with database backend, data processing modules, ML models for forecasting, and interactive dashboard. Must integrate all three modules.', '2026-07-15', '2026-03-19 11:15:53'),
+(30, 7, 'tests', 'guig', '2026-03-29', '2026-03-22 19:51:44');
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,8 @@ CREATE TABLE `attendance` (
 --
 
 INSERT INTO `attendance` (`id`, `student_id`, `course_id`, `date`, `hours`, `created_at`) VALUES
-(1, 11, 8, '2026-03-19', 1.00, '2026-03-19 11:00:32');
+(1, 11, 8, '2026-03-19', 1.00, '2026-03-19 11:00:32'),
+(2, 11, 8, '2026-03-23', 3.00, '2026-03-23 07:45:09');
 
 -- --------------------------------------------------------
 
@@ -119,7 +121,8 @@ CREATE TABLE `blogs` (
 
 INSERT INTO `blogs` (`id`, `title`, `slug`, `excerpt`, `content`, `author`, `category`, `featured_image`, `status`, `published_date`, `created_at`, `updated_at`) VALUES
 (1, 'The Future of Education Technology', 'future-of-education-technology', 'How emerging technologies are transforming the educational landscape and what institutions need to do to stay ahead.', '<p>Education technology has evolved significantly over the past decade...</p>', 'Dr. Ananya Roy', 'Education', NULL, 'published', '2023-08-15', '2026-01-03 08:17:13', '2026-01-03 08:17:13'),
-(2, 'Implementing ERP Solutions for SMEs', 'implementing-erp-solutions-smes', 'A guide for small and medium enterprises looking to implement ERP systems without disrupting their operations.', '<p>Enterprise Resource Planning (ERP) systems are no longer just for large corporations...</p>', 'Sanjay Mehta', 'Business', NULL, 'published', '2023-09-05', '2026-01-03 08:17:13', '2026-01-03 08:17:13');
+(2, 'Implementing ERP Solutions for SMEs', 'implementing-erp-solutions-smes', 'A guide for small and medium enterprises looking to implement ERP systems without disrupting their operations.', '<p>Enterprise Resource Planning (ERP) systems are no longer just for large corporations...</p>', 'Sanjay Mehta', 'Business', NULL, 'published', '2023-09-05', '2026-01-03 08:17:13', '2026-01-03 08:17:13'),
+(3, 'Lol', 'lol', 'fjdjf', 'fjsdgjl;gj;l jj gkj kl gk ghag hgh', 'ME', 'Technical', NULL, 'published', '2026-03-22', '2026-03-22 08:50:06', '2026-03-22 08:50:06');
 
 -- --------------------------------------------------------
 
@@ -143,6 +146,13 @@ CREATE TABLE `career_applications` (
   `notes` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `career_applications`
+--
+
+INSERT INTO `career_applications` (`id`, `first_name`, `last_name`, `email`, `phone`, `position`, `experience`, `resume_path`, `cover_letter`, `how_heard`, `status`, `application_date`, `notes`) VALUES
+(1, 'SAIKAT', 'BISWAS', 'saikatbiswas2811@gmail.com', '07044058292', 'IOT Intern', '1-3', 'uploads/resumes/1774171323_sonic_taser_appl_view.pdf', 'fsdfs', 'linkedin', 'reviewed', '2026-03-22 09:22:03', '');
+
 -- --------------------------------------------------------
 
 --
@@ -163,6 +173,13 @@ CREATE TABLE `certificates` (
   `status` enum('active','expired','revoked') DEFAULT 'active',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `certificates`
+--
+
+INSERT INTO `certificates` (`id`, `student_id`, `enrollment_id`, `certificate_id`, `student_name`, `course_name`, `issue_date`, `expiry_date`, `file_path`, `qr_code`, `status`, `created_at`) VALUES
+(1, 11, 1, 'PP/11/25/252608', 'Neha Das', 'Python Power: Complete 120-Hour Training Program', '2026-03-23', NULL, 'uploads/certificates/ND-PP-11-25-252608.jpg', 'uploads/qr_code/nd_qr.png', 'active', '2026-03-22 19:27:29');
 
 -- --------------------------------------------------------
 
@@ -189,6 +206,14 @@ CREATE TABLE `clients` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`id`, `client_name`, `client_type`, `contact_person`, `email`, `phone`, `address`, `city`, `state`, `country`, `gstin`, `pan`, `status`, `notes`, `created_at`, `updated_at`) VALUES
+(1, 'PLASTWRORK INDUSTRIES LLP', 'company', 'Suyash Moondhara', 'suyash.moondhara@plastwork.in', '+917838852428', 'Khasara No. 358 & 359, Jholungey, Kabrey Block, Namthang Elaka, South Sikkim - 737126', 'Namthang Elaka', 'Sikkim', 'India', '', '', 'active', 'CEO', '2026-03-21 13:59:17', '2026-03-21 13:59:17'),
+(2, 'Ranita Paul', 'individual', 'Ranita Paul', 'ranitapaul943@gmail.com', '8910971887', NULL, NULL, NULL, 'India', NULL, NULL, 'active', 'Auto-registered from student: PP/11/25/252613', '2026-03-22 07:04:20', '2026-03-22 07:04:20');
+
 -- --------------------------------------------------------
 
 --
@@ -205,6 +230,13 @@ CREATE TABLE `contact_submissions` (
   `submission_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` enum('new','read','replied') DEFAULT 'new'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact_submissions`
+--
+
+INSERT INTO `contact_submissions` (`id`, `name`, `email`, `phone`, `subject`, `message`, `submission_date`, `status`) VALUES
+(1, 'SAIKAT BISWAS', 'saikatbiswas2811@gmail.com', '07044058292', 'Course Enquiry', 'gnbnvbnv', '2026-03-22 09:19:17', 'read');
 
 -- --------------------------------------------------------
 
@@ -236,12 +268,41 @@ CREATE TABLE `courses` (
 --
 
 INSERT INTO `courses` (`id`, `title`, `description`, `duration`, `mode`, `fee`, `category`, `instructor`, `image_url`, `syllabus_file`, `is_active`, `created_at`, `program_format`, `tools_provided`, `hardware_kit`, `certification_type`) VALUES
-(4, 'Web Development with Django & React', 'Full-stack web development course covering Django backend, React frontend, REST APIs, and deployment. Build complete web applications with database integration and modern UI/UX.', '80 Hours', 'Online', 11999.00, 'Web Development', 'Full Stack Developer', 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', NULL, 1, '2026-01-02 07:06:38', 'Live Online Sessions', 'Django, React, PostgreSQL, VS Code, Git', 'Not Required', 'Certificate of Completion'),
-(5, 'Data Science & Machine Learning Bootcamp', 'Intensive bootcamp covering data analysis, visualization, statistical modeling, and machine learning algorithms. Hands-on projects with real datasets and industry case studies.', '100 Hours', 'Online', 17999.00, 'Data Science', 'Data Scientist', 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', NULL, 1, '2026-01-02 07:06:38', 'Weekend Batch', 'Python, Pandas, NumPy, Scikit-learn, TensorFlow, Jupyter', 'Not Required', 'Certificate with Project Portfolio'),
-(6, 'Android App Development with Kotlin', 'Learn to build native Android applications using Kotlin. Covers UI design, database integration, API calls, and publishing to Play Store.', '60 Hours', 'Online', 9999.00, 'Mobile Development', 'Android Developer', 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', NULL, 1, '2026-01-02 07:06:38', 'Self-paced with Mentorship', 'Android Studio, Kotlin, Firebase, Git', 'Optional Android Device', 'Certificate of Completion'),
-(7, 'Cybersecurity Fundamentals', 'Introduction to cybersecurity concepts, network security, ethical hacking, and penetration testing. Hands-on labs with security tools and techniques.', '50 Hours', 'Online', 12999.00, 'Cybersecurity', 'Security Expert', 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', NULL, 1, '2026-01-02 07:06:38', 'Evening Batch', 'Kali Linux, Wireshark, Metasploit, VirtualBox', 'Not Required', 'Certificate of Completion'),
-(8, 'Python Power: Complete 120-Hour Training Program', 'A comprehensive Python training program covering foundations, desktop applications, game development, data science, SQL integration, and machine learning. This hands-on course includes three major modules with practical projects, culminating in a Final Integrated Business Intelligence System project.', '120 Hours', 'Online', 14999.00, 'Programming & Data Science', 'Senior Python Developer', 'https://images.unsplash.com/photo-1526379879527-8559ecfcaec0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', NULL, 1, '2026-01-02 07:11:33', 'Live Online/In-Person with Hands-on Projects', 'Python 3.8+, VS Code with Python extension, Jupyter Notebook, SQLite Browser, Git for version control', 'Not Required (Software-based Course)', 'Certificate of Completion with Project Portfolio'),
-(9, 'IoT Product Engineering & Simulation (IPES-Lab)', 'Integrated Training & Internship Program focusing on IoT product development with Proteus simulation. Covers Python programming, Tkinter GUI, MQTT protocol, embedded systems, React Native mobile development, and full-stack IoT solutions. Includes 200 hours of training followed by 200 hours of internship with a major real-life project.', '400 Hours (Training+ Internship)', 'Online', 24999.00, 'IoT & Embedded Systems', 'IoT Product Engineering Team', 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80', NULL, 1, '2026-01-02 07:11:33', 'Blended (Online + Lab + Internship)', 'Proteus Design Suite (Educational License), Arduino IDE, Python 3.x, Node.js, React Native setup, MQTT Broker, Virtual Machine image with pre-configured environment', 'Arduino Uno/Nano, ESP32 Development Board, Sensor Kit (DHT11, IR, PIR), Relay module, Breadboard and jumper wires (Shared Kit)', 'Certificate of Completion + Internship Certificate');
+(4, 'Web Development with Django & React', 'Full-stack web development course covering Django backend, React frontend, REST APIs, and deployment. Build complete web applications with database integration and modern UI/UX.', '80 Hours', 'Online', 11999.00, 'Web Development', 'Full Stack Developer', NULL, NULL, 1, '2026-01-02 07:06:38', 'Live Online Sessions', 'Django, React, PostgreSQL, VS Code, Git', 'Not Required', 'Certificate of Completion'),
+(5, 'Data Science & Machine Learning Bootcamp', 'Intensive bootcamp covering data analysis, visualization, statistical modeling, and machine learning algorithms. Hands-on projects with real datasets and industry case studies.', '100 Hours', 'Online', 17999.00, 'Data Science', 'Data Scientist', NULL, NULL, 1, '2026-01-02 07:06:38', 'Weekend Batch', 'Python, Pandas, NumPy, Scikit-learn, TensorFlow, Jupyter', 'Not Required', 'Certificate with Project Portfolio'),
+(6, 'Android App Development with Kotlin', 'Learn to build native Android applications using Kotlin. Covers UI design, database integration, API calls, and publishing to Play Store.', '60 Hours', 'Online', 9999.00, 'Mobile Development', 'Android Developer', NULL, NULL, 1, '2026-01-02 07:06:38', 'Self-paced with Mentorship', 'Android Studio, Kotlin, Firebase, Git', 'Optional Android Device', 'Certificate of Completion'),
+(7, 'Cybersecurity Fundamentals', 'Introduction to cybersecurity concepts, network security, ethical hacking, and penetration testing. Hands-on labs with security tools and techniques.', '50 Hours', 'Online', 12999.00, 'Cybersecurity', 'Security Expert', NULL, NULL, 1, '2026-01-02 07:06:38', 'Evening Batch', 'Kali Linux, Wireshark, Metasploit, VirtualBox', 'Not Required', 'Certificate of Completion'),
+(8, 'Python Power: Complete 120-Hour Training Program', 'A comprehensive Python training program covering foundations, desktop applications, game development, data science, SQL integration, and machine learning. This hands-on course includes three major modules with practical projects, culminating in a Final Integrated Business Intelligence System project.', '120 Hours', 'Online', 14999.00, 'Programming & Data Science', 'Senior Python Developer', NULL, NULL, 1, '2026-01-02 07:11:33', 'Live Online/In-Person with Hands-on Projects', 'Python 3.8+, VS Code with Python extension, Jupyter Notebook, SQLite Browser, Git for version control', 'Not Required (Software-based Course)', 'Certificate of Completion with Project Portfolio'),
+(9, 'IoT Product Engineering & Simulation (IPES-Lab)', 'Integrated Training & Internship Program focusing on IoT product development with Proteus simulation. Covers Python programming, Tkinter GUI, MQTT protocol, embedded systems, React Native mobile development, and full-stack IoT solutions. Includes 200 hours of training followed by 200 hours of internship with a major real-life project.', '400 Hours (Training+ Internship)', 'Online', 24999.00, 'IoT & Embedded Systems', 'IoT Product Engineering Team', NULL, NULL, 1, '2026-01-02 07:11:33', 'Blended (Online + Lab + Internship)', 'Proteus Design Suite (Educational License), Arduino IDE, Python 3.x, Node.js, React Native setup, MQTT Broker, Virtual Machine image with pre-configured environment', 'Arduino Uno/Nano, ESP32 Development Board, Sensor Kit (DHT11, IR, PIR), Relay module, Breadboard and jumper wires (Shared Kit)', 'Certificate of Completion + Internship Certificate'),
+(10, 'PHP POWER', 'The #1 skill employers seek in developers is the ability to build complete, database-driven web applications. This course is designed to bridge the gap between knowing basic syntax and leveraging the full power of full-stack development. You’ll master front-end styling with Bootstrap, back-end logic with PHP, and data management with MySQL—all while building real-world projects that showcase your skills.', '60 Hours', 'Hybrid', 4500.00, 'Web Development', 'Saikat Biswas', NULL, NULL, 1, '2026-03-21 13:48:38', 'Blended (Online + Lab + Internship)', 'NA', NULL, 'Certificate of Completion with Project Portfolio');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employees`
+--
+
+CREATE TABLE `employees` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `role` varchar(100) NOT NULL,
+  `type` enum('full-time','part-time','freelancer','intern') DEFAULT 'full-time',
+  `email` varchar(100) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `salary` decimal(10,2) DEFAULT 0.00,
+  `join_date` date DEFAULT NULL,
+  `status` enum('active','inactive') DEFAULT 'active',
+  `notes` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`id`, `name`, `role`, `type`, `email`, `phone`, `salary`, `join_date`, `status`, `notes`, `created_at`, `updated_at`) VALUES
+(1, 'Ramdas Hembram', 'Junior Trainee', 'full-time', 'abc@dom.com', '9876543210', 8000.00, '2026-03-22', 'active', 'dfjdsfjfhkjds', '2026-03-22 19:43:55', '2026-03-22 19:43:55');
 
 -- --------------------------------------------------------
 
@@ -271,7 +332,9 @@ CREATE TABLE `enrollments` (
 --
 
 INSERT INTO `enrollments` (`id`, `student_id`, `course_id`, `enrollment_date`, `completion_date`, `status`, `grade`, `certificate_issued`, `certificate_id`, `notes`, `attendance_sheet`, `payment_receipt`, `project_report`, `created_at`) VALUES
-(1, 11, 8, '2025-11-15', '2025-12-12', 'completed', 'AA', 0, NULL, NULL, NULL, NULL, NULL, '2026-03-19 08:04:52');
+(1, 11, 8, '2025-11-15', '2025-12-12', 'completed', 'AA', 0, NULL, NULL, NULL, NULL, NULL, '2026-03-19 08:04:52'),
+(2, 13, 10, '2026-03-18', NULL, 'enrolled', NULL, 0, NULL, '', NULL, NULL, NULL, '2026-03-21 13:49:51'),
+(4, 11, 6, '2026-03-23', NULL, 'enrolled', NULL, 0, NULL, '', NULL, NULL, NULL, '2026-03-23 16:34:26');
 
 -- --------------------------------------------------------
 
@@ -351,6 +414,14 @@ CREATE TABLE `invoices` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `invoices`
+--
+
+INSERT INTO `invoices` (`id`, `invoice_number`, `client_id`, `invoice_date`, `due_date`, `po_number`, `sub_total`, `tax_amount`, `discount_amount`, `total_amount`, `amount_paid`, `balance_due`, `status`, `payment_terms`, `notes`, `created_at`, `updated_at`) VALUES
+(1, 'INV-20260321-215', 1, '2026-03-21', '2026-04-21', 'NA', 7074.00, 0.00, 0.00, 7074.00, 7074.00, 0.00, 'paid', NULL, 'domain renewal', '2026-03-21 14:11:15', '2026-03-21 14:15:30'),
+(2, 'INV-20260322-201', 2, '2026-03-22', '2026-03-22', 'NA', 4500.00, 0.00, 0.00, 4500.00, 0.00, 4500.00, 'draft', 'Net', '', '2026-03-22 07:04:20', '2026-03-22 07:04:20');
+
 -- --------------------------------------------------------
 
 --
@@ -369,6 +440,13 @@ CREATE TABLE `invoice_items` (
   `total_amount` decimal(12,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `invoice_items`
+--
+
+INSERT INTO `invoice_items` (`id`, `invoice_id`, `product_service_id`, `description`, `quantity`, `unit_price`, `gst_rate`, `tax_amount`, `total_amount`, `created_at`) VALUES
+(1, 2, 1, 'Course Fee: PHP POWER', 1.00, 4500.00, 0.00, 0.00, 4500.00, '2026-03-22 07:04:20');
 
 -- --------------------------------------------------------
 
@@ -392,6 +470,13 @@ CREATE TABLE `job_openings` (
   `views` int(11) DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `job_openings`
+--
+
+INSERT INTO `job_openings` (`id`, `title`, `department`, `location`, `employment_type`, `description`, `requirements`, `responsibilities`, `benefits`, `is_active`, `posted_date`, `application_deadline`, `views`, `created_at`) VALUES
+(1, 'IOT Intern', 'IOT', 'Online', 'internship', 'iot jante hobe', 'sd\r\ndas\r\ndad\r\nadasd', 'adas\r\nasd\r\nasd\r\nasd\r\nasd', 'fff f afafafaf aggg', 1, '2026-03-22', '2026-03-29', 0, '2026-03-22 09:21:18');
 
 -- --------------------------------------------------------
 
@@ -425,6 +510,13 @@ CREATE TABLE `payments` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `invoice_id`, `payment_date`, `payment_method`, `transaction_id`, `amount`, `notes`, `created_at`) VALUES
+(1, 1, '2026-03-21', 'bank_transfer', 'YUI678900-0', 7074.00, 'paid full', '2026-03-21 14:15:30');
+
 -- --------------------------------------------------------
 
 --
@@ -445,6 +537,48 @@ CREATE TABLE `products_services` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products_services`
+--
+
+INSERT INTO `products_services` (`id`, `name`, `type`, `category`, `description`, `unit_price`, `gst_rate`, `hsn_sac_code`, `unit`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'Course Fee: PHP POWER', 'service', NULL, NULL, 4500.00, 0.00, NULL, 'unit', 1, '2026-03-22 07:04:20', '2026-03-22 07:04:20');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL,
+  `setting_key` varchar(100) NOT NULL,
+  `setting_value` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `setting_key`, `setting_value`, `created_at`, `updated_at`) VALUES
+(1, 'company_name', '', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(2, 'company_email', '', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(3, 'company_phone', '', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(4, 'company_address', '', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(5, 'company_city', '', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(6, 'company_state', '', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(7, 'company_pincode', '', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(8, 'company_gstin', '', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(9, 'company_pan', '', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(10, 'company_website', '', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(11, 'company_tagline', '', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(12, 'bank_name', 'STATE BANK OF INDIA', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(13, 'bank_account', '38904707477', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(14, 'bank_ifsc', 'SBIN0001770', '2026-03-22 19:43:03', '2026-03-22 19:43:03'),
+(15, 'bank_branch', 'BARRACKPORE', '2026-03-22 19:43:03', '2026-03-22 19:43:03');
 
 -- --------------------------------------------------------
 
@@ -483,8 +617,9 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `candidate_id`, `full_name`, `phone`, `email`, `password`, `father_name`, `time_hours`, `address`, `highest_qualification`, `current_organization`, `org_i_card`, `github_link`, `qr_code_path`, `profile_picture`, `status`, `last_login`, `email_verified`, `verification_token`, `reset_token`, `reset_expiry`, `created_at`, `updated_at`) VALUES
-(11, 'PP/11/25/252608', 'Neha Das', '98765430', 'n9770900@gmail.com', '$2y$10$8r8yn2t5Tj3ACMHJmjEy5uAiHLBBtl1HcOQMKgS4TMDzdoESrdc0u', '', 1, 'Madanpur,Masunda, Amdanga, North 24 Parganas,West Bengal, PIN - 743711', '', 'KCS', 'kcs/116', 'https://github.com/nehadas', NULL, '1773914156_neha_das_1765829550.png', 'pending', '2026-03-19 16:10:31', 1, '625653ddaf379f89dd28039d7cf69c12a060382e0c68edab9b3b4f9ded4774ee', NULL, NULL, '2026-03-19 07:22:02', '2026-03-19 11:00:32'),
-(12, 'IP-07-25-252612', 'Rupsha Saha', '9123317563', 'rupshasaha005@gmail.com', '$2y$10$zz4mw4auVb36emybuogrL.6k31cxd1t3TCHDUbrXsGWq38o3C/EE6', 'Samar Kumar  Saha', 0, 'Siddhanta Para Main Road , Barrackpore \r\nKolkata  : 700122   state  : West Bengal \r\nDist : North 24 parganas , post office  :  Nonachandanpukur, PIN-700122', 'HS', 'Techno India Saltlake', '5566', 'https://github.com/rupshasaha', NULL, '1773915270_rupsha_saha_1766345080.jpeg', 'pending', '2026-03-19 15:38:29', 1, '4a97b7e36ea7b866adaaa25a690b38a2a56e17be3aa88d3d9e822c14d2ff6a16', NULL, NULL, '2026-03-19 10:08:17', '2026-03-19 10:16:03');
+(11, 'PP/11/25/252608', 'Neha Das', '98765430', 'n9770900@gmail.com', '$2y$10$8r8yn2t5Tj3ACMHJmjEy5uAiHLBBtl1HcOQMKgS4TMDzdoESrdc0u', '', 4, 'Madanpur,Masunda, Amdanga, North 24 Parganas,West Bengal, PIN - 743711', '', 'KCS', 'kcs/116', 'https://github.com/nehadas', NULL, '1773914156_neha_das_1765829550.png', 'pending', '2026-03-23 21:51:47', 1, '625653ddaf379f89dd28039d7cf69c12a060382e0c68edab9b3b4f9ded4774ee', NULL, NULL, '2026-03-19 07:22:02', '2026-03-23 16:21:47'),
+(13, 'PP/11/25/252613', 'Ranita Paul', '8910971887', 'ranitapaul943@gmail.com', '$2y$10$DkRXkEHuWy7aEyvq/4gUju7dU4DB6ip7psVfISnUQ2OE.qnDG8VAK', 'Ram joy Paul', 60, '19, Sukanta Sarani,  Barrackpore, kol - 700122', 'BCA', 'SRM Institute of Science and Technology', NULL, '', NULL, NULL, 'active', NULL, 1, NULL, NULL, NULL, '2026-03-21 13:43:18', '2026-03-21 13:43:18'),
+(14, 'PP/11/25/252609', 'Tripan Nandi', NULL, 'tripannandi266@gmail.com', '$2y$10$t6HKNrPDLbNeXLvFwsjLN.fVxMdcOME6o9eIZENaFXV7ujyn1BnRi', '', 0, '', NULL, NULL, NULL, NULL, NULL, '1774248031_WhatsApp Image 2025-09-07 at 00.41.13_7f75df7c.jpg', 'pending', '2026-03-23 12:56:01', 1, '81d25259474586dbbca7f628f31da4d0cc044e7290dc5087d7a92847c2176fb4', NULL, NULL, '2026-03-23 06:39:15', '2026-03-23 07:26:01');
 
 -- --------------------------------------------------------
 
@@ -501,6 +636,19 @@ CREATE TABLE `submissions` (
   `grade` varchar(10) DEFAULT NULL,
   `feedback` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `submissions`
+--
+
+INSERT INTO `submissions` (`id`, `assignment_id`, `student_id`, `submission_file`, `submitted_at`, `grade`, `feedback`) VALUES
+(1, 2, 11, '11_2_1774165671.docx', '2026-03-22 07:47:51', 'A', 'Good'),
+(2, 3, 11, '11_3_1774166613.docx', '2026-03-22 08:03:33', NULL, NULL),
+(3, 4, 11, '11_4_1774167293.docx', '2026-03-22 08:14:53', NULL, NULL),
+(4, 5, 11, '11_5_1774167485.pdf', '2026-03-22 08:18:05', NULL, NULL),
+(5, 6, 11, '11_6_1774251492.docx', '2026-03-23 07:38:12', NULL, NULL),
+(6, 7, 11, '11_7_1774252231.pdf', '2026-03-23 07:50:31', NULL, NULL),
+(7, 8, 11, '11_8_1774252518.pdf', '2026-03-23 07:55:18', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -553,7 +701,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password_hash`, `email`, `role`, `full_name`, `status`, `last_login`, `created_at`) VALUES
-(1, 'admin', '$2y$10$YourHashedPasswordHere', 'admin@araneusedutech.com', 'admin', 'Administrator', 'active', NULL, '2026-02-11 08:06:17');
+(2, 'admin', '$2y$10$1rYuoRKgwCpz4DxQJWziHedjbVfmT37R0jHDiu9oEK0lRMQjz7HjK', 'saikatbiswas2811@gmail.com', 'admin', 'SAIKAT BISWAS', 'active', '2026-03-23 08:25:05', '2026-03-21 13:24:32'),
+(3, 'Shaw', '$2y$10$TQaMIyCx3g3Q.HG.Qw23ve.N8ATGwIEq748pCvPAQolvgTFLI4MY6', 'shaw.riya@gmail.com', 'staff', 'Riya', 'active', '2026-03-22 20:54:30', '2026-03-21 14:03:48');
 
 --
 -- Indexes for dumped tables
@@ -611,6 +760,12 @@ ALTER TABLE `contact_submissions`
 -- Indexes for table `courses`
 --
 ALTER TABLE `courses`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `employees`
+--
+ALTER TABLE `employees`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -675,6 +830,13 @@ ALTER TABLE `products_services`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `setting_key` (`setting_key`);
+
+--
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
@@ -713,55 +875,61 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `assignments`
 --
 ALTER TABLE `assignments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `career_applications`
 --
 ALTER TABLE `career_applications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `certificates`
 --
 ALTER TABLE `certificates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `contact_submissions`
 --
 ALTER TABLE `contact_submissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `enrollments`
 --
 ALTER TABLE `enrollments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `events`
@@ -779,19 +947,19 @@ ALTER TABLE `gst_returns`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `invoice_items`
 --
 ALTER TABLE `invoice_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `job_openings`
 --
 ALTER TABLE `job_openings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
@@ -803,25 +971,31 @@ ALTER TABLE `password_resets`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `products_services`
 --
 ALTER TABLE `products_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `submissions`
 --
 ALTER TABLE `submissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `testimonials`
@@ -833,7 +1007,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

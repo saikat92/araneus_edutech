@@ -85,7 +85,7 @@ $locs  = $conn->query("SELECT DISTINCT location  FROM job_openings WHERE is_acti
 ?>
 
 <!-- Hero -->
-<section class="hero-section" style="background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),url('https://images.unsplash.com/photo-1551836026-d5c2c5af78e4?auto=format&fit=crop&w=1400&q=80');background-size:cover;background-position:center;">
+<section class="hero-section" style="background:linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),url('../assets/images/edu_hero_bg.png')">
     <div class="container">
         <div class="col-lg-8 mx-auto text-center text-white">
             <p class="text-warning fw-semibold mb-2 text-uppercase" style="letter-spacing:.08em;">We're Hiring</p>

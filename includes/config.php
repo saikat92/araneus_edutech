@@ -18,6 +18,13 @@ define('SITE_LLPIN', 'AAP-3776');
 // Gmail SMTP — generate an App Password at:
 // https://myaccount.google.com/apppasswords
 // (Requires 2-Step Verification to be ON for the Gmail account)
-define('GMAIL_APP_PASSWORD', 'your-gmail-app-password-here');
+define('GMAIL_APP_PASSWORD', 'Araneus@2019');
 
 ?>
+
+<!-- 
+cpanel phpmyadmin credentials database :
+
+private $db_name = "plasxjel_araneus_edutech";
+private $username = "plasxjel_araneus";
+private $password = "pd]CVbJS4Nb="; -->
