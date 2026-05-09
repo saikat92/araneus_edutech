@@ -13,13 +13,14 @@ if (!empty($_GET['certificate_id'])) {
         SELECT c.*, s.full_name, s.candidate_id, co.title AS course_title, co.instructor
         FROM certificates c
         LEFT JOIN students s  ON c.student_id = s.id
-        LEFT JOIN courses  co ON c.course_name = co.title
-        WHERE c.certificate_id = ? AND c.status = 'active'
+        LEFT JOIN courses  co ON c.program_name = co.title
+        WHERE c.certificate_id = ? AND c.status = 'issued'
         LIMIT 1
     ");
     $stmt->bind_param("s", $searchedId);
     $stmt->execute();
     $certResult = $stmt->get_result()->fetch_assoc();
+    
     $stmt->close();
     if (!$certResult) $notFound = true;
 }
@@ -91,12 +92,9 @@ if (!empty($_GET['certificate_id'])) {
                                 <h4 class="fw-bold mb-0"><?=htmlspecialchars($certResult['certificate_id'])?></h4>
                             </div>
                             <div class="detail-row"><span class="text-muted">Student Name</span><strong><?=htmlspecialchars($certResult['full_name'] ?? $certResult['student_name'])?></strong></div>
-                            <div class="detail-row"><span class="text-muted">Course</span><strong><?=htmlspecialchars($certResult['course_name'])?></strong></div>
+                            <div class="detail-row"><span class="text-muted">Course</span><strong><?=htmlspecialchars($certResult['program_name'])?></strong></div>
                             <div class="detail-row"><span class="text-muted">Instructor</span><span><?=htmlspecialchars($certResult['instructor'] ?? '—')?></span></div>
-                            <div class="detail-row"><span class="text-muted">Issue Date</span><strong><?=date('d F Y', strtotime($certResult['issue_date']))?></strong></div>
-                            <?php if ($certResult['expiry_date']): ?>
-                            <div class="detail-row"><span class="text-muted">Valid Until</span><strong><?=date('d F Y', strtotime($certResult['expiry_date']))?></strong></div>
-                            <?php endif; ?>
+                            <div class="detail-row"><span class="text-muted">Issued Date</span><strong><?=date('d F Y', strtotime($certResult['issued_date']))?></strong></div>
                             <div class="detail-row"><span class="text-muted">Status</span>
                                 <span class="badge bg-success">Active &amp; Valid</span>
                             </div>

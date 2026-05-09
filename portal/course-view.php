@@ -847,20 +847,19 @@ $counter = 1;
                             <div class="text-center mb-4">
                                 <div class="text-muted small mb-1">This certifies that</div>
                                 <div style="font-size:1.3rem;font-weight:700;color:#1a1a2e;">
-                                    <?= htmlspecialchars($certRecord['student_name']) ?>
+                                    <?= htmlspecialchars($certRecord['student_id']) ?>
                                 </div>
                                 <div class="text-muted small mt-1">has successfully completed</div>
                                 <div style="font-size:1rem;font-weight:600;color:#ff4000;margin-top:4px;">
-                                    <?= htmlspecialchars($certRecord['course_name']) ?>
+                                    <?= htmlspecialchars($certRecord['program_name']) ?>
                                 </div>
                             </div>
 
                             <?php $details = [
                                 ['fas fa-id-card',    'Certificate ID',  $certRecord['certificate_id']],
-                                ['fas fa-calendar',   'Issue Date',      date('d F Y', strtotime($certRecord['issue_date']))],
+                                ['fas fa-calendar',   'Issue Date',      date('d F Y', strtotime($certRecord['issued_date']))],
                             ];
-                            if ($certRecord['expiry_date'])
-                                $details[] = ['fas fa-clock', 'Valid Until', date('d F Y', strtotime($certRecord['expiry_date']))];
+                           
                             ?>
 
                             <?php foreach ($details as [$icon, $label, $value]): ?>

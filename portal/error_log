@@ -1,0 +1,44 @@
+[25-Mar-2026 12:27:27 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[27-Mar-2026 15:28:01 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[29-Mar-2026 13:28:56 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[30-Mar-2026 15:41:58 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[31-Mar-2026 15:07:44 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[01-Apr-2026 12:18:19 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[02-Apr-2026 16:13:50 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[03-Apr-2026 12:58:30 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[08-Apr-2026 13:38:25 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[09-Apr-2026 10:05:08 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[11-Apr-2026 12:17:08 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[13-Apr-2026 12:58:36 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[15-Apr-2026 06:40:50 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[16-Apr-2026 15:15:13 UTC] PHP Warning:  require_once(../includes/Database.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/portal/update_profile.php on line 4
+[16-Apr-2026 15:15:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../includes/Database.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/portal/update_profile.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/portal/update_profile.php on line 4
+[16-Apr-2026 15:16:59 UTC] PHP Warning:  require_once(../includes/Database.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/portal/update_profile.php on line 4
+[16-Apr-2026 15:16:59 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../includes/Database.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/portal/update_profile.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/portal/update_profile.php on line 4
+[16-Apr-2026 15:20:27 UTC] PHP Warning:  require_once(../includes/Database.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/portal/upload_avatar.php on line 5
+[16-Apr-2026 15:20:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../includes/Database.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/portal/upload_avatar.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/portal/upload_avatar.php on line 5
+[16-Apr-2026 15:20:41 UTC] PHP Warning:  require_once(../includes/Database.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/portal/upload_avatar.php on line 5
+[16-Apr-2026 15:20:41 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../includes/Database.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/portal/upload_avatar.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/portal/upload_avatar.php on line 5
+[16-Apr-2026 15:23:22 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/plasxjel/araneus.plastwork.in/portal/includes/header.php:82) in /home/plasxjel/araneus.plastwork.in/portal/course-view.php on line 248
+[16-Apr-2026 15:37:22 UTC] PHP Warning:  require_once(../includes/Database.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/portal/upload_avatar.php on line 5
+[16-Apr-2026 15:37:22 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../includes/Database.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/portal/upload_avatar.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/portal/upload_avatar.php on line 5
+[16-Apr-2026 16:18:33 UTC] PHP Warning:  require_once(../includes/Database.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/portal/update_profile.php on line 4
+[16-Apr-2026 16:18:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '../includes/Database.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/portal/update_profile.php:4
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/portal/update_profile.php on line 4

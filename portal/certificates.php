@@ -7,19 +7,17 @@ $stmt = $conn->prepare("
     SELECT
         c.id,
         c.certificate_id,
-        c.course_name,
-        c.issue_date,
-        c.expiry_date,
+        c.program_name,
+        c.issued_date,
         c.status,
-        c.file_path,
-        c.qr_code,
+        c.qr_code_path,
         co.title     AS course_title,
         co.instructor,
         co.duration
     FROM certificates c
-    LEFT JOIN courses co ON co.title = c.course_name
+    LEFT JOIN courses co ON co.title = c.program_name
     WHERE c.student_id = ?
-    ORDER BY c.issue_date DESC
+    ORDER BY c.issued_date DESC
 ");
 $stmt->bind_param("i", $studentId);
 $stmt->execute();
@@ -32,7 +30,7 @@ $stmt->close();
 
 // Also fetch completed-but-not-yet-issued enrollments to show "pending" certificates
 $pendingStmt = $conn->prepare("
-    SELECT e.id AS enrollment_id, c.title AS course_name, e.completion_date, e.grade
+    SELECT e.id AS enrollment_id, c.title AS program_name, e.completion_date, e.grade
     FROM enrollments e
     JOIN courses c ON e.course_id = c.id
     WHERE e.student_id = ? AND e.status = 'completed' AND e.certificate_issued = 0
@@ -110,8 +108,8 @@ $pendingStmt->close();
                         </div>
                         <div>
                             <div class="fw-semibold text-truncate" style="max-width:180px;"
-                                 title="<?php echo htmlspecialchars($cert['course_name']); ?>">
-                                <?php echo htmlspecialchars($cert['course_name']); ?>
+                                 title="<?php echo htmlspecialchars($cert['program_name']); ?>">
+                                <?php echo htmlspecialchars($cert['program_name']); ?>
                             </div>
                             <small class="text-muted"><?php echo htmlspecialchars($cert['instructor'] ?? ''); ?></small>
                         </div>
@@ -125,15 +123,10 @@ $pendingStmt->close();
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-muted ps-0">Issue Date</td>
-                            <td class="text-end"><?php echo date('d M Y', strtotime($cert['issue_date'])); ?></td>
+                            <td class="text-muted ps-0">Issued Date</td>
+                            <td class="text-end"><?php echo date('d M Y', strtotime($cert['issued_date'])); ?></td>
                         </tr>
-                        <?php if ($cert['expiry_date']): ?>
-                        <tr>
-                            <td class="text-muted ps-0">Expiry Date</td>
-                            <td class="text-end"><?php echo date('d M Y', strtotime($cert['expiry_date'])); ?></td>
-                        </tr>
-                        <?php endif; ?>
+                       
                         <tr>
                             <td class="text-muted ps-0">Status</td>
                             <td class="text-end">
@@ -159,9 +152,9 @@ $pendingStmt->close();
                         </button>
                     </div>
 
-                    <?php if (!empty($cert['qr_code'])): ?>
+                    <?php if (!empty($cert['qr_code_path'])): ?>
                     <div class="text-center mt-3">
-                        <img src="<?php echo htmlspecialchars(SITE_URL . $cert['qr_code']); ?>"
+                        <img src="<?php echo htmlspecialchars(SITE_URL . $cert['qr_code_path']); ?>"
                              alt="QR Code" width="80" height="80" class="rounded">
                         <div class="text-muted" style="font-size:10px;">Scan to verify</div>
                     </div>
@@ -182,7 +175,7 @@ $pendingStmt->close();
                 <table class="table table-hover mb-0">
                     <thead class="table-light">
                         <tr>
-                            <th>Course</th>
+                            <th>Program</th>
                             <th>Completion Date</th>
                             <th>Grade</th>
                             <th>Status</th>
@@ -191,7 +184,7 @@ $pendingStmt->close();
                     <tbody>
                     <?php foreach ($pendingCerts as $p): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($p['course_name']); ?></td>
+                            <td><?php echo htmlspecialchars($p['program_name']); ?></td>
                             <td><?php echo $p['completion_date'] ? date('d M Y', strtotime($p['completion_date'])) : '—'; ?></td>
                             <td>
                                 <?php if ($p['grade']): ?>

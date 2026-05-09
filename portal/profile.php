@@ -6,7 +6,7 @@ require_once 'includes/header.php';
 $enrollments = [];
 $stmt = $conn->prepare("
     SELECT e.*, c.title AS course_name, c.syllabus_file,
-           cert.id AS cert_db_id, cert.issue_date, cert.expiry_date, cert.file_path AS cert_file
+           cert.id AS cert_db_id, cert.issued_date
     FROM enrollments e
     LEFT JOIN courses c ON e.course_id = c.id
     LEFT JOIN certificates cert ON e.certificate_id = cert.certificate_id
@@ -150,7 +150,7 @@ $stmt->close();
                 <table class="table table-hover mb-0" style="font-size:.8rem;">
                     <thead style="background:#f8f9fa;">
                         <tr>
-                            <?php foreach (['Course','Enrolled','Status','Grade','Certificate','Downloads'] as $h): ?>
+                            <?php foreach (['Course','Enrolled','Status','Grade','Certificate','Syllabus'] as $h): ?>
                             <th style="font-size:.72rem;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;"><?= $h ?></th>
                             <?php endforeach; ?>
                         </tr>
@@ -181,10 +181,10 @@ $stmt->close();
                             <td style="padding:10px 12px;vertical-align:middle;">
                                 <div class="d-flex gap-1 flex-wrap">
                                     <?php if (!empty($e['syllabus_file'])): ?>
-                                    <a href="<?= SITE_URL . $e['syllabus_file'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Syllabus"><i class="fas fa-file-pdf"></i></a>
+                                        <a href="<?= SITE_URL.'uploads/'. $e['syllabus_file'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Syllabus"><i class="fas fa-file-pdf"></i></a>
                                     <?php endif; ?>
                                     <?php if (!empty($e['attendance_sheet'])): ?>
-                                    <a href="<?= SITE_URL.'uploads/'.$e['attendance_sheet'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Attendance"><i class="fas fa-calendar-check"></i></a>
+                                        <a href="<?= SITE_URL.'uploads/'.$e['attendance_sheet'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Attendance"><i class="fas fa-calendar-check"></i></a>
                                     <?php endif; ?>
                                     <?php if (!empty($e['payment_receipt'])): ?>
                                     <a href="<?= SITE_URL.'uploads/'.$e['payment_receipt'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Receipt"><i class="fas fa-receipt"></i></a>

@@ -37,7 +37,8 @@
                     <li class="mb-2"><a href="<?= SITE_URL; ?>pages/career.php"              class="text-white-50">Careers</a></li>
                     <li class="mb-2"><a href="<?= SITE_URL; ?>pages/contact.php"             class="text-white-50">Contact</a></li>
                     <li class="mb-2"><a href="<?= SITE_URL; ?>portal/dashboard.php"          class="text-white-50">Student Portal</a></li>
-                    <li class="mb-2"><a href="<?= SITE_URL; ?>pages/certificates.php"          class="text-white-50">Certificate Verification</a></li>
+                    <li class="mb-2"><a href="<?= SITE_URL; ?>pages/certificates.php"        class="text-white-50">Certificate Verification</a></li>
+                    <li class="mb-2"><a href="<?= ADMIN_APP_URL; ?>"                         class="text-white-50">Admin Portal</a></li>
                 </ul>
             </div>
 
