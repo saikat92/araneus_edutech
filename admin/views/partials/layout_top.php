@@ -56,11 +56,12 @@ body{background:#f0f2f7;font-size:.9rem;}
     <a href="<?= APP_URL ?>/admin/accounts"  class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/accounts')!==false?'active':'' ?>"><i class="fa fa-scale-balanced"></i> Accounts</a>
 
     <div class="nav-section">Content</div>
-    <a href="<?= APP_URL ?>/admin/blogs"        class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/blogs')!==false?'active':'' ?>"><i class="fa fa-blog"></i> Blogs</a>
-    <a href="<?= APP_URL ?>/admin/events"        class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/events')!==false?'active':'' ?>"><i class="fa fa-calendar-days"></i> Events</a>
-    <a href="<?= APP_URL ?>/admin/testimonials"  class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/testimonials')!==false?'active':'' ?>"><i class="fa fa-star"></i> Testimonials</a>
-    <a href="<?= APP_URL ?>/admin/careers"       class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/careers')!==false?'active':'' ?>"><i class="fa fa-briefcase"></i> Careers</a>
-    <a href="<?= APP_URL ?>/admin/contacts"      class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/contacts')!==false?'active':'' ?>"><i class="fa fa-envelope"></i> Contacts</a>
+    <a href="<?= APP_URL ?>/admin/blogs"          class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/blogs')!==false?'active':'' ?>"><i class="fa fa-blog"></i> Blogs</a>
+    <a href="<?= APP_URL ?>/admin/events"         class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/events')!==false?'active':'' ?>"><i class="fa fa-calendar-days"></i> Events</a>
+    <a href="<?= APP_URL ?>/admin/testimonials"   class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/testimonials')!==false?'active':'' ?>"><i class="fa fa-star"></i> Testimonials</a>
+    <a href="<?= APP_URL ?>/admin/projects"       class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/projects')!==false?'active':'' ?>"><i class="fa fa-layer-group"></i> Projects</a>
+    <a href="<?= APP_URL ?>/admin/careers"        class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/careers')!==false?'active':'' ?>"><i class="fa fa-briefcase"></i> Careers</a>
+    <a href="<?= APP_URL ?>/admin/contacts"       class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/contacts')!==false?'active':'' ?>"><i class="fa fa-envelope"></i> Contacts</a>
 
     <div class="nav-section">System</div>
     <a href="<?= APP_URL ?>/admin/reports" class="nav-link <?= strpos($_SERVER['REQUEST_URI'],'/reports')!==false?'active':'' ?>"><i class="fa fa-chart-bar"></i> Reports</a>

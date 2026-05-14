@@ -152,3 +152,11 @@ $router->get('/admin/certificates/{id}',         'CertificateController@show');
 $router->get('/admin/certificates/{id}/print',   'CertificateController@print');
 $router->post('/admin/certificates/{id}/revoke', 'CertificateController@revoke');
 $router->post('/admin/certificates/{id}/delete', 'CertificateController@delete');
+
+// ── Projects ───────────────────────────────────────────────────────────────────
+$router->get('/admin/projects',              'ProjectController@index');
+$router->get('/admin/projects/create',       'ProjectController@create');
+$router->post('/admin/projects/create',      'ProjectController@store');
+$router->get('/admin/projects/{id}/edit',    'ProjectController@edit');
+$router->post('/admin/projects/{id}/edit',   'ProjectController@update');
+$router->post('/admin/projects/{id}/delete', 'ProjectController@delete');
