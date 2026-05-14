@@ -1,0 +1,128 @@
+[25-Mar-2026 11:08:30 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[25-Mar-2026 11:09:05 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[25-Mar-2026 11:09:09 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[25-Mar-2026 11:09:36 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[25-Mar-2026 11:10:03 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[25-Mar-2026 11:12:10 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[25-Mar-2026 11:12:29 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[25-Mar-2026 11:12:47 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[25-Mar-2026 11:16:24 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[25-Mar-2026 11:16:33 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[03-Apr-2026 13:27:32 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[03-Apr-2026 13:30:56 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[03-Apr-2026 13:34:20 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[03-Apr-2026 13:42:28 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[03-Apr-2026 16:38:31 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[03-Apr-2026 16:38:37 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[03-Apr-2026 16:39:07 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[03-Apr-2026 16:39:12 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 17
+[03-Apr-2026 17:55:26 UTC] PHP Fatal error:  Uncaught Error: Class "App\Core\Router" not found in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:20
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 20
+[03-Apr-2026 18:11:17 UTC] PHP Warning:  require(/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[03-Apr-2026 18:11:17 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[03-Apr-2026 18:11:29 UTC] PHP Warning:  require(/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[03-Apr-2026 18:11:29 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[03-Apr-2026 18:12:12 UTC] PHP Warning:  require(/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[03-Apr-2026 18:12:12 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[16-Apr-2026 06:11:17 UTC] PHP Warning:  require(/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[16-Apr-2026 06:11:17 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[16-Apr-2026 06:14:14 UTC] PHP Warning:  require(/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[16-Apr-2026 06:14:14 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[16-Apr-2026 06:26:33 UTC] PHP Warning:  require(/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[16-Apr-2026 06:26:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/plasxjel/araneus.plastwork.in/araneus_admin/app/core/Router.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[16-Apr-2026 06:36:57 UTC] PHP Parse error:  syntax error, unexpected variable "$routes", expecting "function" or "const" in /home/plasxjel/araneus.plastwork.in/araneus_admin/app/Core/Router.php on line 5
+[16-Apr-2026 07:12:51 UTC] PHP Warning:  require(/home/plasxjel/araneus.plastwork.in/araneus_admin/App/Core/Router.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[16-Apr-2026 07:12:51 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/plasxjel/araneus.plastwork.in/araneus_admin/App/Core/Router.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[16-Apr-2026 07:13:15 UTC] PHP Warning:  require(/home/plasxjel/araneus.plastwork.in/araneus_admin/App/Core/Router.php): Failed to open stream: No such file or directory in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[16-Apr-2026 07:13:15 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/plasxjel/araneus.plastwork.in/araneus_admin/App/Core/Router.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/plasxjel/araneus.plastwork.in/araneus_admin/public/index.php on line 9
+[16-Apr-2026 14:17:37 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/plasxjel/araneus.plastwork.in/araneus_admin/views/admin/students/index.php on line 34
+[16-Apr-2026 14:17:37 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/plasxjel/araneus.plastwork.in/araneus_admin/views/admin/students/index.php on line 34
+[16-Apr-2026 14:23:00 UTC] PHP Deprecated:  number_format(): Passing null to parameter #1 ($num) of type float is deprecated in /home/plasxjel/araneus.plastwork.in/araneus_admin/views/admin/courses/index.php on line 21
+[16-Apr-2026 14:59:16 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/plasxjel/araneus.plastwork.in/araneus_admin/views/admin/students/index.php on line 34
+[16-Apr-2026 14:59:16 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/plasxjel/araneus.plastwork.in/araneus_admin/views/admin/students/index.php on line 34
+[16-Apr-2026 15:20:49 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/plasxjel/araneus.plastwork.in/araneus_admin/views/admin/students/index.php on line 34
+[16-Apr-2026 15:20:49 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/plasxjel/araneus.plastwork.in/araneus_admin/views/admin/students/index.php on line 34
+[16-Apr-2026 15:21:45 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/plasxjel/araneus.plastwork.in/araneus_admin/views/admin/students/index.php on line 34
+[16-Apr-2026 15:22:16 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/plasxjel/araneus.plastwork.in/araneus_admin/views/admin/students/index.php on line 34
+[16-Apr-2026 15:29:33 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/plasxjel/araneus.plastwork.in/araneus_admin/views/admin/students/index.php on line 34
+[16-Apr-2026 15:34:55 UTC] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /home/plasxjel/araneus.plastwork.in/araneus_admin/views/admin/students/index.php on line 34
