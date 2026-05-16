@@ -67,6 +67,7 @@ $router->get('/admin/invoices/{id}/edit',    'InvoiceController@edit');
 $router->post('/admin/invoices/{id}/edit',   'InvoiceController@update');
 $router->post('/admin/invoices/{id}/delete', 'InvoiceController@delete');
 $router->post('/admin/invoices/{id}/status', 'InvoiceController@updateStatus');
+$router->get('/admin/invoices/{id}/print',  'InvoiceController@printInvoice');
 
 // Payments
 $router->get('/admin/payments',         'PaymentController@index');

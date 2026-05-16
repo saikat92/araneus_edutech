@@ -171,6 +171,13 @@ class InvoiceController extends Controller {
         $this->redirect('/admin/invoices');
     }
 
+    public function printInvoice(string $id): void {
+        $invoice  = $this->model->findWithClient((int)$id);
+        if (!$invoice) { $this->setFlash('danger','Invoice not found'); $this->redirect('/admin/invoices'); }
+        $items    = $this->model->getItems((int)$id);
+        $this->view('admin/invoices/print', compact('invoice','items')+['title'=>'Print Invoice #'.$invoice['invoice_number']]);
+    }
+
     public function updateStatus(string $id): void {
         $this->model->update((int)$id, ['status' => $this->post('status')]);
         $this->setFlash('success','Status updated.');

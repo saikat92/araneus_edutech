@@ -22,6 +22,7 @@
         <td>
           <a href="<?= APP_URL ?>/admin/invoices/<?= $i['id'] ?>" class="btn btn-sm btn-outline-info btn-action"><i class="fa fa-eye"></i></a>
           <a href="<?= APP_URL ?>/admin/invoices/<?= $i['id'] ?>/edit" class="btn btn-sm btn-outline-primary btn-action"><i class="fa fa-pen"></i></a>
+          
           <form method="POST" action="<?= APP_URL ?>/admin/invoices/<?= $i['id'] ?>/delete" class="d-inline" onsubmit="return confirm('Delete invoice?')">
             <button class="btn btn-sm btn-outline-danger btn-action"><i class="fa fa-trash"></i></button>
           </form>

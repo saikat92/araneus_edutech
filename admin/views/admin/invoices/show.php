@@ -9,6 +9,9 @@
         <?php endforeach; ?>
       </select>
       <button class="btn btn-sm btn-success">Update</button>
+      <a href="<?= APP_URL ?>/admin/invoices/<?= $invoice['id'] ?>/print" target="_blank" class="btn btn-secondary">
+          <i class="bi bi-print"></i>Print
+      </a>
     </form>
     <a href="<?= APP_URL ?>/admin/invoices" class="btn btn-sm btn-outline-secondary"><i class="fa fa-arrow-left me-1"></i>Back</a>
   </div>
