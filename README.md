@@ -49,9 +49,13 @@ Place the `admin/` folder inside your project root so the structure is:
 
 ```
 araneus_edutech/
-├── admin/          ← this panel
-├── pages/
-├── portal/
+├── admin/          ← Master admin panel
+├── pages/          ← Araneus Main Website
+├── portal/         ← Student Portal
+├── assets/         ← website and student portal assets
+├── includes/       ← Main website Includes
+├── uploads/        ← not necessary (It wil be needed on admin/uploads)
+├── controller/     ← website and student portal controller
 └── ...
 ```
 

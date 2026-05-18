@@ -8,10 +8,28 @@ class AssignmentController extends Controller {
     public function __construct() { $this->requireAuth(); $this->model = new AssignmentModel(); }
 
     public function index(): void {
-        $page=max(1,(int)$this->get('page',1)); $limit=20; $offset=($page-1)*$limit;
-        $assignments = $this->model->getWithCourse($limit,$offset);
-        $total = $this->model->count(); $pages=ceil($total/$limit);
-        $this->view('admin/assignments/index', compact('assignments','total','pages','page') + ['title'=>'Assignments']);
+        $limit  = max(10, min(100, (int)$this->get('limit', 25)));
+        $page   = max(1, (int)$this->get('page', 1));
+        $offset = ($page - 1) * $limit;
+
+        $filters = [
+            'course_id'  => $this->get('course_id', ''),
+            'search'     => trim($this->get('search', '')),
+            'due_filter' => $this->get('due_filter', ''),
+            'sort'       => $this->get('sort', 'a.due_date'),
+            'order'      => $this->get('order', 'asc'),
+        ];
+
+        $assignments = $this->model->getFiltered($limit, $offset, $filters);
+        $total       = $this->model->countFiltered($filters);
+        $pages       = (int)ceil($total / $limit);
+        $stats       = $this->model->getStats();
+        $courses     = (new CourseModel())->getActive();
+
+        $this->view('admin/assignments/index', compact(
+            'assignments', 'total', 'pages', 'page',
+            'limit', 'offset', 'filters', 'stats', 'courses'
+        ) + ['title' => 'Assignments']);
     }
     public function create(): void {
         $courses = (new CourseModel())->getActive();
