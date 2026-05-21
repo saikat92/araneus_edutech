@@ -5,7 +5,7 @@ require_once 'includes/header.php';
 // ── Filesystem root derived from __DIR__ (no SITE_ROOT needed) ──
 // portal/course-view.php  →  __DIR__ = .../araneus_edutech/portal
 // uploads live at         →  .../araneus_edutech/uploads/
-define('UPLOAD_ROOT', dirname(__DIR__) . '/uploads/');
+define('UPLOAD_ROOT', dirname(__DIR__) . '/admin/uploads/');
 
 $enrollmentId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if (!$enrollmentId) {
@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $dest     = $uploadDir . $filename;
 
                 if (!move_uploaded_file($file['tmp_name'], $dest)) {
-                    $uploadError = "Failed to save file. Check server permissions on uploads/submissions/.";
+                    $uploadError = "Failed to save file. Check server permissions on admin/uploads/submissions/.";
                 } else {
                     // Upsert submission record
                     $chk = $conn->prepare(
@@ -193,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $dest     = $uploadDir . $filename;
 
                 if (!move_uploaded_file($file['tmp_name'], $dest)) {
-                    $uploadError = "Failed to save project file. Check server permissions on uploads/projects/.";
+                    $uploadError = "Failed to save project file. Check server permissions on admin/uploads/projects/.";
                 } else {
                     $u = $conn->prepare(
                         "UPDATE enrollments SET project_report = ? WHERE id = ?"
@@ -367,7 +367,7 @@ $counter = 1;
                 </span>
                 <?php if ($enrollment['syllabus_file']): ?>
                 <br>
-                <a href="<?= SITE_URL ?>uploads/syllabus/<?= urlencode($enrollment['syllabus_file']) ?>"
+                <a href="<?= SITE_URL ?>admin/uploads/syllabus/<?= urlencode($enrollment['syllabus_file']) ?>"
                    class="btn btn-sm btn-outline-primary mt-1" download style="font-size:.78rem;">
                     <i class="fas fa-download me-1"></i>Syllabus
                 </a>
@@ -599,7 +599,7 @@ $counter = 1;
 
                         <!-- Download submitted file -->
                         <?php if ($submitted && !empty($sub['submission_file'])): ?>
-                        <a href="<?= SITE_URL ?>uploads/submissions/<?= urlencode($sub['submission_file']) ?>"
+                        <a href="<?= SITE_URL ?>admin/uploads/submissions/<?= urlencode($sub['submission_file']) ?>"
                            download
                            class="btn btn-sm btn-outline-secondary"
                            style="font-size:.75rem;">
@@ -714,13 +714,13 @@ $counter = 1;
                                 <?= htmlspecialchars($projectReport) ?>
                             </div>
                             <div class="d-flex gap-2 mt-1 flex-wrap">
-                                <a href="<?= SITE_URL ?>uploads/projects/<?= urlencode($projectReport) ?>"
+                                <a href="<?= SITE_URL ?>admin/uploads/projects/<?= urlencode($projectReport) ?>"
                                    target="_blank"
                                    class="btn btn-sm btn-outline-primary"
                                    style="font-size:.75rem;">
                                     <i class="fas fa-eye me-1"></i>View
                                 </a>
-                                <a href="<?= SITE_URL ?>uploads/projects/<?= urlencode($projectReport) ?>"
+                                <a href="<?= SITE_URL ?>admin/uploads/projects/<?= urlencode($projectReport) ?>"
                                    download
                                    class="btn btn-sm btn-outline-secondary"
                                    style="font-size:.75rem;">
@@ -803,9 +803,9 @@ $counter = 1;
                 if ($enrollment['syllabus_file'])
                     $downloads[] = ['fas fa-file-pdf text-danger', 'Syllabus', SITE_URL.'uploads/syllabus/'.urlencode($enrollment['syllabus_file'])];
                 if ($enrollment['attendance_sheet'])
-                    $downloads[] = ['fas fa-calendar-check text-success', 'Attendance Sheet', SITE_URL.'uploads/attendance/'.urlencode($enrollment['attendance_sheet'])];
+                    $downloads[] = ['fas fa-calendar-check text-success', 'Attendance Sheet', SITE_URL.'admin/uploads/attendance/'.urlencode($enrollment['attendance_sheet'])];
                 if ($enrollment['payment_receipt'])
-                    $downloads[] = ['fas fa-receipt text-primary', 'Payment Receipt', SITE_URL.'uploads/receipts/'.urlencode($enrollment['payment_receipt'])];
+                    $downloads[] = ['fas fa-receipt text-primary', 'Payment Receipt', SITE_URL.'admin/uploads/receipts/'.urlencode($enrollment['payment_receipt'])];
                 if (!empty($downloads)):
                 ?>
                 <div class="col-12">

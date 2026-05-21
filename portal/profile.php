@@ -181,16 +181,16 @@ $stmt->close();
                             <td style="padding:10px 12px;vertical-align:middle;">
                                 <div class="d-flex gap-1 flex-wrap">
                                     <?php if (!empty($e['syllabus_file'])): ?>
-                                        <a href="<?= SITE_URL.'uploads/'. $e['syllabus_file'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Syllabus"><i class="fas fa-file-pdf"></i></a>
+                                        <a href="<?= SITE_URL.'admin/uploads/syllabus/'.$e['syllabus_file'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Syllabus"><i class="fas fa-file-pdf"></i></a>
                                     <?php endif; ?>
                                     <?php if (!empty($e['attendance_sheet'])): ?>
-                                        <a href="<?= SITE_URL.'uploads/'.$e['attendance_sheet'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Attendance"><i class="fas fa-calendar-check"></i></a>
+                                        <a href="<?= SITE_URL.'admin/uploads/attendance/'.$e['attendance_sheet'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Attendance"><i class="fas fa-calendar-check"></i></a>
                                     <?php endif; ?>
                                     <?php if (!empty($e['payment_receipt'])): ?>
-                                    <a href="<?= SITE_URL.'uploads/'.$e['payment_receipt'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Receipt"><i class="fas fa-receipt"></i></a>
+                                    <a href="<?= SITE_URL.'admin/uploads/receipts/'.$e['payment_receipt'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Receipt"><i class="fas fa-receipt"></i></a>
                                     <?php endif; ?>
                                     <?php if (!empty($e['project_report'])): ?>
-                                    <a href="<?= SITE_URL.'uploads/'.$e['project_report'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Project"><i class="fas fa-file-code"></i></a>
+                                    <a href="<?= SITE_URL.'admin/uploads/projects/'.$e['project_report'] ?>" download class="btn btn-sm btn-outline-secondary" style="font-size:.7rem;padding:2px 7px;" title="Project"><i class="fas fa-file-code"></i></a>
                                     <?php endif; ?>
                                     <?php if (empty($e['syllabus_file']) && empty($e['attendance_sheet']) && empty($e['payment_receipt']) && empty($e['project_report'])): ?>
                                     <span class="text-muted">—</span>

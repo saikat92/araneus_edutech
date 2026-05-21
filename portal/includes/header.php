@@ -59,7 +59,7 @@ function portalNavActive($page) {
 // Avatar URL helper
 function avatarUrl($studentData) {
     if (!empty($studentData['profile_picture'])) {
-        return SITE_URL . 'uploads/profile_pictures/' . htmlspecialchars($studentData['profile_picture']);
+        return SITE_URL . 'admin/uploads/profile_pictures/' . htmlspecialchars($studentData['profile_picture']);
     }
     return null;
 }
