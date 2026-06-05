@@ -8,7 +8,7 @@
 
 <div class="card">
   <div class="card-body">
-    <form method="POST" action="<?= APP_URL ?>/admin/certificates/create" id="certForm">
+    <form method="POST" action="<?= APP_URL ?>/admin/certificates/create" id="certForm" enctype="multipart/form-data">
       <div class="row g-3">
 
         <!-- Student picker -->
@@ -107,6 +107,18 @@
           <input type="text" name="coordinator_name" class="form-control"
                  value="Mayukh Maitha">
         </div>
+        
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">QR Code Image</label>
+          <input type="file" name="qr_image" id="qrImage" class="form-control"
+                accept="image/png,image/jpeg,image/jpg"
+                onchange="previewQR(this)">
+          <div class="form-text">Upload your pre-generated QR PNG. Leave blank to use API fallback.</div>
+          <div id="qrPreview" class="mt-2 d-none">
+            <img id="qrPreviewImg" src="" style="width:100px;height:100px;border:2px solid #c9a84c;border-radius:8px;padding:4px;">
+          </div>
+        </div>
+
 
         <div class="col-12 mt-2 d-flex gap-2">
           <button type="submit" class="btn btn-primary px-4">
@@ -124,6 +136,17 @@
 $studentsJson = json_encode($students);
 $extraJs = <<<JS
 <script>
+
+function previewQR(input) {
+  const preview = document.getElementById('qrPreview');
+  const img     = document.getElementById('qrPreviewImg');
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = e => { img.src = e.target.result; preview.classList.remove('d-none'); };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
 const studentsData = $studentsJson;
 
 function fillFromStudent(sel) {

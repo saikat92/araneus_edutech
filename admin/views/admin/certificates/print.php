@@ -1,296 +1,397 @@
-<?php
-// Standalone — no layout. Called directly via require in CertificateController::print()
-$certId   = htmlspecialchars($cert['certificate_id']);
-$name     = htmlspecialchars($cert['full_name']);
-$program  = htmlspecialchars($cert['program_name']);
-$project  = htmlspecialchars($cert['project_name'] ?? '');
-$start    = $cert['start_date']  ? date('d-m-Y', strtotime($cert['start_date']))  : '';
-$end      = $cert['end_date']    ? date('d-m-Y', strtotime($cert['end_date']))    : '';
-$duration = htmlspecialchars($cert['duration'] ?? '');
-$mode     = htmlspecialchars($cert['mode'] ?? 'Offline');
-$director = htmlspecialchars($cert['director_name'] ?? 'Shubhajit Kantossan');
-$coord    = htmlspecialchars($cert['coordinator_name'] ?? 'Mayukh Maitha');
-$qrPath   = $cert['qr_code_path']
-    ? APP_URL . '/assets/uploads/' . $cert['qr_code_path']
-    : 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=' . urlencode(APP_URL . '/verify/' . $certId);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Certificate — <?= $certId ?></title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@700;900&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificate of Excellence — Araneus Edutech</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { width: 100%; height: 100%; background: #0d2137; display: flex; align-items: center; justify-content: center; }
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-.cert-wrap {
-  width: 1050px; height: 740px;
-  position: relative;
-  background: #0d2137;
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-}
+  /* A4 Landscape – zero margins */
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: #0a1f2e;   /* deep fallback navy */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lato', sans-serif;
+  }
 
-/* Outer diamond teal corners */
-.cert-wrap::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    linear-gradient(135deg, #1a4a6b 0%, transparent 45%),
-    linear-gradient(315deg, #1a4a6b 0%, transparent 45%);
-  z-index: 0;
-}
+  /* certificate wrapper – exact A4 landscape dimensions */
+  .certificate {
+    width: 297mm;           /* A4 landscape width */
+    height: 210mm;          /* A4 landscape height */
+    position: relative;
+    background-image: url('<?= APP_URL ?>/assets/img/certificate-bg.png');
+    background-size: cover;      /* fill entire canvas without distortion */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: #fef9e6;   /* warm base while bg loads */
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+    overflow: visible;
+    page-break-after: avoid;
+    break-inside: avoid;
+  }
 
-/* Gold border lines */
-.gold-border {
-  position: absolute; inset: 18px;
-  border: 3px solid #c9a84c;
-  z-index: 1;
-  pointer-events: none;
-}
-.gold-border-inner {
-  position: absolute; inset: 24px;
-  border: 1px solid rgba(201,168,76,.4);
-  z-index: 1;
-  pointer-events: none;
-}
+  /* Main content container – positioned exactly within the decorative border area */
+  .certificate-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 22mm 18mm 20mm 18mm;   /* generous inner margins matching template background */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: transparent;        /* no white overlay – pure background image shows through */
+  }
 
-/* White inner card */
-.cert-inner {
-  position: relative; z-index: 2;
-  width: 870px; height: 620px;
-  background: #fff;
-  display: flex; flex-direction: column; align-items: center;
-  padding: 28px 60px 20px;
-  clip-path: polygon(3% 0%, 97% 0%, 100% 3%, 100% 97%, 97% 100%, 3% 100%, 0% 97%, 0% 3%);
-}
+  /* ----- TOP SECTION (ID + titles) ----- */
+  .top-meta {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+  .cert-id {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #b88638;        /* gold/brass tone matching border */
+    background: rgba(255, 248, 225, 0.6);
+    padding: 3px 12px;
+    border-radius: 30px;
+    backdrop-filter: blur(1px);
+    text-transform: uppercase;
+  }
 
-.cert-id {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 10px; font-weight: 700;
-  letter-spacing: .12em;
-  color: #1a3a5c;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
+  .main-titles {
+    text-align: center;
+    margin-top: -4px;
+  }
+  .cert-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 68px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #1f3b4c;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-shadow: 1px 1px 0 rgba(255,215,140,0.3);
+  }
+  .cert-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    color: #c29b3b;
+    text-transform: uppercase;
+    margin-top: 2px;
+    margin-bottom: 12px;
+  }
 
-.cert-title-main {
-  font-family: 'Cinzel', serif;
-  font-size: 52px; font-weight: 900;
-  color: #1a3a5c;
-  letter-spacing: .04em;
-  line-height: 1;
-  margin-bottom: 0;
-}
+  /* ----- PRESENTED TO + NAME (script) ----- */
+  .presented-line {
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e44;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+  .recipient-name {
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 68px;
+    color: #c29b3b;
+    line-height: 1.1;
+    margin: 8px 0 2px 0;
+    font-weight: normal;
+    word-break: keep-all;
+  }
+  .name-underline {
+    width: 440px;
+    max-width: 85%;
+    height: 1.2px;
+    background: linear-gradient(90deg, transparent, #aa7e3a, #e4c27a, #aa7e3a, transparent);
+    margin: 0 auto 12px auto;
+  }
 
-.cert-title-sub {
-  font-family: 'Cinzel', serif;
-  font-size: 22px; font-weight: 700;
-  color: #c9a84c;
-  letter-spacing: .18em;
-  margin-bottom: 10px;
-}
+  /* ----- DESCRIPTION / BODY TEXT (program details) ----- */
+  .cert-details {
+    max-width: 610px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: #1f2e38;
+    background: rgba(255, 253, 245, 0.55);
+    padding: 6px 12px;
+    border-radius: 14px;
+    backdrop-filter: blur(2px);
+  }
+  .cert-details strong {
+    font-weight: 800;
+    color: #a7772a;
+    font-style: normal;
+  }
+  .cert-details em {
+    font-style: italic;
+    font-weight: 500;
+  }
 
-.cert-presented {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 13px;
-  color: #333;
-  margin-bottom: 4px;
-}
+  /* ----- FOOTER (signatures + QR + MSME) ----- */
+  .footer-section {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 18px;
+    padding: 0 12px;
+  }
 
-.cert-student-name {
-  font-family: 'Great Vibes', cursive;
-  font-size: 58px;
-  color: #c9a84c;
-  line-height: 1.15;
-  margin-bottom: 2px;
-}
+  /* signature blocks (left / right) */
+  .signature {
+    text-align: center;
+    width: 210px;
+  }
+  .signature-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 28px;
+    color: #1a2c3c;
+    border-bottom: 1.2px solid #bc8f4b;
+    display: inline-block;
+    min-width: 160px;
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .signature-role {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    color: #7c5e2e;
+    text-transform: uppercase;
+  }
 
-.cert-name-line {
-  width: 420px;
-  border-bottom: 1.5px solid #888;
-  margin-bottom: 12px;
-}
+  /* center badge: QR + MSME logo */
+  .center-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .qr-code {
+    width: 112px;
+    height: 112px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
+    background: white;
+    padding: 5px;
+    border-radius: 12px;
+  }
+  .msme-wrapper {
+    text-align: center;
+  }
+  .msme-logo-img {
+    height: 46px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+  /* fallback msme graphic (elegant and subtle) */
+  .msme-fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .msme-bars {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+  .msme-bar {
+    width: 9px;
+    background: #1f4b7c;
+    border-radius: 3px 3px 0 0;
+  }
+  .msme-text-en {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 7px;
+    font-weight: 800;
+    color: #1f4b7c;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .msme-text-hi {
+    font-size: 7px;
+    color: #1f4b7c;
+    text-align: center;
+  }
 
-.cert-body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 12.5px;
-  color: #222;
-  text-align: center;
-  line-height: 1.7;
-  max-width: 640px;
-  margin-bottom: 14px;
-}
-.cert-body em { font-style: italic; font-weight: 700; }
+  /* micro adjustments for perfect alignment */
+  @media print {
+    html, body {
+      background: white;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .certificate {
+      width: 100%;
+      height: auto;
+      box-shadow: none;
+      margin: 0;
+      page-break-after: avoid;
+      break-inside: avoid;
+    }
+    @page {
+      size: landscape;
+      margin: 0;
+    }
+    .certificate-content {
+      padding: 22mm 18mm 20mm 18mm;
+    }
+    .cert-details {
+      background: rgba(255, 253, 245, 0.7);
+      backdrop-filter: none;
+    }
+  }
 
-/* QR + signatures row */
-.cert-footer {
-  width: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-top: auto;
-  padding-top: 4px;
-}
-
-.sig-block {
-  text-align: center;
-  width: 180px;
-}
-.sig-name {
-  font-family: 'Great Vibes', cursive;
-  font-size: 22px;
-  color: #222;
-  border-bottom: 1px solid #444;
-  padding-bottom: 2px;
-  margin-bottom: 3px;
-}
-.sig-label {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 10px;
-  letter-spacing: .12em;
-  color: #555;
-  text-transform: uppercase;
-}
-
-.qr-center {
-  text-align: center;
-}
-.qr-center img {
-  width: 110px; height: 110px;
-  border: 3px solid #c9a84c;
-  border-radius: 8px;
-  padding: 4px;
-  background: #fff;
-}
-
-.msme-logo {
-  text-align: center;
-  width: 130px;
-}
-.msme-logo img { width: 90px; }
-.msme-text {
-  font-size: 7px;
-  font-weight: 700;
-  color: #1a4a9b;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  margin-top: 2px;
-}
-
-/* Gold corner ornaments */
-.corner {
-  position: absolute;
-  width: 80px; height: 80px;
-  z-index: 3;
-  pointer-events: none;
-}
-.corner svg { width: 100%; height: 100%; }
-.corner.tl { top: 28px; left: 28px; }
-.corner.tr { top: 28px; right: 28px; transform: scaleX(-1); }
-.corner.bl { bottom: 28px; left: 28px; transform: scaleY(-1); }
-.corner.br { bottom: 28px; right: 28px; transform: scale(-1); }
-
-/* Star decorations (css only) */
-.stars { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.star {
-  position: absolute;
-  width: 4px; height: 4px;
-  background: #c9a84c;
-  border-radius: 50%;
-  opacity: .6;
-}
-
-@media print {
-  html, body { background: white; }
-  .cert-wrap { break-inside: avoid; }
-}
+  /* responsive safeguard for screen preview */
+  @media screen and (max-width: 1100px) {
+    .certificate {
+      transform: scale(0.98);
+      margin: 15px auto;
+    }
+  }
 </style>
 </head>
 <body>
-
-<div class="cert-wrap">
-  <!-- Gold borders -->
-  <div class="gold-border"></div>
-  <div class="gold-border-inner"></div>
-
-  <!-- Corner ornaments (SVG fleur/mandala style) -->
-  <?php foreach (['tl','tr','bl','br'] as $c): ?>
-  <div class="corner <?= $c ?>">
-    <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-      <g fill="#c9a84c" opacity=".9">
-        <circle cx="8" cy="8" r="4"/>
-        <path d="M0 0 Q40 0 40 40 Q20 20 0 0Z" opacity=".4"/>
-        <path d="M4 0 Q4 36 40 36 Q22 18 4 0Z" opacity=".5"/>
-        <path d="M0 4 Q36 4 36 40 Q18 22 0 4Z" opacity=".5"/>
-        <rect x="0" y="0" width="3" height="50" rx="1.5" opacity=".6"/>
-        <rect x="0" y="0" width="50" height="3" rx="1.5" opacity=".6"/>
-        <circle cx="55" cy="5" r="2" opacity=".4"/>
-        <circle cx="5" cy="55" r="2" opacity=".4"/>
-        <circle cx="30" cy="10" r="1.5" opacity=".5"/>
-        <circle cx="10" cy="30" r="1.5" opacity=".5"/>
-      </g>
-    </svg>
-  </div>
-  <?php endforeach; ?>
-
-  <!-- Inner white certificate -->
-  <div class="cert-inner">
-    <div class="cert-id">CERTIFICATE ID : <?= $certId ?></div>
-    <div class="cert-title-main">CERTIFICATE</div>
-    <div class="cert-title-sub">OF &nbsp; <?= strtoupper($cert['certificate_type'] ?? 'PARTICIPATION') ?></div>
-    <div class="cert-presented">This Certificate Is Proudly Presented To :</div>
-    <div class="cert-student-name"><?= $name ?></div>
-    <div class="cert-name-line"></div>
-
-    <div class="cert-body">
-      For successfully completing the <em><?= $program ?></em>
-      <?php if ($project): ?>
-        and accomplishing the project "<em><?= $project ?></em>",
-      <?php endif; ?>
-      <?php if ($start && $end): ?>
-        held from <em><?= $start ?> to <?= $end ?></em>,
-      <?php endif; ?>
-      <?php if ($duration): ?>
-        with a total duration of <em><?= $duration ?> (<?= $mode ?>)</em>,
-      <?php endif; ?>
-      organized by <em>Araneus Edutech LLP</em>.
+<div class="certificate">
+  <div class="certificate-content">
+    
+    <!-- upper part: certificate ID aligned to the right (elegant) -->
+    <div class="top-meta">
+      <div class="cert-id">Certificate ID : <?= htmlspecialchars($cert['certificate_id'] ?? $certId ?? 'PP/11/25/252611') ?></div>
     </div>
 
-    <!-- Footer: sig | qr | msme | sig -->
-    <div class="cert-footer">
+    <!-- main titles area -->
+    <div class="main-titles">
+      <div class="cert-heading">CERTIFICATE</div>
+      <div class="cert-sub">OF &nbsp; <?= strtoupper(htmlspecialchars($cert['certificate_type'] ?? $certType ?? 'PARTICIPATION')) ?></div>
+    </div>
 
-      <!-- Director signature -->
-      <div class="sig-block">
-        <div class="sig-name"><?= $director ?></div>
-        <div class="sig-label">(Director)</div>
+    <!-- presented to line -->
+    <div class="presented-line">This Certificate Is Proudly Presented To :</div>
+
+    <!-- recipient name + subtle underline -->
+    <div class="recipient-name"><?= htmlspecialchars($cert['full_name'] ?? $name ?? 'Recipient Name') ?></div>
+    <div class="name-underline"></div>
+
+    <!-- dynamic body text : program, project, dates, duration -->
+    <div class="cert-details">
+      <?php
+        // Safely gather variables from either $cert array or fallback
+        $displayProgram = htmlspecialchars($cert['program_name'] ?? $program ?? 'the training program');
+        $displayProject = htmlspecialchars($cert['project_name'] ?? $project ?? '');
+        $startDate = !empty($cert['start_date']) ? date('d-m-Y', strtotime($cert['start_date'])) : ($start ?? '');
+        $endDate = !empty($cert['end_date']) ? date('d-m-Y', strtotime($cert['end_date'])) : ($end ?? '');
+        $durationText = htmlspecialchars($cert['duration'] ?? $duration ?? '');
+        $modeText = htmlspecialchars($cert['mode'] ?? $mode ?? 'Offline');
+      ?>
+      For successfully completing the <strong><?= $displayProgram ?></strong>
+      <?php if(!empty($displayProject)): ?>
+        and accomplishing the project &#8220;<strong><?= $displayProject ?></strong>&#8221;,
+      <?php endif; ?>
+      <?php if(!empty($startDate) && !empty($endDate)): ?>
+        held from <strong><?= $startDate ?> to <?= $endDate ?></strong>,
+      <?php endif; ?>
+      <?php if(!empty($durationText)): ?>
+        with a total duration of <strong><?= $durationText ?> (<?= $modeText ?>)</strong>,
+      <?php endif; ?>
+      organized by <strong>Araneus Edutech LLP</strong>.
+    </div>
+
+    <!-- footer with signatures, QR, MSME badge -->
+    <div class="footer-section">
+      <!-- left: Director signature -->
+      <div class="signature">
+        <div class="signature-name"><?= htmlspecialchars($cert['director_name'] ?? $director ?? 'Shubhajit Kanti Das') ?></div>
+        <div class="signature-role">(Director)</div>
       </div>
 
-      <!-- QR Code -->
-      <div class="qr-center">
-        <img src="<?= $qrPath ?>" alt="Verify QR">
-      </div>
-
-      <!-- MSME logo placeholder -->
-      <div class="msme-logo">
-        <div style="background:#1a4a9b;color:#fff;font-weight:900;font-size:18px;padding:6px 10px;border-radius:4px;letter-spacing:.05em;font-family:sans-serif;">
-          <img src="<?= APP_URL ?>/assets/img/msme-logo.png" style="width:90px">
+      <!-- center block: QR code + MSME (official) -->
+      <div class="center-badge">
+        <?php
+          $qrPathDisplay = '';
+          if (!empty($cert['qr_code_path'])) {
+              $qrPathDisplay = UPLOAD_URL . 'uploads/' . $cert['qr_code_path'];
+          } elseif (isset($qrPath)) {
+              $qrPathDisplay = $qrPath;
+          } else {
+              $certIdForQR = htmlspecialchars($cert['certificate_id'] ?? $certId ?? 'CERT-UNIQUE');
+              $qrPathDisplay = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&ecc=H&color=8B4513&data=' . urlencode(UPLOAD_URL . '/verify/' . $certIdForQR);
+          }
+        ?>
+        <img class="qr-code" src="<?= $qrPathDisplay ?>" alt="Verification QR Code">
+        <div class="msme-wrapper">
+          <?php
+            $logoPath = APP_URL . '/assets/img/msme-logo.png';
+            $localFileCheck = APP_ROOT . '/public/assets/img/msme-logo.png';
+            if (file_exists($localFileCheck)): ?>
+              <img class="msme-logo-img" src="<?= $logoPath ?>" alt="MSME Government of India">
+          <?php else: ?>
+            <!-- official-style MSME indicator matching govt branding -->
+            <div class="msme-fallback">
+              <div class="msme-bars">
+                <div class="msme-bar" style="height: 12px;"></div>
+                <div class="msme-bar" style="height: 20px;"></div>
+                <div class="msme-bar" style="height: 26px;"></div>
+                <div class="msme-bar" style="height: 16px;"></div>
+                <div class="msme-bar" style="height: 22px;"></div>
+              </div>
+              <div class="msme-text-en">Micro, Small &amp; Medium<br>Enterprises</div>
+              <div class="msme-text-hi">सूक्ष्म, लघु एवं मध्यम उद्यम</div>
+            </div>
+          <?php endif; ?>
         </div>
-        <div class="msme-text">Micro, Small &amp; Medium<br>Enterprises</div>
       </div>
 
-      <!-- Coordinator signature -->
-      <div class="sig-block">
-        <div class="sig-name"><?= $coord ?></div>
-        <div class="sig-label">(Project Coordinator)</div>
+      <!-- right: Coordinator signature -->
+      <div class="signature">
+        <div class="signature-name"><?= htmlspecialchars($cert['coordinator_name'] ?? $coord ?? 'Mayukh Maitha') ?></div>
+        <div class="signature-role">(Project Coordinator)</div>
       </div>
-
     </div>
   </div>
 </div>
 
-<script>window.onload = function() { window.print(); }</script>
+<script>
+  // automatic printing unless preview mode is active
+  if (window.location.search.indexOf('preview=1') === -1) {
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        window.print();
+      }, 300);
+    });
+  }
+</script>
 </body>
 </html>

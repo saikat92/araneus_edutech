@@ -153,6 +153,7 @@ $router->get('/admin/certificates/{id}',         'CertificateController@show');
 $router->get('/admin/certificates/{id}/print',   'CertificateController@print');
 $router->post('/admin/certificates/{id}/revoke', 'CertificateController@revoke');
 $router->post('/admin/certificates/{id}/delete', 'CertificateController@delete');
+$router->post('/admin/certificates/{id}/qr', 'CertificateController@replaceQR');
 
 // ── Projects ───────────────────────────────────────────────────────────────────
 $router->get('/admin/projects',              'ProjectController@index');

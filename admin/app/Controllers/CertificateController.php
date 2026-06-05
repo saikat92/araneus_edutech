@@ -50,12 +50,11 @@ class CertificateController extends Controller {
             $this->redirect('/admin/certificates/create');
         }
 
-        // Generate Certificate ID: PP/MM/YY/XXXXXX
-        $certId = $this->generateCertId($this->post('cert_prefix', 'PP'));
+        // Generate Certificate ID
+        $certId  = $this->generateCertId($this->post('cert_prefix', 'PP'));
 
-        // Generate QR code pointing to verify URL
-        $verifyUrl = APP_URL . '/verify/' . $certId;
-        $qrPath    = $this->generateQR($certId, $verifyUrl);
+        // Handle QR upload
+        $qrPath = $this->handleQRUpload($certId);
 
         $id = $db->insert('certificates', [
             'certificate_id'   => $certId,
@@ -135,46 +134,61 @@ class CertificateController extends Controller {
         return $id;
     }
 
-    private function generateQR(string $certId, string $url): string {
-        $dir      = UPLOAD_PATH . 'qrcodes/';
-        $filename = 'qr_' . preg_replace('/[^a-zA-Z0-9]/', '_', $certId) . '.png';
-        $fullPath = $dir . $filename;
-
+    private function handleQRUpload(string $certId): string {
+        $dir = UPLOAD_PATH . 'qrcodes/';
         if (!is_dir($dir)) mkdir($dir, 0755, true);
 
-        // Use chillerlan/php-qrcode if available
-        if (class_exists('\chillerlan\QRCode\QRCode')) {
-            $options = new \chillerlan\QRCode\QROptions([
-                'outputType'   => \chillerlan\QRCode\Output\QROutputInterface::GDIMAGE_PNG,
-                'scale'        => 8,
-                'imageBase64'  => false,
-                'moduleValues' => [
-                    // dark modules (data)
-                    \chillerlan\QRCode\Data\QRMatrix::M_DATA_DARK       => [0,  51,  51],
-                    \chillerlan\QRCode\Data\QRMatrix::M_FINDER_DARK     => [0,  51,  51],
-                    \chillerlan\QRCode\Data\QRMatrix::M_SEPARATOR       => [255,255,255],
-                    \chillerlan\QRCode\Data\QRMatrix::M_ALIGNMENT_DARK  => [0,  51,  51],
-                    \chillerlan\QRCode\Data\QRMatrix::M_TIMING_DARK     => [0,  51,  51],
-                    \chillerlan\QRCode\Data\QRMatrix::M_FORMAT_DARK     => [0,  51,  51],
-                    \chillerlan\QRCode\Data\QRMatrix::M_VERSION_DARK    => [0,  51,  51],
-                    // light modules
-                    \chillerlan\QRCode\Data\QRMatrix::M_DATA            => [255,255,255],
-                    \chillerlan\QRCode\Data\QRMatrix::M_FINDER          => [255,255,255],
-                    \chillerlan\QRCode\Data\QRMatrix::M_ALIGNMENT       => [255,255,255],
-                    \chillerlan\QRCode\Data\QRMatrix::M_TIMING          => [255,255,255],
-                    \chillerlan\QRCode\Data\QRMatrix::M_FORMAT          => [255,255,255],
-                    \chillerlan\QRCode\Data\QRMatrix::M_VERSION         => [255,255,255],
-                    \chillerlan\QRCode\Data\QRMatrix::M_QUIETZONE       => [255,255,255],
-                ],
-            ]);
-            (new \chillerlan\QRCode\QRCode($options))->render($url, $fullPath);
-        } else {
-            // Fallback: use Google Charts API to download QR
-            $apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' . urlencode($url);
-            $img    = @file_get_contents($apiUrl);
-            if ($img) file_put_contents($fullPath, $img);
+        // If a file was uploaded, save it
+        if (!empty($_FILES['qr_image']['tmp_name']) && $_FILES['qr_image']['error'] === UPLOAD_ERR_OK) {
+            $ext      = strtolower(pathinfo($_FILES['qr_image']['name'], PATHINFO_EXTENSION));
+            $allowed  = ['png', 'jpg', 'jpeg'];
+            if (!in_array($ext, $allowed)) {
+                // Invalid type — fall through to API fallback
+            } else {
+                $filename = 'qr_' . preg_replace('/[^a-zA-Z0-9]/', '_', $certId) . '.' . $ext;
+                $dest     = $dir . $filename;
+                if (move_uploaded_file($_FILES['qr_image']['tmp_name'], $dest)) {
+                    return 'qrcodes/' . $filename;
+                }
+            }
         }
 
+        // No upload — fallback: fetch from free API and cache it
+        $filename = 'qr_' . preg_replace('/[^a-zA-Z0-9]/', '_', $certId) . '.png';
+        $dest     = $dir . $filename;
+        $verifyUrl = 'https://araneus.plastwork.in/admin/verify/' . $certId;
+        $apiUrl   = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&color=003333&bgcolor=ffffff&data='
+                . urlencode($verifyUrl);
+        $img = @file_get_contents($apiUrl);
+        if ($img) file_put_contents($dest, $img);
+
         return 'qrcodes/' . $filename;
+    }
+
+    public function replaceQR(string $id): void {
+        $db   = \App\Core\Database::getInstance();
+        $cert = $db->fetch("SELECT * FROM certificates WHERE id=?", [(int)$id]);
+        if (!$cert) { $this->redirect('/admin/certificates'); }
+
+        $dir = UPLOAD_PATH . 'qrcodes/';
+        if (!is_dir($dir)) mkdir($dir, 0755, true);
+
+        if (!empty($_FILES['qr_image']['tmp_name']) && $_FILES['qr_image']['error'] === UPLOAD_ERR_OK) {
+            $ext     = strtolower(pathinfo($_FILES['qr_image']['name'], PATHINFO_EXTENSION));
+            $allowed = ['png','jpg','jpeg'];
+            if (in_array($ext, $allowed)) {
+                // Delete old QR file if exists
+                if ($cert['qr_code_path'] && file_exists(UPLOAD_PATH . $cert['qr_code_path'])) {
+                    @unlink(UPLOAD_PATH . $cert['qr_code_path']);
+                }
+                $filename = 'qr_' . preg_replace('/[^a-zA-Z0-9]/', '_', $cert['certificate_id']) . '.' . $ext;
+                $dest     = $dir . $filename;
+                if (move_uploaded_file($_FILES['qr_image']['tmp_name'], $dest)) {
+                    $db->update('certificates', ['qr_code_path' => 'qrcodes/'.$filename], 'id=?', [(int)$id]);
+                    $this->setFlash('success', 'QR code updated.');
+                }
+            }
+        }
+        $this->redirect('/admin/certificates/' . $id);
     }
 }
