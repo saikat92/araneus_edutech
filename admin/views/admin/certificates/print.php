@@ -16,9 +16,13 @@
 
   /* A4 Landscape – zero margins */
   html, body {
+    font-size: 13px;
+    color: #111;
+    background: #e8e8e8;
+    background-image: radial-gradient(circle at 1px 1px, #c8c8c8 1px, transparent 1px);
+    background-size: 20px 20px;
     width: 100%;
     height: 100%;
-    background: #0a1f2e;   /* deep fallback navy */
     margin: 0;
     padding: 0;
     display: flex;
@@ -113,7 +117,7 @@
   .recipient-name {
     text-align: center;
     font-family: 'Great Vibes', cursive;
-    font-size: 68px;
+    font-size: 60px;
     color: #c29b3b;
     line-height: 1.1;
     margin: 8px 0 2px 0;
@@ -165,6 +169,11 @@
   .signature {
     text-align: center;
     width: 210px;
+    margin: 0 auto;
+    padding: 8px 12px;
+    border-radius: 30px;
+    border: 1px solid rgba(188, 143, 75, 0.4);
+    backdrop-filter: blur(1px);
   }
   .signature-name {
     font-family: 'Great Vibes', cursive;
@@ -192,6 +201,7 @@
     flex-direction: column;
     align-items: center;
     gap: 8px;
+    margin-top: 12px;
   }
   .qr-code {
     width: 112px;
@@ -329,17 +339,8 @@
       organized by <strong>Araneus Edutech LLP</strong>.
     </div>
 
-    <!-- footer with signatures, QR, MSME badge -->
-    <div class="footer-section">
-      <!-- left: Director signature -->
-      <div class="signature">
-        <div class="signature-name"><?= htmlspecialchars($cert['director_name'] ?? $director ?? 'Shubhajit Kanti Das') ?></div>
-        <div class="signature-role">(Director)</div>
-      </div>
-
-      <!-- center block: QR code + MSME (official) -->
-      <div class="center-badge">
-        <?php
+    <div class="center-badge">
+       <?php
           $qrPathDisplay = '';
           if (!empty($cert['qr_code_path'])) {
               $qrPathDisplay = UPLOAD_URL . 'uploads/' . $cert['qr_code_path'];
@@ -351,6 +352,20 @@
           }
         ?>
         <img class="qr-code" src="<?= $qrPathDisplay ?>" alt="Verification QR Code">
+    </div>
+
+    <!-- footer with signatures, QR, MSME badge -->
+    <div class="footer-section">
+      <!-- left: Director signature -->
+      <div class="signature">
+        <div class="signature-name">
+          <img src="<?= APP_URL ?>/assets/img/SIGN_SB_PNG.png" alt="<?= htmlspecialchars($cert['director_name'] ?? $director ?? 'Saikat Biswas') ?>" style="width: 150px; object-fit: contain; margin-bottom: -12px;">
+        </div>
+        <div class="signature-role">(Director)</div>
+      </div>
+
+      <!-- center block: QR code + MSME (official) -->
+      <div class="center-badge">
         <div class="msme-wrapper">
           <?php
             $logoPath = APP_URL . '/assets/img/msme-logo.png';
@@ -376,7 +391,10 @@
 
       <!-- right: Coordinator signature -->
       <div class="signature">
-        <div class="signature-name"><?= htmlspecialchars($cert['coordinator_name'] ?? $coord ?? 'Mayukh Maitha') ?></div>
+        <div class="signature-name">
+          <img src="<?= APP_URL ?>/assets/img/SIGN_MM_PNG.png" alt="<?= htmlspecialchars($cert['coordinator_name'] ?? $coord ?? 'Mayukh Mridha') ?>" style="width: 150px; object-fit: contain; margin-bottom: -12px;">
+
+        </div>
         <div class="signature-role">(Project Coordinator)</div>
       </div>
     </div>

@@ -89,7 +89,7 @@
           <?php endif; ?>
           <!-- Replace / Upload QR — POST to a dedicated route, NO iframe involvement -->
           <form method="POST"
-                action="<?= UPLOAD_URL ?>/admin/certificates/<?= $cert['id'] ?>/qr"
+                action="<?= APP_URL ?>/admin/certificates/<?= $cert['id'] ?>/qr"
                 enctype="multipart/form-data"
                 class="d-flex gap-2 align-items-center flex-wrap">
             <input type="file" name="qr_image" class="form-control form-control-sm"

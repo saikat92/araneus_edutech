@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 18, 2026 at 11:34 AM
+-- Generation Time: Jun 05, 2026 at 12:05 PM
 -- Server version: 11.4.10-MariaDB-cll-lve-log
--- PHP Version: 8.3.31
+-- PHP Version: 8.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,18 +41,18 @@ CREATE TABLE `assignments` (
 --
 
 INSERT INTO `assignments` (`id`, `course_id`, `title`, `description`, `due_date`, `created_at`) VALUES
-(1, 1, 'Python Data Processor', 'Write a script to load a CSV (e.g., Iris or housing data), compute summary statistics (mean, median), and output cleaned data. Use Pandas, NumPy, and Git for version control.', NULL, '2026-03-25 10:43:13'),
-(2, 1, 'Statistical Analysis of Dataset', 'Using the UCI Heart Disease dataset, compute summary statistics, test a hypothesis (e.g., average cholesterol difference between groups), and interpret p-values.', NULL, '2026-03-25 10:43:13'),
+(1, 1, 'Python Data Processor', 'Write a script to load a CSV (e.g., Iris or housing data), compute summary statistics (mean, median), and output cleaned data. Use Pandas, NumPy, and Git for version control.', '2026-05-28', '2026-03-25 10:43:13'),
+(2, 1, 'Statistical Analysis of Dataset', 'Using the UCI Heart Disease dataset, compute summary statistics, test a hypothesis (e.g., average cholesterol difference between groups), and interpret p-values.', '2026-05-29', '2026-03-25 10:43:13'),
 (3, 1, 'Titanic EDA and Preprocessing', 'Perform exploratory data analysis on the Titanic dataset: visualize survival by features, impute missing ages, and output a cleaned CSV.', NULL, '2026-03-25 10:43:13'),
-(4, 1, 'Customer Data Dashboard', 'Given a sales dataset, create bar and line charts to show trends (monthly sales, top product categories) using Pandas and Matplotlib/Seaborn.', NULL, '2026-03-25 10:43:13'),
-(5, 1, 'House Prices Prediction', 'Build a linear regression model on a housing dataset, evaluate using MSE and R², and experiment with polynomial features.', NULL, '2026-03-25 10:43:13'),
+(4, 1, 'Customer Data Dashboard', 'Given a sales dataset, create bar and line charts to show trends (monthly sales, top product categories) using Pandas and Matplotlib/Seaborn.', '2026-05-30', '2026-03-25 10:43:13'),
+(5, 1, 'House Prices Prediction', 'Build a linear regression model on a housing dataset, evaluate using MSE and R², and experiment with polynomial features.', '2026-05-28', '2026-03-25 10:43:13'),
 (6, 1, 'Medical Diagnosis Classifier', 'Train logistic regression and decision tree models on the Heart Disease dataset. Compute accuracy, precision, recall, and ROC-AUC.', NULL, '2026-03-25 10:43:13'),
 (7, 1, 'Cluster Analysis', 'Apply k-means and PCA on the Iris dataset. Visualize clusters and 2D projections. (Optional: hierarchical clustering dendrogram).', NULL, '2026-03-25 10:43:13'),
 (8, 1, 'Model Tuning', 'Use GridSearchCV to tune hyperparameters of a decision tree or random forest on the classification problem from Module 5. Compare tuned vs default performance.', NULL, '2026-03-25 10:43:13'),
 (9, 1, 'Handwritten Digit Classifier', 'Build a feedforward neural network (and optionally a CNN) in Keras to classify MNIST digits. Achieve at least 90% accuracy.', NULL, '2026-03-25 10:43:13'),
 (10, 1, 'Sentiment Analysis with RNN', 'Preprocess text and train a simple LSTM network for binary sentiment classification on IMDB reviews. Report accuracy and confusion matrix.', NULL, '2026-03-25 10:43:13'),
 (11, 1, 'ML Deployment Task', 'Create a GitHub repo with code, Dockerize a model, or deploy a Flask API that serves a trained model (e.g., house price predictor).', NULL, '2026-03-25 10:43:13'),
-(12, 1, 'Capstone Project', 'End-to-end ML project (e.g., movie recommender, heart disease predictor, sales forecaster). Includes proposal, interim report, final code, and presentation.', NULL, '2026-03-25 10:43:13'),
+(12, 1, 'Capstone Project', 'End-to-end ML project (e.g., movie recommender, heart disease predictor, sales forecaster). Includes proposal, interim report, final code, and presentation.', '2026-05-31', '2026-03-25 10:43:13'),
 (13, 2, 'Personal Portfolio Website', 'Build a personal portfolio page using HTML5, CSS3, and JavaScript. Include responsive design and interactive elements.', NULL, '2026-03-25 10:43:13'),
 (14, 2, 'Business Landing Page with Bootstrap', 'Create a fully responsive business landing page using Bootstrap 4/5, Font Awesome, and custom CSS.', NULL, '2026-03-25 10:43:13'),
 (15, 2, 'Task Manager CRUD App', 'Develop a complete task management application with PHP and MySQL. Implement user registration, login, and CRUD operations for tasks.', NULL, '2026-03-25 10:43:13'),
@@ -128,7 +128,39 @@ INSERT INTO `attendance` (`id`, `student_id`, `course_id`, `date`, `hours`, `cre
 (14, 15, 1, '2026-04-13', 4.00, '2026-04-13 12:58:36'),
 (15, 15, 1, '2026-04-15', 4.00, '2026-04-15 06:40:50'),
 (16, 16, 5, '2026-04-16', 8.00, '2026-04-16 15:23:22'),
-(17, 15, 1, '2026-04-18', 4.00, '2026-04-18 09:03:06');
+(17, 15, 1, '2026-04-18', 4.00, '2026-04-18 09:03:06'),
+(18, 15, 1, '2026-04-19', 4.00, '2026-05-22 07:04:42'),
+(19, 15, 1, '2026-04-20', 4.00, '2026-05-22 07:04:57'),
+(20, 15, 1, '2026-04-21', 4.00, '2026-05-22 07:05:06'),
+(21, 15, 1, '2026-04-22', 4.00, '2026-05-22 07:05:18'),
+(22, 15, 1, '2026-04-23', 4.00, '2026-05-22 07:05:28'),
+(23, 15, 1, '2026-04-24', 4.00, '2026-05-22 07:05:41'),
+(24, 15, 1, '2026-04-25', 4.00, '2026-05-22 07:05:50'),
+(25, 15, 1, '2026-04-27', 4.00, '2026-05-22 07:06:01'),
+(26, 15, 1, '2026-04-28', 4.00, '2026-05-22 07:06:09'),
+(27, 15, 1, '2026-04-29', 4.00, '2026-05-22 07:06:16'),
+(28, 15, 1, '2026-04-30', 4.00, '2026-05-22 07:06:24'),
+(29, 15, 1, '2026-05-02', 4.00, '2026-05-22 07:06:38'),
+(30, 15, 1, '2026-05-03', 4.00, '2026-05-22 07:06:46'),
+(31, 15, 1, '2026-05-05', 4.00, '2026-05-22 07:07:01'),
+(32, 15, 1, '2026-05-06', 4.00, '2026-05-22 07:07:09'),
+(33, 15, 1, '2026-05-08', 4.00, '2026-05-22 07:07:17'),
+(34, 15, 1, '2026-05-09', 4.00, '2026-05-22 07:07:25'),
+(35, 15, 1, '2026-05-11', 4.00, '2026-05-22 07:07:38'),
+(36, 15, 1, '2026-05-13', 4.00, '2026-05-22 07:07:48'),
+(37, 15, 1, '2026-05-14', 4.00, '2026-05-22 07:08:00'),
+(38, 19, 2, '2026-05-14', 3.00, '2026-05-23 04:23:54'),
+(39, 18, 2, '2026-05-14', 3.00, '2026-05-23 04:23:59'),
+(40, 20, 2, '2026-05-14', 3.00, '2026-05-23 04:24:15'),
+(41, 19, 2, '2026-05-23', 2.00, '2026-05-23 04:24:24'),
+(42, 18, 2, '2026-05-23', 2.00, '2026-05-23 04:24:32'),
+(43, 20, 2, '2026-05-23', 2.00, '2026-05-23 04:24:42'),
+(44, 19, 2, '2026-05-28', 2.00, '2026-05-28 15:17:28'),
+(45, 20, 2, '2026-06-04', 2.00, '2026-06-04 15:35:50'),
+(46, 19, 2, '2026-06-04', 2.00, '2026-06-04 15:36:30'),
+(47, 20, 2, '2026-05-28', 2.00, '2026-06-04 15:36:46'),
+(48, 18, 2, '2026-05-28', 2.00, '2026-06-04 15:38:09'),
+(49, 18, 2, '2026-06-04', 2.00, '2026-06-04 15:38:38');
 
 -- --------------------------------------------------------
 
@@ -190,18 +222,31 @@ CREATE TABLE `career_applications` (
 
 CREATE TABLE `certificates` (
   `id` int(11) NOT NULL,
-  `student_id` int(11) DEFAULT NULL,
+  `student_id` int(11) NOT NULL,
   `enrollment_id` int(11) DEFAULT NULL,
-  `certificate_id` varchar(50) NOT NULL,
-  `student_name` varchar(100) NOT NULL,
-  `course_name` varchar(150) NOT NULL,
-  `issue_date` date NOT NULL,
-  `expiry_date` date DEFAULT NULL,
-  `file_path` varchar(255) DEFAULT NULL,
-  `qr_code` varchar(255) DEFAULT NULL,
-  `status` enum('active','expired','revoked') DEFAULT 'active',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `certificate_id` varchar(50) NOT NULL COMMENT 'e.g. PP/05/26/482910 — generated by admin',
+  `certificate_type` varchar(50) NOT NULL DEFAULT 'participation' COMMENT 'participation | internship | completion',
+  `program_name` varchar(200) NOT NULL,
+  `project_name` varchar(200) DEFAULT NULL,
+  `duration` varchar(100) DEFAULT NULL COMMENT 'e.g. 3 Months',
+  `mode` varchar(50) NOT NULL DEFAULT 'Offline',
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  `director_name` varchar(150) NOT NULL DEFAULT 'Shubhajit Kantossan',
+  `coordinator_name` varchar(150) NOT NULL DEFAULT 'Mayukh Maitha',
+  `issued_date` date NOT NULL DEFAULT curdate(),
+  `status` enum('issued','revoked') NOT NULL DEFAULT 'issued',
+  `qr_code_path` varchar(255) DEFAULT NULL COMMENT 'Filename only — stored in admin/uploads/qrcodes/',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Certificates issued via the admin panel';
+
+--
+-- Dumping data for table `certificates`
+--
+
+INSERT INTO `certificates` (`id`, `student_id`, `enrollment_id`, `certificate_id`, `certificate_type`, `program_name`, `project_name`, `duration`, `mode`, `start_date`, `end_date`, `director_name`, `coordinator_name`, `issued_date`, `status`, `qr_code_path`, `created_at`, `updated_at`) VALUES
+(1, 15, 5, 'ML/05/26/835470', 'completion', '120-Hour Machine Learning Internship Program', 'SEISMOSENSE - INDIA DISASTER INTELLIGENCE PLATFORM', '133 hours', 'Offline', '2026-02-02', '2026-05-27', 'Dr. Shubhajit Kanti Das', 'Saikat Biswas', '2026-05-29', 'issued', 'qrcodes/qr_ML_05_26_835470.png', '2026-05-29 15:00:30', '2026-05-29 15:00:30');
 
 -- --------------------------------------------------------
 
@@ -234,8 +279,11 @@ CREATE TABLE `clients` (
 
 INSERT INTO `clients` (`id`, `client_name`, `client_type`, `contact_person`, `email`, `phone`, `address`, `city`, `state`, `country`, `gstin`, `pan`, `status`, `notes`, `created_at`, `updated_at`) VALUES
 (3, 'PLASTWRORK INDUSTRIES LLP', 'company', 'Suyash Moondhara', 'suyash.moondhara@plastwork.in', '+917838852428', 'Khasara No. 353, Jholungey, Mamring- Samardung Road, South Sikkim, PIN - 737137', 'Jholungey', 'South Sikkim', 'India', '', '', 'active', '', '2026-04-16 15:56:52', '2026-04-16 15:56:52'),
-(4, 'Ranita Paul', 'individual', 'Ranita Paul', 'ranitapaul943@gmail.com', '8910971887', NULL, NULL, NULL, 'India', NULL, NULL, 'active', 'Auto-registered from student: 262702', '2026-05-15 08:09:48', '2026-05-15 08:09:48'),
-(5, 'Soumodip Adhikary', 'individual', 'Soumodip Adhikary', 'soumodipadhikary574@gmail.com', '7477390994', NULL, NULL, NULL, 'India', NULL, NULL, 'active', 'Auto-registered from student: 262703', '2026-05-16 10:59:09', '2026-05-16 10:59:09');
+(4, 'Ranita Paul', 'individual', 'Ranita Paul', 'ranitapaul943@gmail.com', '8910971887', '', 'Barrackproe', 'WB', 'India', '', '', 'active', 'Auto-registered from student: 262702', '2026-05-15 08:09:48', '2026-05-20 10:05:06'),
+(5, 'Soumodip Adhikary', 'individual', 'Soumodip Adhikary', 'soumodipadhikary574@gmail.com', '7477390994', '', 'Dumdum', 'WB', 'India', '', '', 'active', 'Auto-registered from student: 262703', '2026-05-16 10:59:09', '2026-05-20 10:05:20'),
+(6, 'Kingston Education Institute', 'company', 'Sudipta Ghosh Sur', 'kpcprincipal@keical.edu.in', '+918336911917', 'KAJIBARI, BERUNANPUKURIA P.O. – MALIKAPUR, BARASAT, DIST. – 24 PGS. (N), KOLKATA – 700126', 'Barasat', 'WB', 'India', '', '', 'active', '', '2026-05-20 10:04:43', '2026-05-20 10:04:43'),
+(7, 'PAYEL CHAKRABORTY', 'individual', 'PAYEL CHAKRABORTY', 'cpayel034@gmail.com', '7439328467', NULL, NULL, NULL, 'India', NULL, NULL, 'active', 'Auto-registered from student: 262701', '2026-05-20 10:28:29', '2026-05-20 10:28:29'),
+(8, 'Debapriya Das - New Delhi institute of management', 'individual', '', 'priya261277@gmail.com', '+918130360101', 'D-7/7318, Vasant Kunj, South West Delhi, Delhi - 110070', 'New Delhi', 'Delhi', 'India', '', '', 'active', '', '2026-06-01 14:39:16', '2026-06-01 14:40:40');
 
 -- --------------------------------------------------------
 
@@ -435,9 +483,14 @@ CREATE TABLE `invoices` (
 --
 
 INSERT INTO `invoices` (`id`, `invoice_number`, `client_id`, `invoice_date`, `due_date`, `po_number`, `sub_total`, `tax_amount`, `discount_amount`, `total_amount`, `amount_paid`, `balance_due`, `status`, `payment_terms`, `notes`, `created_at`, `updated_at`) VALUES
-(3, 'INV-20260416-344', 3, '2026-04-16', '2026-04-20', 'NA', 14952.00, 0.00, 0.00, 14952.00, 0.00, 14952.00, 'draft', '', NULL, '2026-04-16 16:01:23', '2026-05-16 10:03:14'),
+(3, 'INV-20260416-344', 3, '2026-04-16', '2026-04-20', 'NA', 14952.00, 0.00, 0.00, 14952.00, 0.00, 14952.00, 'sent', '', NULL, '2026-04-16 16:01:23', '2026-05-21 06:38:42'),
 (4, 'INV-20260515-845', 4, '2026-03-17', '2026-03-17', '', 3900.00, 0.00, 400.00, 3500.00, 3500.00, 0.00, 'paid', '', '', '2026-05-15 08:09:48', '2026-05-15 08:21:58'),
-(5, 'INV-20260516-395', 5, '2026-03-16', '2026-03-17', '', 3900.00, 0.00, 400.00, 3500.00, 3500.00, 0.00, 'paid', '', '', '2026-05-16 11:01:31', '2026-05-16 11:03:07');
+(5, 'INV-20260516-395', 5, '2026-03-16', '2026-03-17', '', 3900.00, 0.00, 400.00, 3500.00, 3500.00, 0.00, 'paid', '', '', '2026-05-16 11:01:31', '2026-05-16 11:03:07'),
+(7, 'INV-20260520-564', 7, '2026-05-14', '2026-05-15', '', 3900.00, 0.00, 1900.00, 2000.00, 2000.00, 0.00, 'paid', '', '', '2026-05-20 10:28:54', '2026-05-20 10:29:35'),
+(8, 'INV-20260522-661', 6, '2025-03-25', '2025-03-30', 'NA', 9035.00, 1626.30, 0.00, 10661.30, 0.00, 10661.30, 'sent', '', '', '2026-05-22 07:34:29', '2026-05-22 09:44:34'),
+(9, 'INV-20260601-379', 8, '2025-04-16', '2025-04-20', '', 445000.00, 0.00, 0.00, 445000.00, 0.00, 445000.00, 'draft', '', '', '2026-06-01 14:41:48', '2026-06-01 14:41:48'),
+(10, 'INV-20260601-820', 8, '2025-04-02', '2025-04-30', '', 245000.00, 0.00, 0.00, 245000.00, 0.00, 245000.00, 'draft', '', '', '2026-06-01 14:44:57', '2026-06-01 14:44:57'),
+(11, 'INV-20260601-725', 8, '2026-04-15', '2026-04-25', '', 15000.00, 0.00, 0.00, 15000.00, 0.00, 15000.00, 'draft', '', '', '2026-06-01 14:47:38', '2026-06-01 14:47:38');
 
 -- --------------------------------------------------------
 
@@ -469,7 +522,12 @@ INSERT INTO `invoice_items` (`id`, `invoice_id`, `product_service_id`, `descript
 (5, 3, 5, 'Hosting Management', 12.00, 389.00, 0.00, 0.00, 4668.00, '2026-04-16 16:01:23'),
 (6, 3, 6, 'Webiste backup and 2FA', 12.00, 179.00, 0.00, 0.00, 2148.00, '2026-04-16 16:01:23'),
 (7, 4, 7, 'Course Fee: Internship on Full-Stack PHP 2026', 1.00, 3900.00, 0.00, 0.00, 3900.00, '2026-05-15 08:09:48'),
-(8, 5, 7, 'Course Fee: Internship on Full-Stack PHP 2026', 1.00, 3900.00, 0.00, 0.00, 3900.00, '2026-05-16 11:01:31');
+(8, 5, 7, 'Course Fee: Internship on Full-Stack PHP 2026', 1.00, 3900.00, 0.00, 0.00, 3900.00, '2026-05-16 11:01:31'),
+(10, 7, 7, 'Course Fee: Internship on Full-Stack PHP 2026', 1.00, 3900.00, 0.00, 0.00, 3900.00, '2026-05-20 10:28:54'),
+(11, 8, 9, 'Purchase of Electronic Components from Haque Electronics, INV No.: 14 Dated: 22.03.2025', 1.00, 9035.00, 18.00, 1626.30, 10661.30, '2026-05-22 07:34:29'),
+(12, 9, 10, 'Geospatial AI App Development,Node.js / Express.js Backend API,Firebase Integration,AI / ML Microservice — Python FastAPI server hosting 3 trained ML models', 1.00, 445000.00, 0.00, 0.00, 445000.00, '2026-06-01 14:41:48'),
+(13, 10, 11, 'Third-Party API Integration,SOS Emergency Module,Twilio SMS API Integration, SRS document, Other Technicallities', 1.00, 245000.00, 0.00, 0.00, 245000.00, '2026-06-01 14:44:57'),
+(14, 11, 12, 'Geospatial Application Testing', 1.00, 15000.00, 0.00, 0.00, 15000.00, '2026-06-01 14:47:38');
 
 -- --------------------------------------------------------
 
@@ -539,7 +597,8 @@ CREATE TABLE `payments` (
 
 INSERT INTO `payments` (`id`, `invoice_id`, `payment_date`, `payment_method`, `transaction_id`, `amount`, `notes`, `created_at`) VALUES
 (2, 4, '2026-05-15', 'bank_transfer', '234567890', 3500.00, '', '2026-05-15 08:21:58'),
-(3, 5, '2026-05-16', 'bank_transfer', '22', 3500.00, '', '2026-05-16 11:03:07');
+(3, 5, '2026-05-16', 'bank_transfer', '22', 3500.00, '', '2026-05-16 11:03:07'),
+(4, 7, '2026-05-15', 'cash', '', 2000.00, '', '2026-05-20 10:29:35');
 
 -- --------------------------------------------------------
 
@@ -572,7 +631,12 @@ INSERT INTO `products_services` (`id`, `name`, `type`, `category`, `description`
 (4, 'Email Maintainance', 'service', NULL, NULL, 399.00, 0.00, NULL, 'unit', 1, '2026-04-16 16:01:23', '2026-04-16 16:01:23'),
 (5, 'Hosting Management', 'service', NULL, NULL, 389.00, 0.00, NULL, 'unit', 1, '2026-04-16 16:01:23', '2026-04-16 16:01:23'),
 (6, 'Webiste backup and 2FA', 'service', NULL, NULL, 179.00, 0.00, NULL, 'unit', 1, '2026-04-16 16:01:23', '2026-04-16 16:01:23'),
-(7, 'Course Fee: Internship on Full-Stack PHP 2026', 'service', NULL, NULL, 3900.00, 0.00, NULL, 'unit', 1, '2026-05-15 08:09:48', '2026-05-15 08:09:48');
+(7, 'Course Fee: Internship on Full-Stack PHP 2026', 'service', NULL, NULL, 3900.00, 0.00, NULL, 'unit', 1, '2026-05-15 08:09:48', '2026-05-15 08:09:48'),
+(8, 'E-Cleaning Device automation Development Software Development', 'service', NULL, NULL, 0.00, 18.00, NULL, 'unit', 1, '2026-05-20 10:27:14', '2026-05-20 10:27:14'),
+(9, 'Purchase of Electronic Components from Haque Electronics, INV No.: 14 Dated: 22.03.2025', 'service', NULL, NULL, 9035.00, 18.00, NULL, 'unit', 1, '2026-05-22 07:34:29', '2026-05-22 07:34:29'),
+(10, 'Geospatial AI App Development,Node.js / Express.js Backend API,Firebase Integration,AI / ML Microservice — Python FastAPI server hosting 3 trained ML models', 'service', NULL, NULL, 445000.00, 0.00, NULL, 'unit', 1, '2026-06-01 14:41:48', '2026-06-01 14:41:48'),
+(11, 'Third-Party API Integration,SOS Emergency Module,Twilio SMS API Integration, SRS document, Other Technicallities', 'service', NULL, NULL, 245000.00, 0.00, NULL, 'unit', 1, '2026-06-01 14:44:57', '2026-06-01 14:44:57'),
+(12, 'Geospatial Application Testing', 'service', NULL, NULL, 15000.00, 0.00, NULL, 'unit', 1, '2026-06-01 14:47:38', '2026-06-01 14:47:38');
 
 -- --------------------------------------------------------
 
@@ -679,12 +743,12 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `candidate_id`, `full_name`, `phone`, `email`, `password`, `father_name`, `time_hours`, `address`, `highest_qualification`, `current_organization`, `org_i_card`, `github_link`, `qr_code_path`, `profile_picture`, `status`, `last_login`, `email_verified`, `verification_token`, `reset_token`, `reset_expiry`, `created_at`, `updated_at`) VALUES
-(15, '252613', 'RUPSHA SAHA', '9123317563', 'rupshasaha005@gmail.com', '$2y$10$Kd9o4E2dAxjoECZruh7L8u6.rRIMnBsAq3SDApT5a.IPlDjMH0xkS', 'Samar Kumar  Saha', 53, '\"Siddhanta Para Main Road , Barrackpore \r\nKolkata  : 700122   state  : West Bengal \r\nDist : North 24 parganas , post office  :  Nonachandanpukur, KOL - 700122', 'HS', 'TI BCA DAA', NULL, '', NULL, NULL, 'active', '2026-05-14 10:06:22', 1, 'd47126705869a51d2abb0d13ee853cd645d7205c17dd174e8189fbfc5b1f1c67', NULL, NULL, '2026-03-25 12:23:51', '2026-05-14 14:06:22'),
+(15, '252613', 'RUPSHA SAHA', '9123317563', 'rupshasaha005@gmail.com', '$2y$10$Kd9o4E2dAxjoECZruh7L8u6.rRIMnBsAq3SDApT5a.IPlDjMH0xkS', 'Samar Kumar  Saha', 133, '\"Siddhanta Para Main Road , Barrackpore \r\nKolkata  : 700122   state  : West Bengal \r\nDist : North 24 parganas , post office  :  Nonachandanpukur, KOL - 700122', 'HS', 'TI BCA DAA', NULL, '', NULL, '1779349264_15.jpeg', 'active', '2026-05-29 11:40:09', 1, 'd47126705869a51d2abb0d13ee853cd645d7205c17dd174e8189fbfc5b1f1c67', NULL, NULL, '2026-03-25 12:23:51', '2026-05-29 15:40:09'),
 (16, '252608', 'Neha Das', '9830440551', 'n9770900@gmail.com', '$2y$10$yTED2my.mSd3e59.w8Zu8OxNgKjkJ.t1Oggv5eWEyqzk545/JbvP2', '', 68, 'Madanpur,Masunda, Amdanga, North 24 Parganas,West Bengal, PIN - 743711', 'HS', 'KCS BCA H', NULL, 'https://github.com/', NULL, NULL, 'active', '2026-05-16 11:17:27', 1, 'e9c88450967f17b18e2d423f0a2fe38720778f6a6c77b398edeaa6a40bb532c9', NULL, NULL, '2026-04-16 05:51:40', '2026-05-16 15:17:27'),
 (17, '252609', 'Tripan Nandi', '7001984201', 'tripannandi266@gmail.com', '$2y$10$B6paMkFekk.k0ASCKyaHu.TvV2EAtQg/jjZiunC8zWpSu4gcgkcD6', 'Tapan KR nandi', 6, 'Basirhat College , P.O. Basirhat, Pin Code: 743412, West Bengal. North 24 Parganas district, PIN - 743412', 'HS', 'KCS BCA H', NULL, 'https://github.com/', NULL, NULL, 'active', NULL, 1, NULL, NULL, NULL, '2026-04-16 15:34:55', '2026-04-16 15:34:55'),
-(18, '262701', 'PAYEL CHAKRABORTY', '7439328467', 'cpayel034@gmail.com', '$2y$10$4Q93F6j8s2oj0bkpAt0/4..6dzS4IGO6IWWRIMLpNm2H4LwSrWbnm', 'Prosenjt Chakraborty', 60, 'Barrackpore', 'BCA', 'Techno India Salt Lake', NULL, '', NULL, NULL, 'active', NULL, 1, NULL, NULL, NULL, '2026-05-15 07:29:15', '2026-05-15 07:29:15'),
-(19, '262702', 'Ranita Paul', '8910971887', 'ranitapaul943@gmail.com', '$2y$10$aNsJjpzhy/gv46QChgmGL.d08JBt90MWVSJ.BMZYl3JuAb6vzIw7i', 'Ram joy Paul', 60, '19, Sukanta sarani Barrackpore', 'BCA', 'Techno India Saltlake', NULL, '', NULL, NULL, 'active', NULL, 1, NULL, NULL, NULL, '2026-05-15 08:00:08', '2026-05-15 08:00:08'),
-(20, '262703', 'Soumodip Adhikary', '7477390994', 'soumodipadhikary574@gmail.com', '$2y$10$myog.IgFPntlDFJjkibeD.xhwYl0N.nva6sHu85iMjKj5ursRDTam', 'Samir Adhikary', 60, 'West Bengal, Midnapure,ashok Nagar', 'BCA', 'SRM', NULL, '', NULL, NULL, 'active', NULL, 1, NULL, NULL, NULL, '2026-05-15 08:01:34', '2026-05-15 08:01:34');
+(18, '262701', 'PAYEL CHAKRABORTY', '7439328467', 'cpayel034@gmail.com', '$2y$10$4Q93F6j8s2oj0bkpAt0/4..6dzS4IGO6IWWRIMLpNm2H4LwSrWbnm', 'Prosenjt Chakraborty', 69, 'Barrackpore', 'BCA', 'Techno India Salt Lake', NULL, '', NULL, NULL, 'active', '2026-06-04 11:37:32', 1, NULL, NULL, NULL, '2026-05-15 07:29:15', '2026-06-04 15:38:38'),
+(19, '262702', 'Ranita Paul', '8910971887', 'ranitapaul943@gmail.com', '$2y$10$aNsJjpzhy/gv46QChgmGL.d08JBt90MWVSJ.BMZYl3JuAb6vzIw7i', 'Ram joy Paul', 69, '19, Sukanta sarani Barrackpore', 'BCA', 'Techno India Saltlake', NULL, '', NULL, NULL, 'active', '2026-06-05 06:35:56', 1, NULL, NULL, NULL, '2026-05-15 08:00:08', '2026-06-05 10:35:56'),
+(20, '262703', 'Soumodip Adhikary', '7477390994', 'soumodipadhikary574@gmail.com', '$2y$10$myog.IgFPntlDFJjkibeD.xhwYl0N.nva6sHu85iMjKj5ursRDTam', 'Samir Adhikary', 69, 'West Bengal, Midnapure,ashok Nagar', 'BCA', 'SRM', NULL, '', NULL, NULL, 'active', '2026-06-04 11:35:33', 1, NULL, NULL, NULL, '2026-05-15 08:01:34', '2026-06-04 15:36:46');
 
 -- --------------------------------------------------------
 
@@ -753,7 +817,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password_hash`, `email`, `role`, `full_name`, `status`, `last_login`, `created_at`) VALUES
-(2, 'admin', '$2y$10$1rYuoRKgwCpz4DxQJWziHedjbVfmT37R0jHDiu9oEK0lRMQjz7HjK', 'saikatbiswas2811@gmail.com', 'admin', 'SAIKAT BISWAS', 'active', '2026-05-16 17:08:21', '2026-03-21 13:24:32'),
+(2, 'admin', '$2y$10$1rYuoRKgwCpz4DxQJWziHedjbVfmT37R0jHDiu9oEK0lRMQjz7HjK', 'saikatbiswas2811@gmail.com', 'admin', 'SAIKAT BISWAS', 'active', '2026-06-05 07:23:00', '2026-03-21 13:24:32'),
 (3, 'Shaw', '$2y$10$TQaMIyCx3g3Q.HG.Qw23ve.N8ATGwIEq748pCvPAQolvgTFLI4MY6', 'shaw.riya@gmail.com', 'staff', 'Riya', 'active', '2026-03-22 20:54:30', '2026-03-21 14:03:48');
 
 --
@@ -793,7 +857,11 @@ ALTER TABLE `career_applications`
 --
 ALTER TABLE `certificates`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `certificate_id` (`certificate_id`);
+  ADD UNIQUE KEY `certificate_id` (`certificate_id`),
+  ADD UNIQUE KEY `uq_certificate_id` (`certificate_id`),
+  ADD KEY `idx_student_id` (`student_id`),
+  ADD KEY `idx_enrollment_id` (`enrollment_id`),
+  ADD KEY `idx_status` (`status`);
 
 --
 -- Indexes for table `clients`
@@ -942,7 +1010,7 @@ ALTER TABLE `assignments`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `blogs`
@@ -966,7 +1034,7 @@ ALTER TABLE `certificates`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `contact_submissions`
@@ -1008,13 +1076,13 @@ ALTER TABLE `gst_returns`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `invoice_items`
 --
 ALTER TABLE `invoice_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `job_openings`
@@ -1032,13 +1100,13 @@ ALTER TABLE `password_resets`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `products_services`
 --
 ALTER TABLE `products_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `projects`
@@ -1092,6 +1160,13 @@ ALTER TABLE `assignments`
 ALTER TABLE `attendance`
   ADD CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `attendance_ibfk_2` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `certificates`
+--
+ALTER TABLE `certificates`
+  ADD CONSTRAINT `fk_cert_enrollment` FOREIGN KEY (`enrollment_id`) REFERENCES `enrollments` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_cert_student` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `enrollments`
